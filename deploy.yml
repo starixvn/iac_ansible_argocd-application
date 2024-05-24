@@ -13,9 +13,18 @@
         src: "{{pathManifest}}/application.yml.j2"
         dest: "/tmp/{{pathManifest}}/application.yml"
 
+    # - name: Install Application
+    #   k8s:
+    #     src: "/tmp/{{pathManifest}}/application.yml"
+    #     state: present
+    #     apply: true
+
     - name: Install Application
-      k8s:
-        src: "/tmp/{{pathManifest}}/application.yml"
-        state: present
-        apply: true
+      shell: |
+        k3s kubectl apply -f "/tmp/{{pathManifest}}/application.yml"
+
+    - name: Cleanup Manifests file
+      file:
+        state: absent
+        path: "/tmp/{{pathManifest}}"
 
