@@ -1,0 +1,60 @@
+
+# Repository of Helm Project
+repoURL: "https://gitlab.nexdev.net/NEXOPS/helm-charts/helm-nexops-tools.git"
+
+
+# Variable for Starix and LumiPlus to lookup (cluster, hub, sc, ing)
+starix:
+  nexprod:
+    cluster: "https://kubernetes.default.svc"
+    hub: "hub.nexdev.net"
+    ingressDomain: "nexdev.net"
+    storageClass: "longhorn"
+  local:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  sit:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  uat:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  prod:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+
+
+lumiplus:
+  lumprod:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  local:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  sit:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  uat:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""
+  prod:
+    cluster: ""
+    hub: ""
+    ingressDomain: ""
+    storageClass: ""

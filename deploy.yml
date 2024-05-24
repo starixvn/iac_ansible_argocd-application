@@ -1,0 +1,14 @@
+---
+- name: Deploy Application via ArgoCD
+  hosts: master[0]
+  run_once: true
+  tasks:
+    - name: Create Directory contain manifest file
+      file:
+        path: "/tmp/{{pathManifest}}"
+        state: directory
+
+    - name: Gen manifest file from JinJa files
+      template:
+        src: "{{pathManifest}}/application.yml.j2"
+        dest: "/tmp/{{pathManifest}}/application.yml"
