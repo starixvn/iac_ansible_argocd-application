@@ -9,7 +9,7 @@ metadata:
     org: {{org}}
 spec:
   destination:
-    server: "{{ org[env][cluster] }}"
+    server: "{{ org[env]["cluster"] }}"
     namespace: portainer
   project: default
   source:
