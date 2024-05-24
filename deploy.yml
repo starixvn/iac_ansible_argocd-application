@@ -12,3 +12,10 @@
       template:
         src: "{{pathManifest}}/application.yml.j2"
         dest: "/tmp/{{pathManifest}}/application.yml"
+
+    - name: Install Application
+      k8s:
+        src: "/tmp/{{pathManifest}}/application.yml"
+        state: present
+        apply: true
+
