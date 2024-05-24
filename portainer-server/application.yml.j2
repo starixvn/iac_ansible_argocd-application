@@ -9,7 +9,7 @@ metadata:
     org: {{org}}
 spec:
   destination:
-    server: "{{ org[env]["cluster"] }}"
+    server: "{{ info[org][env]["cluster"] }}"
     namespace: portainer
   project: default
   source:
@@ -20,7 +20,7 @@ spec:
       releaseName: portainer-server-{{env}}
       valuesObject:
         image:
-          repository: "{{ org[env]['hub'] }}/base/portainer"
+          repository: "{{ info[org][env]['hub'] }}/base/portainer"
           tag: server-2.19.4
           pullPolicy: Always
         service:
@@ -29,12 +29,12 @@ spec:
           enabled: true
           ingressClassName: "haproxy"
           hosts:
-            - host: "portainer-k3s.{{ org[env]['ingressDomain'] }}"
+            - host: "portainer-k3s.{{ info[org][env]['ingressDomain'] }}"
               paths:
               - path: "/"
                 pathType: "Prefix"
         persistence:
-          storageClass: "{{ org[env]['storageClass'] }}"
+          storageClass: "{{ info[org][env]['storageClass'] }}"
 
   syncPolicy:
     automated:
