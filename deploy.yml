@@ -19,8 +19,6 @@
         state: present
         apply: true
 
-
-
     - name: Cleanup Manifests file
       file:
         state: absent
