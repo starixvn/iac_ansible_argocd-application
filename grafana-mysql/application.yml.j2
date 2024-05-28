@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-mysql-{{env}}
+  namespace: argocd
+  labels:
+    name: grafana-mysql-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: monitoring
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: grafana/mysql
+    targetRevision: HEAD
+    helm:
+      releaseName: grafana-mysql-{{env}}
+      valuesObject:
+        clusterDomain: starix.nexprod
+        auth:
+          rootPassword: "1qaz@WSX"
+          createDatabase: true
+          database: "grafana_db"
+          username: "grafana_user"
+          password: "LZk36O1^ur$6"
+        primary:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          persistence:
+            storageClass: "{{ info[org][env]['storageClass'] }}"
+            size: 8Gi
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
