@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-server-{{env}}
+  namespace: argocd
+  labels:
+    name: prometheus-server-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: monitoring
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: monitoring/kube-prometheus-ori
+    targetRevision: HEAD
+    helm:
+      releaseName: prometheus-server-{{env}}
+      valuesObject:
+        clusterDomain: starix.nexprod
+        prometheus:
+          retention: 3d
+          retentionSize: "10GB"
+          persistence:
+            storageClass: "{{ info[org][env]['storageClass'] }}"
+            size: "12Gi"
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
