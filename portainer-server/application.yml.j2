@@ -37,6 +37,7 @@ spec:
             ingress.kubernetes.io/ssl-redirect: "true"
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
+          size: "4Gi"
 
   syncPolicy:
     automated:
