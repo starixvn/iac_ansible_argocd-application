@@ -49,6 +49,10 @@ spec:
               admin_password: "RHk^QbNE0C5Q"
 
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
