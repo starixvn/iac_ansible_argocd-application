@@ -1,27 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: portainer-server-{{env}}
+  name: vault-server-{{env}}
   namespace: argocd
   labels:
-    name: portainer-server-{{env}}
+    name: vault-server-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: portainer
+    namespace: vault
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: portainer-server
+    path: vault-server
     targetRevision: HEAD
     helm:
-      releaseName: portainer-server-{{env}}
+      releaseName: vault-server-{{env}}
       valuesObject:
         image:
-          repository: "{{ info[org][env]['hub'] }}/base/portainer"
-          tag: server-2.18.1
+          repository: "hashicorp"
+          tag: vault:1.15.2
           pullPolicy: Always
         service:
           type: ClusterIP
@@ -29,7 +29,7 @@ spec:
           enabled: true
           ingressClassName: "haproxy"
           hosts:
-            - host: "portainer-k3s.{{ info[org][env]['ingressDomain'] }}"
+            - host: "vault-k3s.{{ info[org][env]['ingressDomain'] }}"
               paths:
               - path: "/"
                 pathType: "Prefix"
