@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-server-{{env}}
+  name: vault-{{env}}
   namespace: argocd
   labels:
-    name: vault-server-{{env}}
+    name: vault-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
@@ -14,10 +14,10 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: vault-server
+    path: vault
     targetRevision: HEAD
     helm:
-      releaseName: vault-server-{{env}}
+      releaseName: vault-{{env}}
       valuesObject:
         image:
           repository: "hashicorp"
