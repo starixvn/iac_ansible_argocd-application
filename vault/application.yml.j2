@@ -37,9 +37,9 @@ spec:
                 pathType: "Prefix"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
-        persistence:
-          storageClass: "longhorn-stricted"
-          size: "10Gi"
+        #persistence:
+        #  storageClass: "longhorn-stricted"
+        #  size: "10Gi"
 
   syncPolicy:
     automated:
