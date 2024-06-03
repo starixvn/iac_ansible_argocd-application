@@ -14,9 +14,11 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: vault-cluster
+    path: vault-cluster-1
     targetRevision: HEAD
     helm:
+      valueFiles:
+        - override-values.yaml
       releaseName: vault-{{env}}
       valuesObject:
         image:
