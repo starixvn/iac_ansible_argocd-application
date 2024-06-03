@@ -24,6 +24,7 @@ spec:
           cache:
             redis:
               url: "redis://redis-server:6379"
+          skipDBUpdate: false
         ingress:
           hosts:
             - host: "trivy-k3s.{{ info[org][env]['ingressDomain'] }}"
