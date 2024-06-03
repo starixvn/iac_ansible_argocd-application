@@ -20,6 +20,10 @@ spec:
       releaseName: trivy-server-{{env}}
       valuesObject:
         nodeSelector: {}
+        trivy:
+          cache:
+            redis:
+              url: "redis://redis-server:6379"
         ingress:
           hosts:
             - host: "trivy-k3s.{{ info[org][env]['ingressDomain'] }}"
