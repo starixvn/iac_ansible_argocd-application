@@ -17,8 +17,6 @@ spec:
     path: vault-cluster-1
     targetRevision: HEAD
     helm:
-      valueFiles:
-        - override-values.yaml
       releaseName: vault-{{env}}
       valuesObject:
         image:
@@ -36,6 +34,8 @@ spec:
         persistence:
           storageClass: "longhorn-stricted"
           size: "5Gi"
+      valueFiles:
+        - override-values.yaml
 
   syncPolicy:
     automated:
