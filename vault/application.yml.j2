@@ -38,8 +38,8 @@ spec:
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
         persistence:
-          storageClass: "longhorn"
-          size: "10Gi"
+          storageClass: "longhorn-stricted"
+          size: "5Gi"
 
   syncPolicy:
     automated:
