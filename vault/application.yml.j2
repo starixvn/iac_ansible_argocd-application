@@ -28,13 +28,11 @@ spec:
         service:
           type: ClusterIP
         ingress:
-          enabled: true
-          ingressClassName: "haproxy"
-          hosts:
-            - host: "vault-k3s.{{ info[org][env]['ingressDomain'] }}"
-              paths:
-              - path: "/"
-                pathType: "Prefix"
+            enabled: true
+            ingressClassName: "haproxy"
+            host: "vault-k3s.{{ info[org][env]['ingressDomain'] }}"
+            annotations:
+              ingress.kubernetes.io/ssl-redirect: "true"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
         persistence:
