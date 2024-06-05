@@ -32,7 +32,7 @@ spec:
           ingress:
             enabled: true
             ingressClassName: "haproxy"
-            host: "grafana-k3s.{{ info[org][env]['ingressDomain'] }}"
+            host: "grafana.{{ info[org][env]['ingressDomain'] }}"
             annotations:
               ingress.kubernetes.io/ssl-redirect: "true"
           config:
