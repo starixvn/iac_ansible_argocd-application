@@ -44,6 +44,22 @@ spec:
               type: "mysql"
               user: "grafana_user"
             security:
+              auth.ldap:
+                enabled: true
+                [[servers]]
+                host = "10.18.200.102"
+                port = 389
+                use_ssl = false
+                ssl_skip_verify = false
+                bind_dn = "CN=ldapnex,OU=ServicesAccounts,OU=UsersGroups,OU=IT,OU=ServersLabs,OU=NEXSOL,DC=spvn,DC=local"
+                bind_password = 'D5TcVuqk%L'
+                search_filter = "(sAMAccountName=%s)"
+                search_base_dns = ["OU=NEXSOL,DC=spvn,DC=local"]
+                [servers.attributes]
+                name = "name"
+                username = "sAMAccountName"
+                member_of = "memberOf"
+                email =  "mail"
               # ## Grafana Admin credentials, if omitted they will be admin:<random_pass>
               # admin_user:
               admin_password: "RHk^QbNE0C5Q"
