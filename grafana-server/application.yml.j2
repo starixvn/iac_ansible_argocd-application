@@ -46,9 +46,9 @@ spec:
             security:
               # ## Grafana Admin credentials, if omitted they will be admin:<random_pass>
               # admin_user:
+              auth.ldap:
+                enabled: true
               admin_password: "RHk^QbNE0C5Q"
-            auth.ldap:
-              enabled: true
           extraVolumes:
             - name: grafana-ldap-toml
               configMap:
