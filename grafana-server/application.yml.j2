@@ -47,6 +47,10 @@ spec:
               # ## Grafana Admin credentials, if omitted they will be admin:<random_pass>
               # admin_user:
               admin_password: "RHk^QbNE0C5Q"
+          containerSecurityContext:
+            enabled: false
+          podSecurityContext:
+            enabled: false
 
   syncPolicy:
     automated:
