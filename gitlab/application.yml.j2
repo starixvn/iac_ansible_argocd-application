@@ -21,8 +21,8 @@ spec:
       valuesObject:
         tolerations:
         - key: "cattle.io/os"
-          value: "true"
-          effect: "gitlab"
+          value: "gitlab"
+          effect: "NoSchedule"
         global:
           nodeSelector:
             gitlab-server: "yes"
