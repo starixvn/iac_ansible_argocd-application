@@ -23,11 +23,18 @@ spec:
         image:
           repository: "hub.nexdev.net/base/opensearchproject/opensearch-dashboards"
           tag: "2.13.0"
-        nodeSelector:
-          nexops-tools: "yes"
         service:
           type: NodePort
           nodePort: "31601"
+        ingress:
+          enabled: true
+          ingressClassName: "haproxy"
+          hosts:
+          - host: logs.{{ info[org][env]['ingressDomain'] }}
+          annotations:
+            ingress.kubernetes.io/ssl-redirect: "true"
+        nodeSelector:
+          nexops-tools: "yes"
 
   syncPolicy:
     automated:
