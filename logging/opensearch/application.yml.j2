@@ -17,21 +17,22 @@ spec:
     path: opensearch/opensearch
     targetRevision: HEAD
     helm:
-      singleNode: true
-      extraEnvs:
-        - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
-          value: Y8cY3sn7hCwSmJLff2U7fkNG
-      image:
-        repository: "hub.nexdev.net/base/opensearchproject/opensearch"
-        tag: "2.13.0"
-      persistence:
-        enabled: true
-      accessModes:
-        - ReadWriteOnce
-      size: 20Gi
-      nodeSelector:
-        nexops-tools: "yes"
-
+      releaseName: opensearch-{{env}}
+      valuesObject:
+        singleNode: true
+        extraEnvs:
+          - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+            value: Y8cY3sn7hCwSmJLff2U7fkNG
+        image:
+          repository: "hub.nexdev.net/base/opensearchproject/opensearch"
+          tag: "2.13.0"
+        persistence:
+          enabled: true
+        accessModes:
+          - ReadWriteOnce
+        size: 20Gi
+        nodeSelector:
+          nexops-tools: "yes"
   syncPolicy:
     automated:
       prune: true
