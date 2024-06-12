@@ -19,8 +19,11 @@ spec:
     helm:
       releaseName: gitlab-{{org}}-{{env}}
       valuesObject:
+        upgradeCheck:
+          enabled: false
         tolerations:
         - key: "cattle.io/os"
+          operator: "Equal"
           value: "gitlab"
           effect: "NoSchedule"
         global:
