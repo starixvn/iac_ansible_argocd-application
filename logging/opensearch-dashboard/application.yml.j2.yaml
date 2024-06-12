@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: opensearch/opensearch-dashboard
+    path: opensearch/opensearch-dashboards
     targetRevision: HEAD
     helm:
       releaseName: opensearch-dashboard-{{env}}
