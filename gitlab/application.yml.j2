@@ -1,0 +1,73 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitlab-{{org}}-{{env}}
+  namespace: argocd
+  labels:
+    name: gitlab-{{org}}-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gitlab-server
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: gitlab
+    targetRevision: HEAD
+    helm:
+      releaseName: gitlab-{{org}}-{{env}}
+      valuesObject:
+        tolerations:
+        - key: "cattle.io/os"
+          operator: "Equal"
+          value: "true"
+          effect: "gitlab"
+        global:
+          nodeSelector:
+            gitlab-server: "yes"
+          hosts:
+            domain: lumigame.com
+            https: false
+            gitlab:
+              name: gitlab-des.lumigame.com
+          edition: ce
+          monitoring: true
+          minio:
+            enabled: false
+          kas:
+            enabled: false
+          registry:
+            enabled: false
+          time_zone: "Asia/Bangkok"
+          ingress:
+            class: ""
+        certmanager:
+          installed: false
+        gitlab-runner:
+          install: false
+        gitlab:
+          gitaly:
+            persistence:
+              storageClass: longhorn-strict
+              size: 50Gi
+        postgresql:
+          persistence:
+            storageClass: longhorn-strict
+            size: 8Gi
+        redis:
+          master:
+            persistence:
+              storageClass: longhorn-strict
+              size: 5Gi
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
