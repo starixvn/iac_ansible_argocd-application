@@ -56,20 +56,20 @@ spec:
             enabled: false
           gitaly:
             persistence:
-              storageClass: longhorn-strict
+              storageClass: longhorn-stricted
               size: 30Gi
         minio:
           persistence:
-            storageClass: longhorn-strict
+            storageClass: longhorn-stricted
             size: 45Gi
         postgresql:
           persistence:
-            storageClass: longhorn-strict
+            storageClass: longhorn-stricted
             size: 8Gi
         redis:
           master:
             persistence:
-              storageClass: longhorn-strict
+              storageClass: longhorn-stricted
               size: 5Gi
 
   syncPolicy:
