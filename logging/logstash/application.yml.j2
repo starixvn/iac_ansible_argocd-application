@@ -9,7 +9,7 @@ metadata:
     org: {{org}}
 spec:
   destination:
-    server: "{{ info[org][env]["cluster"] }}"
+    server: "{{ info[org][env][cluster] }}"
     namespace: logging
   project: default
   source:
@@ -96,9 +96,10 @@ spec:
           limits:
             cpu: "1000m"
             memory: "4096Mi"
-        image: "hub.nexdev.net/base/logstash"
+        image: "{{ info[org][env][hub] }}/base/elk/logstash"
         # image: "docker.elastic.co/logstash/logstash"
-        imageTag: "8.5.1"
+        imageTag: "7.17.6"
+        # imageTag: "8.5.1"
 
         httpPort: 9600
         extraPorts:
