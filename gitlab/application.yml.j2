@@ -21,12 +21,11 @@ spec:
       valuesObject:
         upgradeCheck:
           enabled: false
-        tolerations:
-        - key: "cattle.io/os"
-          operator: "Equal"
-          value: "gitlab"
-          effect: "NoSchedule"
         global:
+          tolerations:
+          - key: "cattle.io/os"
+            value: "gitlab"
+            effect: "NoSchedule"
           nodeSelector:
             gitlab-server: "yes"
           hosts:
@@ -62,15 +61,24 @@ spec:
           persistence:
             storageClass: longhorn-stricted
             size: 45Gi
+          nodeSelector:
+            gitlab-server: "yes"
         postgresql:
           persistence:
             storageClass: longhorn-stricted
             size: 8Gi
+          nodeSelector:
+            gitlab-server: "yes"
         redis:
           master:
             persistence:
               storageClass: longhorn-stricted
               size: 5Gi
+          nodeSelector:
+            gitlab-server: "yes"
+        prometheus:
+          install: false
+        
 
   syncPolicy:
     syncOptions:
