@@ -65,27 +65,43 @@ spec:
 
 
           main_output.conf: |
-            if "vault-server" in [tags] {
-              opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-vault-audit-local-%{+YYYY.MM.dd}"
-              }         
+            output {
+
+              if "vault-server" in [tags] {
+                opensearch {
+                  hosts => ["https://opensearch-cluster-master:9200"]
+                  user => "logstash"
+                  password => "logstash"
+                  ssl => true
+                  ssl_certificate_verification => false
+                  index => "logstash-vault-audit-local-%{+YYYY.MM.dd}"
+                }         
+              }
+              
+              else if "vault-cluster-server" in [tags] {
+                opensearch {
+                  hosts => ["https://opensearch-cluster-master:9200"]
+                  user => "logstash"
+                  password => "logstash"
+                  ssl => true
+                  ssl_certificate_verification => false
+                  index => "logstash-vault-cluster-audit-local-%{+YYYY.MM.dd}"
+                }         
+              }
+
+              else {
+                opensearch {
+                  hosts => ["https://opensearch-cluster-lumi:9200"]
+                  user => "logstash"
+                  password => "logstash"
+                  ssl => true
+                  ssl_certificate_verification => false
+                  index => "logstash-unknown-%{+YYYY.MM.dd}"
+                }        
+              }
+
             }
             
-            else if "vault-cluster-server" in [tags] {
-              opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-vault-cluster-audit-local-%{+YYYY.MM.dd}"
-              }         
-            }
 
 
         logstashJavaOpts: "-Xmx3g -Xms3g"
