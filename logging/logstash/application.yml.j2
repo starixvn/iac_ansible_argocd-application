@@ -24,7 +24,7 @@ spec:
             http.host: "0.0.0.0"
 
         logstashPipeline:
-          generic.conf: |
+          logstash.conf: |
             input {
 
               http {
@@ -32,10 +32,10 @@ spec:
                 add_field => { "[@metadata][input-http]" => "" }
               }
               beats {
-                port => 5044
+                port => 5000
               }
               tcp {
-                port => 5000
+                port => 5044
               }
 
             }
@@ -121,10 +121,10 @@ spec:
         extraPorts:
           - name: httplog
             containerPort: 8080
-          - name: tcp
+          - name: beats
             containerPort: 5000
-          # - name: beats
-          #   containerPort: 5044
+          - name: tcp
+            containerPort: 5044
           # - name: beats
           #   containerPort: 5001
 
@@ -135,9 +135,9 @@ spec:
           type: ClusterIP
           ports:
             - name: beats
-              port: 5044
+              port: 5000
               protocol: TCP
-              targetPort: 5044
+              targetPort: 5000
             - name: httplog
               port: 8080
               protocol: TCP
@@ -147,9 +147,9 @@ spec:
               protocol: TCP
               targetPort: 9600
             - name: tcp
-              port: 5000
+              port: 5044
               protocol: TCP
-              targetPort: 5000
+              targetPort: 5044
           # annotations: {}
           # type: ClusterIP
           # loadBalancerIP: ""
