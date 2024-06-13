@@ -34,10 +34,10 @@ spec:
               beats {
                 port => 5000
               }
-              # tcp {
-              #   port => 5044
-              #   codec => json
-              # }
+              tcp {
+                port => 5044
+                codec => json
+              }
 
             }
 
@@ -115,8 +115,8 @@ spec:
             memory: "4096Mi"
         image: "{{ info[org][env]['hub'] }}/base/elk/logstash"
         # image: "docker.elastic.co/logstash/logstash"
-        imageTag: "7.17.6"
-        # imageTag: "8.5.1"
+        # imageTag: "7.17.6"
+        imageTag: "8.5.1"
 
         httpPort: 9600
         extraPorts:
@@ -124,8 +124,8 @@ spec:
             containerPort: 8080
           - name: beats
             containerPort: 5000
-          # - name: tcp
-          #   containerPort: 5044
+          - name: tcp
+            containerPort: 5044
           # - name: beats
           #   containerPort: 5001
 
@@ -147,10 +147,10 @@ spec:
               port: 9600
               protocol: TCP
               targetPort: 9600
-            # - name: tcp
-            #   port: 5044
-            #   protocol: TCP
-            #   targetPort: 5044
+            - name: tcp
+              port: 5044
+              protocol: TCP
+              targetPort: 5044
           # annotations: {}
           # type: ClusterIP
           # loadBalancerIP: ""
