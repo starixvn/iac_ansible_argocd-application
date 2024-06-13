@@ -9,7 +9,7 @@ metadata:
     org: {{org}}
 spec:
   destination:
-    server: "{{ info[org][env]["cluster"] }}"
+    server: "{{ info[org][env][cluster] }}"
     namespace: logging
   project: default
   source:
@@ -24,7 +24,7 @@ spec:
           - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
             value: Y8cY3sn7hCwSmJLff2U7fkNG
         image:
-          repository: "hub.nexdev.net/base/opensearchproject/opensearch"
+          repository: "{{ info[org][env][hub] }}/base/opensearchproject/opensearch"
           tag: "2.13.0"
         persistence:
           enabled: true
