@@ -19,7 +19,6 @@ spec:
     helm:
       releaseName: logstash-{{env}}
       valueFiles:
-        - values.yaml
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
         image: "{{ info[org][env]['hub'] }}/base/opensearchproject/logstash-opensearch"
