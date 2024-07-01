@@ -57,24 +57,24 @@ spec:
             enabled: false
           gitaly:
             persistence:
-              storageClass: longhorn-stricted
+              storageClass: local-path
               size: 30Gi
         minio:
           persistence:
-            storageClass: longhorn-stricted
+            storageClass: local-path
             size: 45Gi
           nodeSelector:
             gitlab-server: "yes"
         postgresql:
           persistence:
-            storageClass: longhorn-stricted
+            storageClass: local-path
             size: 8Gi
           nodeSelector:
             gitlab-server: "yes"
         redis:
           master:
             persistence:
-              storageClass: longhorn-stricted
+              storageClass: local-path
               size: 5Gi
           nodeSelector:
             gitlab-server: "yes"
