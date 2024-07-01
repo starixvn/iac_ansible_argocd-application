@@ -66,10 +66,10 @@ spec:
           nodeSelector:
             gitlab-server: "yes"
         postgresql:
-          persistence:
-            storageClass: local-path
-            size: 8Gi
-          global:
+          primary:
+            persistence:
+              storageClass: local-path
+              size: 8Gi
             nodeSelector:
               gitlab-server: "yes"
         redis:
