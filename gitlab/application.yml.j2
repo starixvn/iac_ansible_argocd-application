@@ -77,8 +77,8 @@ spec:
             persistence:
               storageClass: local-path
               size: 5Gi
-          nodeSelector:
-            gitlab-server: "yes"
+            nodeSelector:
+              gitlab-server: "yes"
         prometheus:
           install: false
         
