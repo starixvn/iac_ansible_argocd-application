@@ -39,12 +39,12 @@ spec:
           registry:
             enabled: false
           time_zone: "Asia/Bangkok"
-          ingress:
+          {# ingress:
             enabled: true
             class: "haproxy"
             configureCertmanager: false
             tls:
-              enabled: false
+              enabled: false #}
         nginx-ingress:
           enabled: false
         haproxy:
