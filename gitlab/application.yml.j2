@@ -41,17 +41,19 @@ spec:
           time_zone: "Asia/Bangkok"
           ingress:
             enabled: true
-            class: "haproxy"
-            configureCertmanager: false
+            #class: "haproxy"
+            configureCertmanager: true
             tls:
-              enabled: false
+              enabled: true
         nginx-ingress:
-          enabled: false
-        haproxy:
-          install: true
+          enabled: true
+        #haproxy:
+        #  install: true
         certmanager:
-          installCRDs: false
-          install: false
+          installCRDs: true
+          install: true
+        certmanager-issuer:
+          email: ken.nguyen@starixsoft.com
         gitlab-runner:
           install: false
         gitlab:
