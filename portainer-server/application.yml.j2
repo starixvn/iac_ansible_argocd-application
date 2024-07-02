@@ -29,7 +29,7 @@ spec:
           enabled: true
           ingressClassName: "haproxy"
           hosts:
-            - host: "portainer-k3s.{{ info[org][env]['ingressDomain'] }}"
+            - host: "portainer.{{ info[org][env]['ingressDomain'] }}"
               paths:
               - path: "/"
                 pathType: "Prefix"
