@@ -33,6 +33,9 @@ spec:
             https: true
             gitlab:
               name: gitgd.lumigame.com
+          shell:
+            tcp:
+              proxyProtocol: true
           edition: ce
           kas:
             enabled: false
@@ -41,20 +44,19 @@ spec:
           time_zone: "Asia/Bangkok"
           ingress:
             enabled: true
-            #class: "haproxy"
-            configureCertmanager: true
-            useNewIngressForCerts: true
+            provider: haproxy
+            class: "haproxy"
+            configureCertmanager: false
+            useNewIngressForCerts: false
             tls:
-              enabled: true
+              enabled: false
         nginx-ingress:
-          enabled: true
+          enabled: false
         #haproxy:
         #  install: true
         certmanager:
-          installCRDs: true
-          install: true
-        certmanager-issuer:
-          email: ken.nguyen@starixsoft.com
+          installCRDs: false
+          install: false
         gitlab-runner:
           install: false
         gitlab:
