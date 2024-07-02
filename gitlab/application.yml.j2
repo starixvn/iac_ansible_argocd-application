@@ -50,6 +50,20 @@ spec:
             useNewIngressForCerts: false
             tls:
               enabled: false
+          appConfig:
+            ldap:
+              preventSignin: false
+              servers:
+                main:
+                  label: 'LDAP'
+                  host: '10.10.50.102'
+                  port: 389
+                  uid: 'sAMAccountName'
+                  bind_dn: 'CN=LDAP Reader,OU=ServicesAccounts,OU=UsersGroups,OU=IT,OU=ServersLabs,OU=LUMI,DC=luminet,DC=vn'
+                  base: 'OU=LUMI,DC=luminet,DC=vn'
+                  password: 'J5IvWV1+'
+                  verify_certificates: false
+                  active_directory: true  
         nginx-ingress:
           enabled: false
         haproxy:
