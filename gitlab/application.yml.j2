@@ -30,7 +30,7 @@ spec:
             gitlab-server: "yes"
           hosts:
             domain: lumigame.com
-            https: false
+            https: true
             gitlab:
               name: gitgd.lumigame.com
           edition: ce
@@ -43,6 +43,7 @@ spec:
             enabled: true
             #class: "haproxy"
             configureCertmanager: true
+            useNewIngressForCerts: true
             tls:
               enabled: true
         nginx-ingress:
