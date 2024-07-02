@@ -61,7 +61,9 @@ spec:
                   uid: 'sAMAccountName'
                   bind_dn: 'CN=LDAP Reader,OU=ServicesAccounts,OU=UsersGroups,OU=IT,OU=ServersLabs,OU=LUMI,DC=luminet,DC=vn'
                   base: 'OU=LUMI,DC=luminet,DC=vn'
-                  password: 'J5IvWV1+'
+                  password:
+                    secret: ldap-password.password
+                    key: ldap-password.key
                   verify_certificates: false
                   active_directory: true  
         nginx-ingress:
