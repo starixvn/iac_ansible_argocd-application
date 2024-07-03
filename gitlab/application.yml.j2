@@ -19,37 +19,13 @@ spec:
     helm:
       releaseName: gitlab-{{org}}-{{env}}
       valuesObject:
-        upgradeCheck:
-          enabled: false
         global:
-          tolerations:
-          - key: "cattle.io/os"
-            value: "gitlab"
-            effect: "NoSchedule"
           nodeSelector:
             gitlab-server: "yes"
           hosts:
-            domain: lumigame.com
-            https: true
+            domain: "{{ info[org][env]['ingressDomain'] }}"
             gitlab:
-              name: gitgd.lumigame.com
-          shell:
-            tcp:
-              proxyProtocol: true
-          edition: ce
-          kas:
-            enabled: false
-          registry:
-            enabled: false
-          time_zone: "Asia/Bangkok"
-          ingress:
-            enabled: true
-            provider: haproxy
-            class: "haproxy"
-            configureCertmanager: false
-            useNewIngressForCerts: false
-            tls:
-              enabled: false
+              name: "gitgd.{{ info[org][env]['ingressDomain'] }}"
           appConfig:
             ldap:
               preventSignin: false
@@ -66,22 +42,11 @@ spec:
                     key: 'password'
                   verify_certificates: false
                   active_directory: true  
-        nginx-ingress:
-          enabled: false
-        haproxy:
-          install: true
-        certmanager:
-          installCRDs: false
-          install: false
-        gitlab-runner:
-          install: false
         gitlab:
-          toolbox:
-            enabled: false
           gitaly:
             persistence:
               storageClass: local-path
-              size: 30Gi
+              size: 40Gi
           gitlab-shell:
             enabled: true
         minio:
@@ -94,19 +59,17 @@ spec:
           primary:
             persistence:
               storageClass: local-path
-              size: 8Gi
+              size: 10Gi
             nodeSelector:
               gitlab-server: "yes"
         redis:
           master:
             persistence:
               storageClass: local-path
-              size: 5Gi
+              size: 10Gi
             nodeSelector:
               gitlab-server: "yes"
-        prometheus:
-          install: false
-        
+
 
   syncPolicy:
     syncOptions:
