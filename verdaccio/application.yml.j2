@@ -20,6 +20,26 @@ spec:
       valueFiles:
         - values.yaml
       releaseName: verdaccio-{{env}}
+      valuesObject:
+        image:
+          repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
+          tag: 5.24.1
+          pullPolicy: Always
+        service:
+          type: ClusterIP
+        ingress:
+          enabled: true
+          ingressClassName: "haproxy"
+          hosts:
+            - host: "npm-k3s.{{ info[org][env]['ingressDomain'] }}"
+              paths:
+              - path: "/"
+                pathType: "Prefix"
+          annotations:
+            ingress.kubernetes.io/ssl-redirect: "true"
+        persistence:
+          storageClass: "{{ info[org][env]['storageClass'] }}"
+          size: "2Gi"
 
   syncPolicy:
     automated:
