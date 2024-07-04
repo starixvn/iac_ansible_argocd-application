@@ -53,7 +53,7 @@ spec:
             ssl-certificate: "haproxy-ingress/lumigame-cert"
 {% endif %}
     path: kubernetes-ingress-ori
-    repoURL: "{{ urlRepoArgo }}"
+    repoURL: "{{ repoURL }}"
     targetRevision: HEAD
   syncPolicy:
     automated:
