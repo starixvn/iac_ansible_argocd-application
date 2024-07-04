@@ -17,8 +17,8 @@ spec:
     path: verdaccio
     targetRevision: HEAD
     helm:
-      valueFiles:
-        - values.yaml
+      #valueFiles:
+      #  - values.yaml
       releaseName: verdaccio-{{env}}
       valuesObject:
         image:
