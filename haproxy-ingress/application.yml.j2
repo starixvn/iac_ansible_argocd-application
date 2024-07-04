@@ -20,6 +20,15 @@ spec:
         value: LoadBalancer
       valuesObject:
         controller:
+{% if enable_gitlab_shell == "yes" %}
+          service:
+            tcpPorts:
+              - name: ssh
+                port: 22
+                targetPort: 22
+          extraArgs:
+            - --configmap-tcp-services=gitlab-server/gitlab-server-haproxy-tcp
+{% endif %}
           config:
             timeout-connect: "5s"
             scale-server-slots: "7"
