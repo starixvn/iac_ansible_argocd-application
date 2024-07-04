@@ -50,7 +50,7 @@ info:
       ingressDomain: ""
       storageClass: ""
     uat:
-      cluster: ""
+      cluster: "https://uat-sc-apiserver.starixplay.com:16443"
       hub: ""
       ingressDomain: ""
       storageClass: ""

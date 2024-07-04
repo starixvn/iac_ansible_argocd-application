@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: haproxy-ingress-{{env}}
+  namespace: argocd
+  labels:
+    name: haproxy-ingress-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    namespace: haproxy-ingress
+    server: "{{ info[org][env]['cluster'] }}"
+  project: default
+  source:
+    helm:
+      releaseName: haproxy-ingress-{{env}}
+      parameters:
+      - name: "controller.service.type"
+        value: LoadBalancer
+      valuesObject:
+        controller:
+          config:
+            timeout-connect: "5s"
+            scale-server-slots: "7"
+            maxconn: "20000"
+            stats-config-snippet: |
+{% if org == "starix" %}
+              stats auth nexcel:NexOps!QAZ
+{% elif org == "lumi" %}
+              stats auth lumi:lum!onRock
+{% endif %}
+              stats refresh 300s
+              stats show-legends
+              stats show-node
+              stats show-modules
+            forwarded-for: "true"
+            dontlognull: "true"
+            # syslog-server: "address:stdout, format: raw, facility:daemon"
+{% if org == "starix" and setTLS == "yes" %}
+            ssl-certificate: "haproxy-ingress/nexdev-crt"
+{% endif %}
+{% if org == "lumi" and setTLS == "yes" %}
+            ssl-certificate: "haproxy-ingress/lumigame-cert"
+{% endif %}
+    path: kubernetes-ingress-ori
+    repoURL: "{{ urlRepoArgo }}"
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m # the maximum amount of time allowed for the backoff strategy    
