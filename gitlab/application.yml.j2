@@ -26,6 +26,12 @@ spec:
             domain: "{{ info[org][env]['ingressDomain'] }}"
             gitlab:
               name: "git21.{{ info[org][env]['ingressDomain'] }}"
+          ingress:
+            provider: "nginx"
+            class: "nginx" 
+            tls:
+              enabled: true
+              #secretName: "gitlab-lumi-lumprod-wildcard-tls"
           appConfig:
             ldap:
               preventSignin: false
@@ -41,7 +47,9 @@ spec:
                     secret: 'gitlab-lumprod-ldap-password'
                     key: 'password'
                   verify_certificates: false
-                  active_directory: true  
+                  active_directory: true
+        nginx-ingres:
+          enabled: true
         gitlab:
           gitaly:
             persistence:
