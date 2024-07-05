@@ -29,9 +29,10 @@ spec:
           # Use the Vault K8s Image https://github.com/hashicorp/vault-k8s/
           image:
             repository: "hashicorp/vault-k8s"
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
             tag: "1.4.1"
           agentImage:
-            repository: "hashicorp/vault"
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
             tag: "1.16.1"
 
           resources:
@@ -51,7 +52,7 @@ spec:
         server:
           # Use the Enterprise Image
           image:
-            repository: "hashicorp/vault"
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
             tag: "1.16.1"
           tolerations:
           - effect: NoSchedule
