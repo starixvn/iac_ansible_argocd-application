@@ -1,0 +1,124 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-{{env}}
+  namespace: argocd
+  labels:
+    name: vault-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]['cluster'] }}"
+    namespace: vault
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: vault/{{chartVersion}}
+    targetRevision: HEAD
+    helm:
+      releaseName: vault-{{env}}
+      valueFiles:
+        - value.d/values-{{org}}-{{env}}.yaml
+      valuesObject:
+        global:
+          enabled: true
+          tlsDisable: true
+        injector:
+          enabled: true
+          # Use the Vault K8s Image https://github.com/hashicorp/vault-k8s/
+          image:
+            repository: "hashicorp/vault-k8s"
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
+            tag: "1.4.1"
+          agentImage:
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
+            tag: "1.16.1"
+
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 256Mi
+              cpu: 250m
+          tolerations:
+          - effect: NoSchedule
+            key: cattle.io/os
+            operator: Equal
+            value: linux
+          nodeSelector:
+            nexops-tools: "yes"
+        server:
+          # Use the Enterprise Image
+          image:
+            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
+            tag: "1.16.1"
+          tolerations:
+          - effect: NoSchedule
+            key: cattle.io/os
+            operator: Equal
+            value: linux
+          nodeSelector:
+            vault-workload: "yes"
+
+          ingress:
+            enabled: true
+            activeService: false
+            ingressClassName: "haproxy"
+            host: "vault.{{info[org][env]['ingressDomain']}}"
+            annotations:
+              ingress.kubernetes.io/ssl-redirect: "true"
+          # For HA configuration and because we need to manually init the vault,
+          # we need to define custom readiness/liveness Probe settings
+          readinessProbe:
+            enabled: true
+            path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
+          livenessProbe:
+            enabled: true
+            path: "/v1/sys/health?standbyok=true"
+            initialDelaySeconds: 60
+
+          updateStrategyType: "RollingUpdate" 
+
+          # extraEnvironmentVars is a list of extra environment variables to set with the stateful set. These could be
+          # used to include variables required for auto-unseal.
+          extraSecretEnvironmentVars:
+            - envName: AWS_ACCESS_KEY_ID
+              secretName: eks-creds
+              secretKey: AWS_ACCESS_KEY_ID
+            - envName: AWS_SECRET_ACCESS_KEY
+              secretName: eks-creds
+              secretKey: AWS_SECRET_ACCESS_KEY
+
+          standalone:
+            enabled: false
+
+        # Vault UI
+        ui:
+          enabled: true
+          externalPort: 8200
+          targetPort: 8200
+          activeVaultPodOnly: false
+          service:
+            type: ClusterIP
+          ingress:
+            enabled: true
+            ingressClassName: "haproxy"
+            hosts:
+              - host: vault.{{info[org][env]['ingressDomain']}}
+
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
