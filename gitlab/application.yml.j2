@@ -61,6 +61,9 @@ spec:
               size: 40Gi
           gitlab-shell:
             enabled: true
+          webservice:
+            ingress:
+              proxyBodySize: "5g"
         minio:
           persistence:
             #storageClass: local-path
