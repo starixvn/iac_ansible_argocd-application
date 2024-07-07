@@ -28,7 +28,7 @@ spec:
               name: "git21.{{ info[org][env]['ingressDomain'] }}"
           ingress:
             provider: "nginx"
-            class: "nginx" 
+            class: "gitlab-nginx" 
             tls:
               enabled: true
               #secretName: "gitlab-lumi-lumprod-wildcard-tls"
