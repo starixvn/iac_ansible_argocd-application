@@ -27,7 +27,7 @@ spec:
             gitlab:
               name: "git21.{{ info[org][env]['ingressDomain'] }}"
           ingress:
-            #provider: "nginx"
+            provider: "nginx"
             class: "gitlab-nginx" 
             tls:
               enabled: true
