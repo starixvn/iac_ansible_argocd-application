@@ -26,15 +26,9 @@ spec:
             domain: "{{ info[org][env]['ingressDomain'] }}"
             gitlab:
               name: "git21.{{ info[org][env]['ingressDomain'] }}"
-          ingress:
-            provider: "nginx"
-            class: "gitlab-nginx" 
-            tls:
-              enabled: true
-              #secretName: "gitlab-lumi-lumprod-wildcard-tls"
           shell:
             tcp:
-              proxyProtocol: false
+              proxyProtocol: true
           appConfig:
             ldap:
               preventSignin: false
@@ -51,39 +45,34 @@ spec:
                     key: 'password'
                   verify_certificates: false
                   active_directory: true
-        nginx-ingress:
-          enabled: true
         gitlab:
           gitaly:
             persistence:
-              #storageClass: local-path
-              storageClass: nfs-client
+              storageClass: local-path
+              #storageClass: nfs-client
               size: 40Gi
           gitlab-shell:
             enabled: true
-          webservice:
-            ingress:
-              proxyBodySize: "5g"
         minio:
           persistence:
-            #storageClass: local-path
-            storageClass: nfs-client
-            size: 50Gi
+            storageClass: local-path
+            #storageClass: nfs-client
+            size: 70Gi
           nodeSelector:
             gitlab-server: "yes"
         postgresql:
           primary:
             persistence:
-              #storageClass: local-path
-              storageClass: nfs-client
+              storageClass: local-path
+              #storageClass: nfs-client
               size: 11Gi
             nodeSelector:
               gitlab-server: "yes"
         redis:
           master:
             persistence:
-              #storageClass: local-path
-              storageClass: nfs-client
+              storageClass: local-path
+              #storageClass: nfs-client
               size: 10Gi
             nodeSelector:
               gitlab-server: "yes"
