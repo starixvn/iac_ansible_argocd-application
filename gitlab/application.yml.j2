@@ -48,31 +48,31 @@ spec:
         gitlab:
           gitaly:
             persistence:
-              storageClass: local-path
-              #storageClass: nfs-client
+              #storageClass: local-path
+              storageClass: nfs-client
               size: 40Gi
           gitlab-shell:
             enabled: true
         minio:
           persistence:
-            storageClass: local-path
-            #storageClass: nfs-client
+            #storageClass: local-path
+            storageClass: nfs-client
             size: 70Gi
           nodeSelector:
             gitlab-server: "yes"
         postgresql:
           primary:
             persistence:
-              storageClass: local-path
-              #storageClass: nfs-client
+              #storageClass: local-path
+              storageClass: nfs-client
               size: 11Gi
             nodeSelector:
               gitlab-server: "yes"
         redis:
           master:
             persistence:
-              storageClass: local-path
-              #storageClass: nfs-client
+              #storageClass: local-path
+              storageClass: nfs-client
               size: 10Gi
             nodeSelector:
               gitlab-server: "yes"
