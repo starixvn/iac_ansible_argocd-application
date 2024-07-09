@@ -28,12 +28,9 @@ spec:
           enabled: true
           # Use the Vault K8s Image https://github.com/hashicorp/vault-k8s/
           image:
-            repository: "hashicorp/vault-k8s"
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
-            tag: "1.4.1"
           agentImage:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-            tag: "1.16.1"
 
           resources:
             requests:
@@ -53,7 +50,6 @@ spec:
           # Use the Enterprise Image
           image:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-            tag: "1.16.1"
           tolerations:
           - effect: NoSchedule
             key: cattle.io/os
@@ -63,14 +59,8 @@ spec:
             vault-workload: "yes"
 
           ingress:
-            enabled: true
             activeService: false
             ingressClassName: "haproxy"
-            hosts: 
-              - host: "vault.{{info[org][env]['ingressDomain']}}"
-                paths: []
-            annotations:
-              ingress.kubernetes.io/ssl-redirect: "true"
           # For HA configuration and because we need to manually init the vault,
           # we need to define custom readiness/liveness Probe settings
           readinessProbe:
