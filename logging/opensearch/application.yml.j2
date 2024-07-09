@@ -14,23 +14,13 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: opensearch/opensearch
+    path: logging/opensearch/{{helmVersion}}
     targetRevision: HEAD
     helm:
       releaseName: opensearch-{{env}}
       valuesObject:
-        singleNode: true
-        extraEnvs:
-          - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
-            value: Y8cY3sn7hCwSmJLff2U7fkNG
         image:
           repository: "{{ info[org][env][hub] }}/base/opensearchproject/opensearch"
-          tag: "2.13.0"
-        persistence:
-          enabled: true
-        accessModes:
-          - ReadWriteOnce
-        size: 20Gi
         nodeSelector:
           nexops-tools: "yes"
   syncPolicy:
