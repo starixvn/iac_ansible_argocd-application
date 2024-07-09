@@ -84,6 +84,11 @@ spec:
           name: "k8s-runner"
           cache:
             secretName: s3access
+        resources:
+          limits:
+            memory: 2000Mi
+            cpu: 1500m
+            ephemeral-storage: 1024Mi          
         nodeSelector: {}
         hpa: {}
 
