@@ -20,7 +20,7 @@ spec:
       releaseName: opensearch-{{env}}
       valuesObject:
         image:
-          repository: "{{ info[org][env][hub] }}/base/opensearchproject/opensearch"
+          repository: "{{ info[org][env]['hub'] }}/base/opensearchproject/opensearch"
         nodeSelector:
           nexops-tools: "yes"
   syncPolicy:
