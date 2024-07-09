@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: opensearch/fluent-bit
+    path: logging/fluent-bit/{{helmVersion}}
     targetRevision: HEAD
     helm:
       releaseName: fluentbit-{{env}}
