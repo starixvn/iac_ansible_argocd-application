@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: opensearch/logstash
+    path: logging/logstash/{{helmVersion}}
     targetRevision: HEAD
     helm:
       releaseName: logstash-{{env}}
