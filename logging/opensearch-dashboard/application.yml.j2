@@ -18,6 +18,8 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: opensearch-dashboard-{{env}}
+      valueFiles:
+        - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
         opensearchHosts: "https://opensearch-cluster-master:9200"
         image:
