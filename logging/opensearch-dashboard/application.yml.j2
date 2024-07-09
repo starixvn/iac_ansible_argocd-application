@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: opensearch/opensearch-dashboards
+    path: logging/opensearch-dashboards/{{helmVersion}}
     targetRevision: HEAD
     helm:
       releaseName: opensearch-dashboard-{{env}}
@@ -22,10 +22,9 @@ spec:
         opensearchHosts: "https://opensearch-cluster-master:9200"
         image:
           repository: "{{ info[org][env][hub] }}/opensearchproject/opensearch-dashboards"
-          tag: "2.13.0"
-        service:
-          type: NodePort
-          nodePort: "31601"
+        # service:
+        #   type: NodePort
+        #   nodePort: "31601"
         ingress:
           enabled: true
           ingressClassName: "haproxy"
