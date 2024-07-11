@@ -51,9 +51,9 @@ info:
       storageClass: ""
     uat:
       cluster: "https://uat-sc-apiserver.starixplay.com:16443"
-      hub: ""
-      ingressDomain: ""
-      storageClass: ""
+      hub: "lumhub.nebula.prod/kbt"
+      ingressDomain: "sgamesuat.com"
+      storageClass: "longhorn"
     prod:
       cluster: ""
       hub: ""
