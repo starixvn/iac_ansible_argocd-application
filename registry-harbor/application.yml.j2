@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value-{{org}}-{{env}}.yml
+        - value.d/value-{{org}}-{{env}}.yml
       releaseName: harbor-{{env}}
 
   syncPolicy:
