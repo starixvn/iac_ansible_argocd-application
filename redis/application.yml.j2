@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis-{{env}}
+  name: redis-{{system}}
   namespace: argocd
   labels:
-    name: redis-{{env}}
+    name: redis-{{system}}
     env: {{env}}
     org: {{org}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: redis
+    namespace: redis-{{system}}
   project: default
   source:
     repoURL: "{{repoURL}}"
@@ -18,8 +18,8 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-{{env}}.yaml
-      releaseName: redis-{{env}}
+        - values-{{system}}-{{env}}.yaml
+      releaseName: redis-{{system}}
 
   syncPolicy:
     automated:
