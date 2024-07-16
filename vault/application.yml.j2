@@ -17,8 +17,7 @@ spec:
     path: vault/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      # releaseName: vault-{{env}}
-      releaseName: vault-cluster
+      releaseName: vault-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
