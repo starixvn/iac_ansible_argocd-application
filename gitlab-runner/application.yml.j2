@@ -19,7 +19,7 @@ spec:
     helm:
       valueFiles:
         - value.d/{{runnerType}}-{{org}}-{{env}}.yml
-      releaseName: gitlab-runner-{{org}}
+      releaseName: gitlab-runner-{{org}}-{{runnerType}}
 
 
   syncPolicy:
