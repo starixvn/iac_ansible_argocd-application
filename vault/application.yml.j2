@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  # name: vault-{{env}}
-  name: vault-temp
+  name: vault-{{env}}
   namespace: argocd
   labels:
     name: vault-{{env}}
@@ -19,7 +18,6 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: vault-{{env}}
-      # releaseName: vault-cluster
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
