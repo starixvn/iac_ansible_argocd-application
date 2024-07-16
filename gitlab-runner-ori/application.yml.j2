@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/value-{{org}}-{{env}}.yml
+        - value.d/{{runnerType}}-{{org}}-{{env}}.yml
       releaseName: gitlab-runner-{{org}}
 
 
