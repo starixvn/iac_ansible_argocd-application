@@ -22,7 +22,7 @@ spec:
       releaseName: verdaccio-{{env}}
       valuesObject:
         image:
-          repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
+          repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio-k3s"
           tag: 5.24.1
           pullPolicy: Always
         service:
@@ -38,7 +38,7 @@ spec:
             ingress.kubernetes.io/ssl-redirect: "true"
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
-          size: "2Gi"
+          size: "32Gi"
 
   syncPolicy:
     automated:
