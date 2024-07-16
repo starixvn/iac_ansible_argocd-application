@@ -1,0 +1,107 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitlab-runner-{{org}}
+  namespace: argocd
+  labels:
+    name: gitlab-runner-{{org}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: gitlab-runner
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: gitlab-runner
+    targetRevision: HEAD
+    helm:
+      releaseName: gitlab-runner-{{org}}
+      valuesObject:
+        image:
+          registry: "{{ info[org][env]['hub'] }}"
+          image: base/gitlab-runner
+          tag: ubuntu-v16.2.2
+        gitlabUrl: https://gitlab.nexdev.net
+        runnerRegistrationToken: "VscxAqFvRVcXgpyoBDD_"
+        concurrent: 10
+        runners:
+          config: |
+            [[runners]]
+              environment = [
+                # "FF_USE_LEGACY_KUBERNETES_EXECUTION_STRATEGY=false",
+                "DOCKER_HOST=tcp://localhost:2376",
+                "DOCKER_TLS_VERIFY=1",
+                "DOCKER_TLS_CERTDIR=/certs",
+                "DOCKER_CERT_PATH=$DOCKER_TLS_CERTDIR/client",
+                "DOCKER_BUILDKIT=1",
+                "DOCKER_CLI_EXPERIMENTAL=enabled",
+              ]
+              pre_build_script = """
+              if ! command -v docker &> /dev/null; then
+                echo "Docker command could not be found."
+              else
+                while true; do
+                    if docker info >/dev/null 2>&1; then
+                        echo "Docker has started!"
+                        break
+                    else
+                        echo "Waiting for Docker to start..."
+                        sleep 1
+                    fi
+                done
+              fi
+              """
+              [runners.kubernetes]
+                namespace = "gitlab-runner"
+                image = "hub.nexdev.net/base/docker:24.0.4-bash-jq-jinja"
+                privileged = true
+                #memory_limit = "8Gi"
+                poll_timeout = 3600
+                poll_interval = 5
+              [runners.cache]
+                Type = "s3"
+                Shared = true
+                [runners.cache.s3]
+                  ServerAddress = "minio-api.nexdev.net"
+                  BucketName = "gitlab"
+                  AuthenticationType = "access-key"
+              [[runners.kubernetes.services]]
+                environment = ["HEALTHCHECK_TCP_PORT=2376"]
+                name = "hub.nexdev.net/base/docker:24-dind-alpine"
+                command = ["--experimental", "--mtu=1450"]
+                alias = "docker"
+            [runners.kubernetes.node_selector]
+              "node-role.kubernetes.io/runner" = "yes"
+            [runners.kubernetes.node_tolerations]
+              "cattle.io/os=runner" = "NoSchedule"
+              [[runners.kubernetes.volumes.empty_dir]]
+                name = "docker-certs"
+                mount_path = "/certs/client"
+                medium = "Memory"
+          tags: "docker,k8s,ci"
+          name: "k8s-runner"
+          cache:
+            secretName: s3access
+        resources:
+          limits:
+            memory: 2000Mi
+            cpu: 1500m
+            ephemeral-storage: 1024Mi          
+        nodeSelector: {}
+        hpa: {}
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
