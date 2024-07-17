@@ -40,10 +40,10 @@ info:
       ingressDomain: "lumigame.com"
       storageClass: "longhorn"
     local:
-      cluster: ""
-      hub: ""
-      ingressDomain: ""
-      storageClass: ""
+      cluster: "https://kubernetes.default.svc"
+      hub: "hub.lumigame.com"
+      ingressDomain: "lumigame.com"
+      storageClass: "longhorn"
     sit:
       cluster: ""
       hub: ""
