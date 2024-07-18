@@ -21,10 +21,8 @@ spec:
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
-        image: "{{ info[org][env]['hub'] }}/base/opensearchproject/logstash-opensearch"
-        # image: "docker.elastic.co/logstash/logstash"
-        # imageTag: "7.17.6"
-        imageTag: "8.9.0"
+        image: "{{ info[org][env]['hub'] }}/base/logstash/logstash"
+        # image: "{{ info[org][env]['hub'] }}/base/opensearchproject/logstash-opensearch"
 
         httpPort: 9600
         extraPorts:
@@ -56,6 +54,7 @@ spec:
               protocol: TCP
               targetPort: 9600
             - name: tcp
+              nodePort: 30504
               port: 5044
               protocol: TCP
               targetPort: 5044
