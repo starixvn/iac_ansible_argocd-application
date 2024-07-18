@@ -21,7 +21,7 @@ spec:
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
-        image: "{{ info[org][env]['hub'] }}/base/elk/logstash"
+        image: "{{ info[org][env]['hub'] }}/base/logstash/logstash"
         # image: "{{ info[org][env]['hub'] }}/base/opensearchproject/logstash-opensearch"
 
         httpPort: 9600
