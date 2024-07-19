@@ -23,6 +23,20 @@ spec:
       valuesObject:
         image:
           repository: "{{ info[org][env]['hub'] }}/base/fluent/fluent-bit"
+        tolerations: 
+        - effect: NoSchedule
+          key: cattle.io/os
+          operator: Equal
+          value: linux
+        affinity: 
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/runner
+                  operator: NotIn
+                  values:
+                  - "yes"
 
 
   syncPolicy:
