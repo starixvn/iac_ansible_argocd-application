@@ -42,6 +42,7 @@ spec:
           type: NodePort
           ports:
             - name: beats
+              nodePort: 30500
               port: 5000
               protocol: TCP
               targetPort: 5000
