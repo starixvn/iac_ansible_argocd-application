@@ -21,7 +21,8 @@ spec:
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
-        image.repository: "{{ info[org][env]['hub'] }}/base/axoflow/axosyslog"
+        image:
+          repository: "{{ info[org][env]['hub'] }}/base/axoflow/axosyslog"
         
 
   syncPolicy:
