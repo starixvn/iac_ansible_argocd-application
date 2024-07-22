@@ -32,8 +32,10 @@ spec:
             containerPort: 5000
           - name: tcp
             containerPort: 5044
-          # - name: beats
-          #   containerPort: 5001
+          - name: syslog
+            containerPort: 5045
+          - name: beats
+            containerPort: 5001
 
         nodeSelector: 
           nexops-tools: "yes"
