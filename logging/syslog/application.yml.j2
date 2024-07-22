@@ -20,7 +20,8 @@ spec:
       releaseName: syslog-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
-      # valuesObject:
+      valuesObject:
+        image.repository: "{{ info[org][env]['hub'] }}/base/axoflow/axosyslog"
         
 
   syncPolicy:
