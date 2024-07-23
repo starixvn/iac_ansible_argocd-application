@@ -59,6 +59,11 @@ spec:
               port: 5044
               protocol: TCP
               targetPort: 5044
+            - name: syslog
+              nodePort: 30505
+              port: 5045
+              protocol: TCP
+              targetPort: 5045
           # annotations: {}
           # type: ClusterIP
           # loadBalancerIP: ""
