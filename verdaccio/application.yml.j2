@@ -33,7 +33,7 @@ spec:
           paths:
             - /
           hosts:
-            - "npm-k3s.{{ info[org][env]['ingressDomain'] }}"
+            - "npm.{{ info[org][env]['ingressDomain'] }}"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
         persistence:
