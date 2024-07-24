@@ -17,10 +17,11 @@ spec:
     path: verdaccio
     targetRevision: HEAD
     helm:
-      #valueFiles:
-      #  - values.yaml
       releaseName: verdaccio-{{env}}
       valuesObject:
+        global:
+          nodeSelector:
+            npm: "yes"
         image:
           repository: "hub.nexdev.net/base/nexops-tools/verdaccio-k3s"
           tag: 5.24.1
@@ -39,8 +40,6 @@ spec:
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
           size: "32Gi"
-        nodeSelector:
-          npm: "yes"
 
   syncPolicy:
     automated:
