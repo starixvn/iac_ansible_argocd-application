@@ -39,6 +39,8 @@ spec:
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
           size: "32Gi"
+        nodeSelector:
+          npm: "yes"
 
   syncPolicy:
     automated:
