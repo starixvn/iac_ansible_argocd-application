@@ -22,7 +22,7 @@ spec:
       releaseName: verdaccio-{{env}}
       valuesObject:
         image:
-          repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
+          repository: "hub.nexdev.net/base/nexops-tools/verdaccio-k3s"
           tag: 5.24.1
           pullPolicy: Always
         service:
