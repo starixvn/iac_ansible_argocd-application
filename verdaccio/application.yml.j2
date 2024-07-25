@@ -20,7 +20,7 @@ spec:
       releaseName: verdaccio-{{env}}
       valuesObject:
         image:
-          repository: "hub.lumigame.com/base/nexops-tools/verdaccio"
+          repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
           tag: 5.24.1
           pullPolicy: Always
         service:
