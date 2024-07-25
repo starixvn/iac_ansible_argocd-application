@@ -32,8 +32,8 @@ spec:
             - /
           hosts:
             - "npm.{{ info[org][env]['ingressDomain'] }}"
-          annotations:
-            ingress.kubernetes.io/ssl-redirect: "false"
+          #annotations:
+          #  ingress.kubernetes.io/ssl-redirect: "false"
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
           size: "32Gi"
