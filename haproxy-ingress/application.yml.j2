@@ -22,7 +22,7 @@ spec:
 {% else %}
       - name: "controller.service.type"
         value: LoadBalancer
-{% endif%}
+{% endif %}
       valuesObject:
         controller:
 {% if enable_gitlab_shell is defined %}
@@ -52,6 +52,7 @@ spec:
             dontlognull: "true"
 {% if org == "lumi" and env == "local" %}
             syslog-server: "address:10.10.50.121, port:30514, facility:local1"
+{% endif %}
 {% if org == "starix" and setTLS is defined %}
             ssl-certificate: "haproxy-ingress/nexdev-crt"
 {% endif %}
