@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: external-secrets-operator
+    path: "external-secrets-operator/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
       releaseName: ESO-{{org}}-{{env}}
