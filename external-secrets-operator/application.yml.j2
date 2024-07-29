@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ESO-{{org}}-{{env}}
+  name: eso-{{org}}-{{env}}
   namespace: argocd
   labels:
-    name: ESO-{{org}}-{{env}}
+    name: eso-{{org}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
@@ -17,10 +17,10 @@ spec:
     path: "external-secrets-operator/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
-      releaseName: ESO-{{org}}-{{env}}
+      releaseName: eso-{{org}}-{{env}}
       valuesFiles:
         - value.d/values-{{org}}-{{env}}.yaml
-      valuesObject:
+      valuesobject:
         serviceMonitor.enabled: true
         image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
         webhook.image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
