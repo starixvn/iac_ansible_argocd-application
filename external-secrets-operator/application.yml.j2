@@ -18,9 +18,9 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: eso-{{org}}-{{env}}
-      valuesFiles:
+      valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
-      valuesobject:
+      valuesObject:
         serviceMonitor.enabled: true
         image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
         webhook.image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
