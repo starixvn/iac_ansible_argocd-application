@@ -21,10 +21,16 @@ spec:
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
-        serviceMonitor.enabled: true
-        image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
-        webhook.image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
-        certController.image.repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
+        serviceMonitor:
+          enabled: true
+        image:
+          repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
+        webhook:
+          image:
+            repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
+        certController:
+          image:
+            repository: "{{ info[org][env]['hub'] }}/external-secrets/external-secrets"
 
 
   syncPolicy:
