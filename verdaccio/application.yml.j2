@@ -31,12 +31,12 @@ spec:
           paths:
             - /
           hosts:
-            - "npm.{{ info[org][env]['ingressDomain'] }}"
+            - "npm-k3s.{{ info[org][env]['ingressDomain'] }}"
           #annotations:
           #  ingress.kubernetes.io/ssl-redirect: "false"
         persistence:
           storageClass: "{{ info[org][env]['storageClass'] }}"
-          size: "32Gi"
+          size: "50Gi"
 
   syncPolicy:
     automated:
