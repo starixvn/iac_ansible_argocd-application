@@ -1,23 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio-{{org}}-{{env}}
+  name: minio-tenant-{{org}}-{{env}}
   namespace: argocd
   labels:
-    name: "minio-{{org}}-{{env}}"
+    name: "minio-tenant-{{org}}-{{env}}"
     env: {{env}}
     org: {{org}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
-    namespace: minio-operator
+    namespace: minio
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: "minio/{{ chartVersion }}"
+    path: "minio/tenant/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
-      releaseName: minio-{{org}}-{{env}}
+      releaseName: minio-tenant-{{org}}-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject: {}
