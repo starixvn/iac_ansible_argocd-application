@@ -19,7 +19,7 @@ spec:
     helm:
       releaseName: minio-tenant-{{org}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
+        - value.d/values-{{org}}-{{env}}-{{tenantName}}.yaml
       valuesObject: {}
         
   syncPolicy:
