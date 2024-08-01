@@ -23,7 +23,10 @@ spec:
       valuesObject: 
         operator:
           image:
-            repository: "info[org][env]['hub']/base/minio/operator:v6.0.1"
+            repository: "info[org][env]['hub']/base/minio/operator"
+          sidecarImage:
+            repository: "info[org][env]['hub']/base/minio/operator-sidecar"
+
         
   syncPolicy:
     automated:
