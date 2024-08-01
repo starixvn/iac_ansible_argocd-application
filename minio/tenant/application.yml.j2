@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio-tenant-{{org}}-{{env}}
+  name: minio-tenant-{{tenantName}}-{{org}}-{{env}}
   namespace: argocd
   labels:
-    name: "minio-tenant-{{org}}-{{env}}"
+    name: "minio-tenant-{{tenantName}}-{{org}}-{{env}}"
     env: {{env}}
     org: {{org}}
 spec:
@@ -17,7 +17,7 @@ spec:
     path: "minio/tenant/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
-      releaseName: minio-tenant-{{org}}-{{env}}
+      releaseName: minio-tenant-{{tenantName}}-{{org}}-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}-{{tenantName}}.yaml
       valuesObject: {}
