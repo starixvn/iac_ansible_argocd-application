@@ -20,7 +20,10 @@ spec:
       releaseName: minio-tenant-{{tenantName}}-{{org}}-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}-{{tenantName}}.yaml
-      valuesObject: {}
+      valuesObject:
+        tenant:
+          image:
+            repository: "{{ info[org][env]['hub'] }}/base/minio/minio"
         
   syncPolicy:
     automated:
