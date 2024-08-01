@@ -20,7 +20,10 @@ spec:
       releaseName: minio-operator-{{org}}-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
-      valuesObject: {}
+      valuesObject: 
+        operator:
+          image:
+            repository: "info[org][env]['hub']/base/minio/operator:v6.0.1"
         
   syncPolicy:
     automated:
