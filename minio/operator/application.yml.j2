@@ -23,9 +23,9 @@ spec:
       valuesObject: 
         operator:
           image:
-            repository: "info[org][env]['hub']/base/minio/operator"
+            repository: "{{ info[org][env]['hub'] }}/base/minio/operator"
           sidecarImage:
-            repository: "info[org][env]['hub']/base/minio/operator-sidecar"
+            repository: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
 
         
   syncPolicy:
