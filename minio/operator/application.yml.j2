@@ -19,13 +19,13 @@ spec:
     helm:
       releaseName: minio-operator-{{org}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
-      valuesObject: 
-        operator:
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/minio/operator"
-          sidecarImage:
-            repository: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
+      - value.d/values-{{org}}-{{env}}.yaml
+      parameters: 
+      - name: "operator.image.repository"
+        value: "{{ info[org][env]['hub'] }}/base/minio/operator"
+      - name: "operator.image.sidecarImage"
+        value: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
+      valuesObject: {}
 
         
   syncPolicy:
