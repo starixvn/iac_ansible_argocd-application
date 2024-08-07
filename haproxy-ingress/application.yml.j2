@@ -15,6 +15,8 @@ spec:
   source:
     helm:
       releaseName: haproxy-ingress-{{env}}
+      valueFiles:
+      - value.d/values-{{org}}-{{env}}.yaml
       parameters:
 {% if env == "local" %}
       - name: "controller.service.type"
