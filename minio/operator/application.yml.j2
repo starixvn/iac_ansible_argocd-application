@@ -23,7 +23,7 @@ spec:
       parameters: 
       - name: "operator.image.repository"
         value: "{{ info[org][env]['hub'] }}/base/minio/operator"
-      - name: "operator.image.sidecarImage"
+      - name: "operator.image.sidecarImage.repository"
         value: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
       valuesObject: {}
 
