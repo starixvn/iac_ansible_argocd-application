@@ -34,9 +34,9 @@ spec:
             - "jaeger-k3s.{{ info[org][env]['ingressDomain'] }}"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "false"
-        #persistence:
-        #  storageClass: "{{ info[org][env]['storageClass'] }}"
-        #  size: "50Gi"
+        persistence:
+          storageClass: local-path #"{{ info[org][env]['storageClass'] }}"
+          size: "8Gi"
 
   syncPolicy:
     automated:
