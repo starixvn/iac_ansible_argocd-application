@@ -17,6 +17,8 @@ spec:
     path: jaeger
     targetRevision: HEAD
     helm:
+      valueFiles:
+        - values.yaml
       releaseName: jaeger-{{env}}
       valuesObject:
         #image:
