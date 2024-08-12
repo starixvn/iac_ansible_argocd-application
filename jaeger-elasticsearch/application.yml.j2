@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger-{{env}}
+  namespace: argocd
+  labels:
+    name: jaeger-elasticsearch-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: jaeger
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: jaeger-elasticsearch
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      releaseName: jaeger-elasticsearch-{{env}}
+      valuesObject:
+        #image:
+        #  repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
+        #  tag: 5.24.1
+        #  pullPolicy: Always
+        service:
+          type: ClusterIP
+        ingress:
+          enabled: true
+          ingressClassName: "haproxy"
+          paths:
+            - /
+          hosts:
+            - "jaeger-elasticsearch-k3s.{{ info[org][env]['ingressDomain'] }}"
+          annotations:
+            ingress.kubernetes.io/ssl-redirect: "true"
+        persistence:
+          storageClass: longhorn-single
+          size: "2Gi"
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
