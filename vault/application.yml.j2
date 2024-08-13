@@ -26,74 +26,15 @@ spec:
           tlsDisable: true
         injector:
           enabled: true
-          # Use the Vault K8s Image https://github.com/hashicorp/vault-k8s/
           image:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
           agentImage:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-
-          resources:
-            requests:
-              memory: 256Mi
-              cpu: 250m
-            limits:
-              memory: 256Mi
-              cpu: 250m
-          tolerations:
-          - effect: NoSchedule
-            key: cattle.io/os
-            operator: Equal
-            value: linux
-          nodeSelector:
-            nexops-tools: "yes"
+          
         server:
           # Use the Enterprise Image
           image:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-          tolerations:
-          - effect: NoSchedule
-            key: cattle.io/os
-            operator: Equal
-            value: linux
-          nodeSelector:
-            vault-workload: "yes"
-
-          ingress:
-            activeService: false
-            ingressClassName: "haproxy"
-          # For HA configuration and because we need to manually init the vault,
-          # we need to define custom readiness/liveness Probe settings
-          readinessProbe:
-            enabled: true
-            path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
-          livenessProbe:
-            enabled: true
-            path: "/v1/sys/health?standbyok=true"
-            initialDelaySeconds: 60
-
-          updateStrategyType: "RollingUpdate" 
-
-          # extraEnvironmentVars is a list of extra environment variables to set with the stateful set. These could be
-          # used to include variables required for auto-unseal.
-          extraSecretEnvironmentVars:
-            - envName: AWS_ACCESS_KEY_ID
-              secretName: eks-creds
-              secretKey: AWS_ACCESS_KEY_ID
-            - envName: AWS_SECRET_ACCESS_KEY
-              secretName: eks-creds
-              secretKey: AWS_SECRET_ACCESS_KEY
-
-          standalone:
-            enabled: false
-
-        # Vault UI
-        ui:
-          enabled: true
-          externalPort: 8200
-          targetPort: 8200
-          activeVaultPodOnly: false
-          serviceType: "ClusterIP"
-
 
   syncPolicy:
     automated:
