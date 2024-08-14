@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis-{{system}}
+  name: redis-{{env}}-{{system}}
   namespace: argocd
   labels:
-    name: redis-{{system}}
+    name: redis-{{env}}-{{system}}
     env: {{env}}
     org: {{org}}
 spec:
@@ -19,7 +19,7 @@ spec:
     helm:
       valueFiles:
         - values-{{system}}-{{env}}.yaml
-      releaseName: redis-{{system}}
+      releaseName: redis-{{env}}-{{system}}
 
   syncPolicy:
     automated:
