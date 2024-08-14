@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: jaeger-elasticsearch
+    path: jaeger/elasticsearch
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -22,8 +22,8 @@ spec:
       releaseName: jaeger-elasticsearch-{{env}}
       valuesObject:
         #image:
-        #  repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
-        #  tag: 5.24.1
+        #  repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/"
+        #  tag: 
         #  pullPolicy: Always
         service:
           type: ClusterIP
