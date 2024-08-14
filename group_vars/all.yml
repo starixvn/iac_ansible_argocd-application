@@ -38,6 +38,7 @@ info:
       storageClass: ""
     testlab:
       cluster: "https://10.70.70.140:6443"
+      hub: "hub.nexdev.net"
 
 
 
