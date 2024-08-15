@@ -37,10 +37,7 @@ spec:
             repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
 
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
-      allowEmpty: true
+    automated: {}
     syncOptions:
       - CreateNamespace=true
     retry:
