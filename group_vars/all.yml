@@ -28,7 +28,7 @@ info:
       storageClass: ""
     k3suat:
       cluster: "https://uat-starix-k3s-api.starixplay.com:16442"
-      hub: "nexhub.starixplay.com/kbt"
+      hub: "nexhub.nebula.prod/kbt"
       ingressDomain: "starixuat.com"
       storageClass: "longhorn"
     prod:
