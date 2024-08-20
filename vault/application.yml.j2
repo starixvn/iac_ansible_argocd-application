@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vaultz-{{env}}
+  name: vault-{{env}}
   namespace: argocd
   labels:
     name: vault-{{env}}
@@ -17,7 +17,7 @@ spec:
     path: vault/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: vaultz-{{env}}
+      releaseName: vault-{{env}}
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
