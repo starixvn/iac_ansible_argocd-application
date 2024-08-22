@@ -14,11 +14,11 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: sentry-selfhost
+    path: sentry-selfhost/24.0.0
     targetRevision: HEAD
     helm:
       valueFiles:
-        - 24.0.0/values.d/values-{{org}}-{{env}}.yaml
+        - values.d/values-{{org}}-{{env}}.yaml
       releaseName: sentry-{{org}}-{{env}}
 
   syncPolicy:
