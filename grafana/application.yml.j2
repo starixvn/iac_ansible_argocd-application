@@ -19,25 +19,8 @@ spec:
     helm:
       releaseName: grafana-{{env}}
       valueFiles:
-        - value.d/value-{{org}}-{{env}}.yml
-      valuesObject:
-        grafana:
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/grafana"
-            tag: 10.1.4-d11
-            pullPolicy: Always
-          ingress:
-            enabled: true
-            ingressClassName: "haproxy"
-            paths:
-              - /
-            host: "grafana.{{ info[org][env]['ingressDomain'] }}"
-            annotations:
-              ingress.kubernetes.io/ssl-redirect: "true"
-          persistence:
-            storageClass: "{{ info[org][env]['storageClass'] }}"
-            size: "10Gi"
-
+        - values.yaml
+        
   syncPolicy:
     automated:
       prune: false
