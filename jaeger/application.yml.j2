@@ -21,10 +21,6 @@ spec:
         - values.yaml
       releaseName: jaeger-{{env}}
       valuesObject:
-        #image:
-        #  repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/verdaccio"
-        #  tag: 5.24.1
-        #  pullPolicy: Always
         service:
           type: ClusterIP
         ingress:

@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-{{env}}
+  namespace: argocd
+  labels:
+    name: grafana-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: grafana
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: grafana
+    targetRevision: HEAD
+    helm:
+      releaseName: grafana-{{env}}
+      valuesObject:
+        grafana:
+          #image:
+            #registry: hub.nexdev.net
+            #repository: base/grafana
+            #tag: local-10.0.1-ubuntu
+          #resources:
+            #limits:
+              #cpu: 500m
+              #memory: 1Gi
+          ingress:
+            enabled: true
+            ingressClassName: "haproxy"
+            paths:
+              - /
+            host: "grafana.{{ info[org][env]['ingressDomain'] }}"
+            annotations:
+              ingress.kubernetes.io/ssl-redirect: "true"
+          persistence:
+            storageClass: "{{ info[org][env]['storageClass'] }}"
+            size: "10Gi"
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
