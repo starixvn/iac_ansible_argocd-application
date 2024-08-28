@@ -18,16 +18,18 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: grafana-{{env}}
+      valueFiles:
+        - value.d/value-{{org}}-{{env}}.yml
       valuesObject:
         grafana:
-          #image:
-            #registry: hub.nexdev.net
-            #repository: base/grafana
-            #tag: local-10.0.1-ubuntu
-          #resources:
-            #limits:
-              #cpu: 500m
-              #memory: 1Gi
+          image:
+            registry: hub.nexdev.net
+            repository: base/grafana
+            tag: local-10.0.1-ubuntu
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
           ingress:
             enabled: true
             ingressClassName: "haproxy"
