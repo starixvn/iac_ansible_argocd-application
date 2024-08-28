@@ -23,13 +23,9 @@ spec:
       valuesObject:
         grafana:
           image:
-            registry: hub.nexdev.net
-            repository: base/grafana
-            tag: local-10.0.1-ubuntu
-          resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
+            repository: "{{ info[org][env]['hub'] }}/base/grafana"
+            tag: 10.1.4-d11
+            pullPolicy: Always
           ingress:
             enabled: true
             ingressClassName: "haproxy"
