@@ -45,7 +45,7 @@ info:
       cluster: "https://10.10.50.127:6443"
       hub: "hub.nexdev.net"
       ingressDomain: ""
-      storageClass: "longhorn-s1"
+      storageClass: "longhorn"
 
   lumi:
     lumprod:
