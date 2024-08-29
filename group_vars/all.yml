@@ -33,6 +33,9 @@ info:
       storageClass: "longhorn"
     k3slocal:
       cluster: "https://kubernetes.default.svc"
+      hub: "hub.nexdev.net"
+      ingressDomain: ""
+      storageClass: "longhorn"
     prod:
       cluster: ""
       hub: ""
@@ -47,7 +50,7 @@ info:
       cluster: "https://10.10.50.127:6443"
       hub: "hub.nexdev.net"
       ingressDomain: ""
-      storageClass: "longhorn"
+      storageClass: "longhorn-s1"
 
   lumi:
     lumprod:
