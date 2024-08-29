@@ -31,6 +31,8 @@ info:
       hub: "nexhub.nebula.prod/kbt"
       ingressDomain: "starixuat.com"
       storageClass: "longhorn"
+    k3slocal:
+      cluster: "https://kubernetes.default.svc"
     prod:
       cluster: ""
       hub: ""
