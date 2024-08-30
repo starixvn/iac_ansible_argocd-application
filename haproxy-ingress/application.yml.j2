@@ -17,14 +17,7 @@ spec:
       releaseName: haproxy-ingress-{{env}}
       valueFiles:
       - value.d/values-{{org}}-{{env}}.yaml
-      parameters:
-{% if env == "local" %}
-      - name: "controller.service.type"
-        value: NodePort
-{% else %}
-      - name: "controller.service.type"
-        value: LoadBalancer
-{% endif %}
+      parameters: []
       valuesObject:
         controller:
           config:
@@ -46,7 +39,7 @@ spec:
 {% if org == "lumi" and env == "local" %}
             syslog-server: "address:10.10.50.121, port:30514, facility:local1"
 {% endif %}
-{% if org == "starix" and setTLS == "yes" %}
+{% if org == "starix" and setTLS is defined %}
             ssl-certificate: "haproxy-ingress/nexdev-crt"
 {% endif %}
 {% if org == "lumi" and setTLS is defined %}
