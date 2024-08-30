@@ -22,6 +22,10 @@ spec:
       releaseName: redis-cluster-{{env}}-{{system}}
 
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
