@@ -27,9 +27,9 @@ info:
       ingressDomain: ""
       storageClass: ""
     k3suat:
-      cluster: "https://uat-starix-k3s-api.starixplay.com:16442"
+      cluster: "https://starix-k3suat-api.starixuat.com:16444"
       hub: "nexhub.nebula.prod/kbt"
-      ingressDomain: "starixuat.com"
+      ingressDomain: ""
       storageClass: "longhorn"
     k3slocal:
       cluster: "https://kubernetes.default.svc"
