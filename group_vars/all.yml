@@ -54,7 +54,7 @@ info:
       ingressDomain: ""
       storageClass: "longhorn-s1"
     prod:
-      cluster: "http://s1-prod-apiserver.starixplay.com:16445"
+      cluster: "https://s1-prod-apiserver.starixplay.com:16445"
       hub: ""
       ingressDomain: ""
       storageClass: ""      
