@@ -36,6 +36,8 @@ info:
       hub: "hub.nexdev.net"
       ingressDomain: ""
       storageClass: "longhorn"
+    k3sprod:
+      cluster: "https://starix-k3sprod-api.starixplay.com:16446"
     prod:
       cluster: ""
       hub: ""
@@ -51,6 +53,11 @@ info:
       hub: "hub.nexdev.net"
       ingressDomain: ""
       storageClass: "longhorn-s1"
+    prod:
+      cluster: "http://s1-prod-apiserver.starixplay.com:16445"
+      hub: ""
+      ingressDomain: ""
+      storageClass: ""      
 
   lumi:
     lumprod:
