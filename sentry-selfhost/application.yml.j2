@@ -10,7 +10,7 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: sentry-{{org}}
+    namespace: sentry-{{org}}-{{env}}
   project: default
   source:
     repoURL: "{{repoURL}}"
