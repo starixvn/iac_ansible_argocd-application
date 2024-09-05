@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis-{{org}}-{{env}}
+  name: redis-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: redis-{{org}}-{{env}}
+    name: redis-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
