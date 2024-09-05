@@ -39,10 +39,10 @@ spec:
 {% if org == "lumi" and env == "local" %}
             syslog-server: "address:10.10.50.121, port:30514, facility:local1"
 {% endif %}
-{% if org == "starix" and setTLS is defined %}
+{% if org == "starix" and setTLS == "yes" %}
             ssl-certificate: "haproxy-ingress/nexdev-crt"
 {% endif %}
-{% if org == "lumi" and setTLS is defined %}
+{% if org == "lumi" and setTLS == "yes" %}
             ssl-certificate: "haproxy-ingress/lumigame-cert"
 {% endif %}
     path: kubernetes-ingress-ori
