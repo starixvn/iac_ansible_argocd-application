@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rabbitmq-{{system}}
+  name: rabbitmq-{{system}}-{{env}}
   namespace: argocd
   labels:
-    name: rabbitmq-{{system}}
+    name: rabbitmq-{{system}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:

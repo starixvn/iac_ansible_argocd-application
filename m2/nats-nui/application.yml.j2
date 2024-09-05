@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nats-nui-{{system}}
+  name: nats-nui-{{system}}-{{env}}
   namespace: argocd
   labels:
-    name: nats-nui-{{system}}
+    name: nats-nui-{{system}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
