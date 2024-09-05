@@ -1,12 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sentry-{{org}}-{{env}}
+  name: sentry-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: sentry-{{org}}-{{env}}
+    name: sentry-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
