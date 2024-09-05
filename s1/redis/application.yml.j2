@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-{{org}}-{{env}}.yml
+        - values-{{team}}-{{env}}.yml
       releaseName: redis-{{team}}-{{env}}
 
   syncPolicy:
