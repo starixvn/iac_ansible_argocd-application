@@ -1,7 +1,7 @@
 
 # Repository of Helm Project
 repoURL: "https://gitlab.nexdev.net/NEXOPS/helm-charts/helm-nexops-tools.git"
-
+argo_repoURL: "https://gitlab.nexdev.net/iac/ansible/argocd-application.git"
 
 # Variable for Starix and LumiPlus to lookup (cluster, hub, sc, ing)
 info:
