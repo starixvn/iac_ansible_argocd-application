@@ -1,31 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis-{{system}}
+  name: redis-{{org}}-{{env}}
   namespace: argocd
   labels:
-    name: redis-{{system}}
+    name: redis-{{org}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: m2
+    namespace: redis-{{team}}
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: redis
+    path: redis-selfhost/24.0.0
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-{{system}}-{{env}}.yaml
-      releaseName: redis-{{system}}
+        - values-{{org}}-{{env}}.yml
+      releaseName: redis-{{team}}-{{env}}
 
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
-      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
