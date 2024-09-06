@@ -1,50 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jaeger-elasticsearch-{{env}}
+  name: jaeger-elasticsearch-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: jaeger-elasticsearch-{{env}}
+    name: jaeger-elasticsearch-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: jaeger
+    namespace: jaeger-{{team}}
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: jaeger/elasticsearch
+    path: jaeger
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values.yaml
-      releaseName: jaeger-elasticsearch-{{env}}
-      valuesObject:
-        #image:
-        #  repository: "{{ info[org][env]['hub'] }}/base/nexops-tools/"
-        #  tag: 
-        #  pullPolicy: Always
-        service:
-          type: ClusterIP
-        ingress:
-          enabled: true
-          ingressClassName: "haproxy"
-          paths:
-            - /
-          hosts:
-            - "jaeger-elasticsearch-k3s.{{ info[org][env]['ingressDomain'] }}"
-          annotations:
-            ingress.kubernetes.io/ssl-redirect: "true"
-        persistence:
-          storageClass: longhorn
-          size: "8Gi"
+        - values.d/elasticsearch/values-{{team}}-{{env}}.yaml
+      releaseName: jaeger-elasticsearch-{{team}}-{{env}}
 
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
-      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
