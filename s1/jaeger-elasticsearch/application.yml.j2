@@ -19,7 +19,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-{{team}}-{{env}}.yml
+        - values-{{team}}-{{env}}.yaml
       releaseName: jaeger-elasticsearch-{{team}}-{{env}}
 
   syncPolicy:
