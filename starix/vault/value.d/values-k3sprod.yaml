@@ -62,13 +62,13 @@ server:
         storage "raft" {
           path = "/vault/data"
           retry_join {
-            leader_api_addr = "http://vault-k3suat-0.vault-k3suat-internal:8200"
+            leader_api_addr = "http://vault-k3sprod-0.vault-k3sprod-internal:8200"
           }
           retry_join {
-            leader_api_addr = "http://vault-k3suat-1.vault-k3suat-internal:8200"
+            leader_api_addr = "http://vault-k3sprod-1.vault-k3sprod-internal:8200"
           }
           retry_join {
-            leader_api_addr = "http://vault-k3suat-2.vault-k3suat-internal:8200"
+            leader_api_addr = "http://vault-k3sprod-2.vault-k3sprod-internal:8200"
           }
         }
 
@@ -85,7 +85,7 @@ server:
   extraEnvironmentVars:
     HTTP_PROXY: lisasqd.nebula.prod:8801
     HTTPS_PROXY: lisasqd.nebula.prod:8801
-    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-k3suat-internal,.nebula.prod,.svc,.cluster.local
+    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-k3sprod-internal,.nebula.prod,.svc,.cluster.local
 
 
   extraSecretEnvironmentVars:
