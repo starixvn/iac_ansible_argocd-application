@@ -13,7 +13,7 @@ spec:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: vault
   project: default
-  source:
+  sources:
   - repoURL: "{{repoURL}}"
     path: vault/{{chartVersion}}
     targetRevision: HEAD
