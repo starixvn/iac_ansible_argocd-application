@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor-bk-{{team}}-{{env}}
+  namespace: argocd
+  labels:
+    name: harbor-bk-{{team}}-{{env}}
+    team: {{team}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]["cluster"] }}"
+    namespace: harbor-bk-{{team}}
+  project: default
+  source:
+    repoURL: "{{repoURL}}"
+    path: registry/harbor/2.11.0
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - value.d/value-{{team}}-{{env}}.yml
+      releaseName: harbor-bk-{{team}}-{{env}}
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
