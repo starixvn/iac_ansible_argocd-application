@@ -15,11 +15,11 @@ spec:
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: jaeger-otel/1.53.0
+    path: jaeger-otel/1.53.0/elasticsearch
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values.d/elasticsearch/values-{{team}}-{{env}}.yml
+        - values-{{team}}-{{env}}.yaml
       releaseName: jaeger-elasticsearch-{{team}}-{{env}}
 
   syncPolicy:
