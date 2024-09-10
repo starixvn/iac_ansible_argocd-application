@@ -23,6 +23,10 @@ spec:
       releaseName: zabbix-proxy-{{team}}-{{env}}
 
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
