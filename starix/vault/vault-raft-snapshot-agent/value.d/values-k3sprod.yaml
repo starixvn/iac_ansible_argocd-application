@@ -1,6 +1,6 @@
 ---
 cronjob:
-  schedule: "15 17 * * *"
+  schedule: "45 11 * * *"
   env:
   - name: TZ
     value: Asia/Bangkok
