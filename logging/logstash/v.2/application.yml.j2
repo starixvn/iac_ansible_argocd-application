@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: logstash-{{team}}-{{env}}
+  namespace: argocd
+  labels:
+    name: logstash-{{team}}-{{env}}
+    env: {{env}}
+    org: {{org}}
+    team: {{team}}
+spec:
+  destination:
+    server: "{{ info[org][env]['cluster'] }}"
+    namespace: logging
+  project: default
+  sources:
+  - repoURL: "{{repoURL}}"
+    path: logging/logstash/{{helmVersion}}
+    targetRevision: HEAD
+    helm:
+      releaseName: logstash-{{team}}-{{env}}
+      valueFiles:
+        - $values/logging/logstash/v.2/value.d/values-{{team}}-{{env}}.yaml
+      valuesObject:
+        image: "{{ info[org][env]['hub'] }}/base/logstash/logstash"
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m

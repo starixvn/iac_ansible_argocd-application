@@ -1,6 +1,18 @@
 ---
 server:
 
+  ingress:
+    activeService: true
+    ingressClassName: "haproxy"
+    enabled: true
+    hosts: 
+    - host: "vault.starixplay.com"
+      paths: []
+    - host: "vn-nex-vault-prod.nebula.prod"
+      paths: []
+    annotations:
+      haproxy.org/forwarded-for: "true"
+
   resources:
     limits:
       memory: 2Gi
@@ -14,18 +26,6 @@ server:
   auditStorage:
     enabled: false
 
-  ingress:
-    activeService: false
-    ingressClassName: "haproxy"
-    enabled: true
-    hosts: 
-    - host: "vault.starixplay.com"
-      paths: []
-    - host: "vn-nex-vault-prod.nebula.prod"
-      paths: []
-    annotations:
-      haproxy.org/forwarded-for: "true"
-
   # Run Vault in "HA" mode.
   ha:
     enabled: true
@@ -37,7 +37,7 @@ server:
       config: |
         ui = true
         cluster_name = "vault-integrated-storage"
-        default_max_request_duration = "7200s"
+        # default_max_request_duration = "7200s"
         
         listener "tcp" {
           tls_disable = 1
@@ -72,6 +72,11 @@ server:
           }
         }
 
+        service_registration "kubernetes" {}
+
+  serviceAccount:
+    createSecret: true
+
   readinessProbe:
     enabled: true
     path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
@@ -85,7 +90,7 @@ server:
   extraEnvironmentVars:
     HTTP_PROXY: lisasqd.nebula.prod:8801
     HTTPS_PROXY: lisasqd.nebula.prod:8801
-    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod-internal,.nebula.prod,.svc,.cluster.local
+    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod:8200,.vault-starix-k3sprod:8201,.vault-starix-k3sprod-active:8200,.vault-starix-k3sprod-active:8201,.vault-starix-k3sprod-agent-injector-svc,vault-starix-k3sprod-ui:8200,.vault-starix-k3sprod-internal:8200,.vault-starix-k3sprod-internal:8201,.nebula.prod,.svc,.cluster.local
 
 
   extraSecretEnvironmentVars:
@@ -99,20 +104,8 @@ server:
   standalone:
     enabled: false
 
-  # tolerations:
-  # - effect: NoSchedule
-  #   key: cattle.io/os
-  #   operator: Equal
-  #   value: linux
   nodeSelector:
     vault-workload: "yes"
-
-# injector:
-#   tolerations:
-#   - effect: NoSchedule
-#     key: cattle.io/os
-#     operator: Equal
-#     value: linux
 
 ui:
   enabled: true
