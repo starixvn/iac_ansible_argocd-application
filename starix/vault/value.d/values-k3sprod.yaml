@@ -1,6 +1,18 @@
 ---
 server:
 
+  ingress:
+    activeService: false
+    ingressClassName: "haproxy"
+    enabled: true
+    hosts: 
+    - host: "vault.starixplay.com"
+      paths: []
+    - host: "vn-nex-vault-prod.nebula.prod"
+      paths: []
+    annotations:
+      haproxy.org/forwarded-for: "true"
+
   resources:
     limits:
       memory: 2Gi
@@ -13,18 +25,6 @@ server:
 
   auditStorage:
     enabled: false
-
-  ingress:
-    activeService: false
-    ingressClassName: "haproxy"
-    enabled: true
-    hosts: 
-    - host: "vault.starixplay.com"
-      paths: []
-    - host: "vn-nex-vault-prod.nebula.prod"
-      paths: []
-    annotations:
-      haproxy.org/forwarded-for: "true"
 
   # Run Vault in "HA" mode.
   ha:
@@ -72,6 +72,11 @@ server:
           }
         }
 
+        service_registration "kubernetes" {}
+
+  serviceAccount:
+    createSecret: true
+
   readinessProbe:
     enabled: true
     path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
@@ -99,20 +104,8 @@ server:
   standalone:
     enabled: false
 
-  # tolerations:
-  # - effect: NoSchedule
-  #   key: cattle.io/os
-  #   operator: Equal
-  #   value: linux
   nodeSelector:
     vault-workload: "yes"
-
-# injector:
-#   tolerations:
-#   - effect: NoSchedule
-#     key: cattle.io/os
-#     operator: Equal
-#     value: linux
 
 ui:
   enabled: true
