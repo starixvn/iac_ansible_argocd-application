@@ -1,28 +1,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jaeger-elasticsearch-{{team}}-{{env}}
+  name: jaeger-{{env}}
   namespace: argocd
   labels:
-    name: jaeger-elasticsearch-{{team}}-{{env}}
+    name: jaeger-elasticsearch-{{env}}
     env: {{env}}
     org: {{org}}
-    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: jaeger-{{team}}
+    namespace: jaeger
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: jaeger
+    path: jaeger-elasticsearch
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values.d/elasticsearch/values-{{team}}-{{env}}.yaml
-      releaseName: jaeger-elasticsearch-{{team}}-{{env}}
+        - values.yaml
+      releaseName: jaeger-elasticsearch-{{env}}
 
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
