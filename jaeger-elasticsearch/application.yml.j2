@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jaeger-{{env}}
+  name: jaeger-elasticsearch-{{env}}
   namespace: argocd
   labels:
     name: jaeger-elasticsearch-{{env}}
@@ -20,6 +20,21 @@ spec:
       valueFiles:
         - values.yaml
       releaseName: jaeger-elasticsearch-{{env}}
+      valuesObject:
+        service:
+          type: ClusterIP
+        ingress:
+          enabled: true
+          ingressClassName: "haproxy"
+          paths:
+            - /
+          hosts:
+            - "jaeger-elasticsearch-k3s.{{ info[org][env]['ingressDomain'] }}"
+          annotations:
+            ingress.kubernetes.io/ssl-redirect: "true"
+        persistence:
+          storageClass: longhorn
+          size: "8Gi"
 
   syncPolicy:
     automated:
