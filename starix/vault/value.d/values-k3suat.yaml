@@ -21,7 +21,7 @@ server:
     enabled: true
     size: 20Gi
     mountPath: "/vault/data"
-    storageClass: longhorn-stricted
+    storageClass: longhorn-stricted-vault
 
   auditStorage:
     enabled: false
