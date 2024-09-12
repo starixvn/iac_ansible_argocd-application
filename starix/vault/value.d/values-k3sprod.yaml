@@ -90,7 +90,7 @@ server:
   extraEnvironmentVars:
     HTTP_PROXY: lisasqd.nebula.prod:8801
     HTTPS_PROXY: lisasqd.nebula.prod:8801
-    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod-active,.vault-starix-k3sprod,.vault-starix-k3sprod-ui,.vault-starix-k3sprod-internal,.nebula.prod,.svc,.cluster.local
+    NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod:8200,.vault-starix-k3sprod:8201,.vault-starix-k3sprod-active:8200,.vault-starix-k3sprod-active:8201,.vault-starix-k3sprod-agent-injector-svc,vault-starix-k3sprod-ui:8200,.vault-starix-k3sprod-internal:8200,.vault-starix-k3sprod-internal:8201,.nebula.prod,.svc,.cluster.local
 
 
   extraSecretEnvironmentVars:
