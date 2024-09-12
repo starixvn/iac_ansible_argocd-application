@@ -1,6 +1,6 @@
 ---
 cronjob:
-  schedule: "15 13 * * *"
+  schedule: "15 17 * * *"
   env:
   - name: TZ
     value: Asia/Bangkok
@@ -31,4 +31,4 @@ cronjob:
   - name: https_proxy
     value: lisasqd.nebula.prod:8801
   - name: no_proxy
-    value: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,vault-starix-k3sprod-active:8200
+    value: vault-starix-k3sprod-active:8200
