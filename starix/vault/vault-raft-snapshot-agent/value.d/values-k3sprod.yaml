@@ -27,8 +27,8 @@ cronjob:
         key: AWS_ACCESS_KEY_ID
         name: vault-snapshot-credentials
   - name: http_proxy
-    values: lisasqd.nebula.prod:8801
+    value: lisasqd.nebula.prod:8801
   - name: https_proxy
-    values: lisasqd.nebula.prod:8801
+    value: lisasqd.nebula.prod:8801
   - name: no_proxy
-    values: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod-active
+    value: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.vault-starix-k3sprod-active
