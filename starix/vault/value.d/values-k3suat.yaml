@@ -2,9 +2,9 @@
 server:
 
   ingress:
-    activeService: false
+    activeService: true
     ingressClassName: "haproxy"
-    enabled: true
+    enabled: false
     hosts: 
     - host: "vault.starixuat.com"
       paths: []
@@ -15,7 +15,7 @@ server:
       
   resources:
     limits:
-      memory: 2Gi
+      memory: 4Gi
 
   dataStorage:
     enabled: true
