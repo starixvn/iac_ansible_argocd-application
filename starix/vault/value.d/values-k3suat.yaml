@@ -104,20 +104,8 @@ server:
   standalone:
     enabled: false
 
-  # tolerations:
-  # - effect: NoSchedule
-  #   key: cattle.io/os
-  #   operator: Equal
-  #   value: linux
   nodeSelector:
     vault-workload: "yes"
-
-# injector:
-#   tolerations:
-#   - effect: NoSchedule
-#     key: cattle.io/os
-#     operator: Equal
-#     value: linux
 
 ui:
   enabled: true
