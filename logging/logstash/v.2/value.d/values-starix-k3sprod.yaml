@@ -1,0 +1,114 @@
+logstashConfig:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+
+logstashPipeline:
+  logstash.conf: |
+    input {
+      tcp {
+        port => 5044
+      }
+
+      # http {
+      #   port => 8080
+      #   add_field => { "[@metadata][input-http]" => "" }
+      # }
+      # beats {
+      #   port => 5000
+      # }
+
+    }
+
+  vault_filter.conf: |
+    filter {
+      if [host] =~ /vault-starix-k3sprod/ {
+        json {
+          source => "message"
+        }
+        mutate {
+          add_tag => ["vault","prod","starix"]
+          remove_field => ["[event][original]"]
+          remove_field => ["[response][data]"]
+        }
+      }
+    }
+
+  main_output.conf: |
+    output {
+
+      if "vault" in [tags] and "prod" in [tags] and "starix" in [tags] {
+        elasticsearch {
+          hosts => ["http://10.99.27.15:9200"]
+          user => "logstash"
+          password => "logstash"
+          index => "logstash-vault-starix-prod-%{+YYYY.MM.dd}"
+        }         
+      }
+
+      else {
+        elasticsearch {
+          hosts => ["http://10.99.27.15:9200"]
+          user => "logstash"
+          password => "logstash"
+          index => "unknown-%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+          ecs_compatibility => disabled
+        }        
+      }
+
+    }
+    
+
+
+logstashJavaOpts: "-Xmx3g -Xms3g"
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "4096Mi"
+  limits:
+    cpu: "1000m"
+    memory: "4096Mi"
+
+
+
+httpPort: 9600
+extraPorts:
+  - name: tcp
+    containerPort: 5044
+  # - name: httplog
+  #   containerPort: 8080
+  # - name: beats
+  #   containerPort: 5000
+  # - name: syslog
+  #   containerPort: 5045
+
+
+service:
+  type: NodePort
+  ports:
+  - name: tcp
+    nodePort: 30504
+    port: 5044
+    protocol: TCP
+    targetPort: 5044
+  # - name: beats
+  #   nodePort: 30500
+  #   port: 5000
+  #   protocol: TCP
+  #   targetPort: 5000
+  # - name: httplog
+  #   port: 8080
+  #   protocol: TCP
+  #   targetPort: 8080
+  # - name: http
+  #   port: 9600
+  #   protocol: TCP
+  #   targetPort: 9600
+  # - name: syslog
+  #   nodePort: 30505
+  #   port: 5045
+  #   protocol: TCP
+  #   targetPort: 5045
+
+# nodeSelector: 
+#   nexops-tools: "yes"
