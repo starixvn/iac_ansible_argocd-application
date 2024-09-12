@@ -13,8 +13,8 @@ spec:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: vault
   project: default
-  source:
-    repoURL: "{{repoURL}}"
+  sources:
+  - repoURL: "{{repoURL}}"
     path: vault/vault-raft-snapshot-agent/{{chartVersion}}
     targetRevision: HEAD
     helm:
@@ -25,6 +25,9 @@ spec:
       - name: "image.repository"
         value: "{{ info[org][env]['hub'] }}/base/nexops-tools/vault-snapshot"
       valuesObject: {} 
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
       
   syncPolicy:
     automated:
