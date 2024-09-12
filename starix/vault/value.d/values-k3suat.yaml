@@ -1,6 +1,18 @@
 ---
 server:
 
+  ingress:
+    activeService: false
+    ingressClassName: "haproxy"
+    enabled: true
+    hosts: 
+    - host: "vault.starixuat.com"
+      paths: []
+    - host: "vn-nex-vault-uat.nebula.prod"
+      paths: []
+    annotations:
+      haproxy.org/forwarded-for: "true"
+      
   resources:
     limits:
       memory: 2Gi
@@ -13,18 +25,6 @@ server:
 
   auditStorage:
     enabled: false
-
-  ingress:
-    activeService: false
-    ingressClassName: "haproxy"
-    enabled: true
-    hosts: 
-    - host: "vault.starixuat.com"
-      paths: []
-    - host: "vn-nex-vault-uat.nebula.prod"
-      paths: []
-    annotations:
-      haproxy.org/forwarded-for: "true"
 
   # Run Vault in "HA" mode.
   ha:
@@ -71,6 +71,11 @@ server:
             leader_api_addr = "http://vault-starix-k3suat-2.vault-starix-k3suat-internal:8200"
           }
         }
+
+        service_registration "kubernetes" {}
+
+  serviceAccount:
+    createSecret: true
 
   readinessProbe:
     enabled: true
