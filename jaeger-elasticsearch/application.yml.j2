@@ -23,9 +23,6 @@ spec:
       valuesObject:
         service:
           type: NodePort #ClusterIP
-          nodePorts:
-            restAPI: "30920"
-            transport: "30930"
         ingress:
           enabled: true
           ingressClassName: "haproxy"
