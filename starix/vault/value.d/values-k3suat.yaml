@@ -10,12 +10,10 @@ server:
       paths: []
     - host: "vn-nex-vault-uat.nebula.prod"
       paths: []
-    annotations:
-      haproxy.org/forwarded-for: "true"
       
-  resources:
-    limits:
-      memory: 4Gi
+  resources: {}
+    # limits:
+    #   memory: 4Gi
 
   dataStorage:
     enabled: true
