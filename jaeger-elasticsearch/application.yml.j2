@@ -22,7 +22,7 @@ spec:
       releaseName: jaeger-elasticsearch-{{env}}
       valuesObject:
         service:
-          type: ClusterIP
+          type: NodePort #ClusterIP
         ingress:
           enabled: true
           ingressClassName: "haproxy"
