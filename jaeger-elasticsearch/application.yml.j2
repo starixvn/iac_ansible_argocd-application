@@ -21,8 +21,8 @@ spec:
         - values.yaml
       releaseName: jaeger-elasticsearch-{{env}}
       valuesObject:
-        #service:
-        #  type: ClusterIP
+        service:
+          type: NodePort #ClusterIP
         ingress:
           enabled: true
           ingressClassName: "haproxy"
