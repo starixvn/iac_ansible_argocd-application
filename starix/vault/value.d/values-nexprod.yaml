@@ -2,7 +2,7 @@
 server:
 
   ingress:
-    enabled: false
+    enabled: true
     activeService: true
     ingressClassName: "haproxy"
     hosts: 
