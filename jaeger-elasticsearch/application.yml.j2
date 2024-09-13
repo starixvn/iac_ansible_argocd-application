@@ -21,8 +21,8 @@ spec:
         - values.yaml
       releaseName: jaeger-elasticsearch-{{env}}
       valuesObject:
-        service:
-          type: ClusterIP
+        #service:
+        #  type: ClusterIP
         ingress:
           enabled: true
           ingressClassName: "haproxy"
@@ -32,9 +32,9 @@ spec:
             - "jaeger-elasticsearch-k3s.{{ info[org][env]['ingressDomain'] }}"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
-        persistence:
-          storageClass: longhorn
-          size: "8Gi"
+        #persistence:
+        #  storageClass: longhorn
+        #  size: "8Gi"
 
   syncPolicy:
     automated:
