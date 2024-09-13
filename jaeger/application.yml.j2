@@ -32,9 +32,9 @@ spec:
             - "jaeger-k3s.{{ info[org][env]['ingressDomain'] }}"
           annotations:
             ingress.kubernetes.io/ssl-redirect: "true"
-        persistence:
-          storageClass: longhorn-single
-          size: "2Gi"
+        #persistence:
+        #  storageClass: longhorn-single
+        #  size: "2Gi"
 
   syncPolicy:
     automated:
