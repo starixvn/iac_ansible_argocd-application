@@ -1,16 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: haproxy-service-{{org}}-{{env}}
+  name: haproxy-service-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: haproxy-service-{{org}}-{{env}}
+    name: haproxy-service-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: haproxy-service
+    namespace: haproxy-service-{{team}}
   project: default
   source:
     repoURL: "{{repoURL}}"
@@ -18,14 +19,10 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yml
-      releaseName: haproxy-service-{{org}}-{{env}}
+        - value.d/values-{{team}}-{{env}}.yml
+      releaseName: haproxy-service-{{team}}-{{env}}
 
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
-      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
     retry:
