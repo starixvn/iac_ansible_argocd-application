@@ -9,6 +9,11 @@ logstashPipeline:
         port => 5044
       }
 
+      tcp {
+        port => 5064
+        tags => ["tcp", "vault", "prod", "starix"]
+      }
+
       # http {
       #   port => 8080
       #   add_field => { "[@metadata][input-http]" => "" }
@@ -21,12 +26,11 @@ logstashPipeline:
 
   vault_filter.conf: |
     filter {
-      if [host] =~ /vault-starix-k3sprod/ {
+      if "vault" in [tags] {
         json {
           source => "message"
         }
         mutate {
-          add_tag => ["vault","prod","starix"]
           remove_field => ["[event][original]"]
           remove_field => ["[response][data]"]
         }
@@ -75,6 +79,8 @@ httpPort: 9600
 extraPorts:
   - name: tcp
     containerPort: 5044
+  - name: tcp-vault-starix-prod
+    containerPort: 5064
   # - name: httplog
   #   containerPort: 8080
   # - name: beats
@@ -91,6 +97,11 @@ service:
     port: 5044
     protocol: TCP
     targetPort: 5044
+  - name: tcp-vault-starix-prod
+    nodePort: 30064
+    port: 5064
+    protocol: TCP
+    targetPort: 5064
   # - name: beats
   #   nodePort: 30500
   #   port: 5000
