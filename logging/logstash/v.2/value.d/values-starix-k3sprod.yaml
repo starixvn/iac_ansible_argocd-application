@@ -81,12 +81,6 @@ extraPorts:
     containerPort: 5044
   - name: vault-st-prod
     containerPort: 5064
-  # - name: httplog
-  #   containerPort: 8080
-  # - name: beats
-  #   containerPort: 5000
-  # - name: syslog
-  #   containerPort: 5045
 
 
 service:
@@ -102,24 +96,3 @@ service:
     port: 5064
     protocol: TCP
     targetPort: 5064
-  # - name: beats
-  #   nodePort: 30500
-  #   port: 5000
-  #   protocol: TCP
-  #   targetPort: 5000
-  # - name: httplog
-  #   port: 8080
-  #   protocol: TCP
-  #   targetPort: 8080
-  # - name: http
-  #   port: 9600
-  #   protocol: TCP
-  #   targetPort: 9600
-  # - name: syslog
-  #   nodePort: 30505
-  #   port: 5045
-  #   protocol: TCP
-  #   targetPort: 5045
-
-# nodeSelector: 
-#   nexops-tools: "yes"
