@@ -19,7 +19,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yml
+        - value.d/values-{{team}}-{{env}}.yaml
       releaseName: redis-sentinel-{{team}}-{{env}}
 
   syncPolicy:
