@@ -79,7 +79,7 @@ httpPort: 9600
 extraPorts:
   - name: tcp
     containerPort: 5044
-  - name: tcp-vault-starix-prod
+  - name: vault-st-prod
     containerPort: 5064
   # - name: httplog
   #   containerPort: 8080
@@ -97,7 +97,7 @@ service:
     port: 5044
     protocol: TCP
     targetPort: 5044
-  - name: tcp-vault-starix-prod
+  - name: vault-st-prod
     nodePort: 30064
     port: 5064
     protocol: TCP
