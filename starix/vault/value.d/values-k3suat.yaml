@@ -102,8 +102,21 @@ server:
   standalone:
     enabled: false
 
+  tolerations:
+  - key: devops/node-role
+    operator: Equal
+    effect: NoSchedule
+    value: vault
+
   nodeSelector:
     vault-workload: "yes"
+
+injector:
+  tolerations:
+  - key: devops/node-role
+    operator: Equal
+    effect: NoSchedule
+    value: vault
 
 ui:
   enabled: true
