@@ -109,7 +109,7 @@ server:
     enabled: false
 
   tolerations:
-  - key: devops/node-role
+  - key: node.role
     operator: Equal
     effect: NoSchedule
     value: vault
