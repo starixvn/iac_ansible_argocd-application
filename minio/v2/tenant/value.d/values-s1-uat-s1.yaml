@@ -1,0 +1,88 @@
+---
+secrets:
+  name: nexops-env-configuration
+  accessKey: nexops
+  secretKey: Ilu@n3xc3lS1
+
+tenant:
+  name: s1
+
+  configuration:
+    name: nexops-env-configuration
+
+  buckets: []
+
+
+  ###
+  # Array of Kubernetes secrets from which the Operator generates MinIO users during tenant provisioning.
+  #
+  # Each secret should specify the ``CONSOLE_ACCESS_KEY`` and ``CONSOLE_SECRET_KEY`` as the access key and secret key for that user.
+  users: [ ]
+
+  features:
+    bucketDNS: false
+    domains: { }
+    enableSFTP: false
+
+  pools:
+  - name: pool-0
+    servers: 2
+    volumesPerServer: 2
+    size: 10Gi
+    storageClassName: longhorn-single
+    storageAnnotations: { }
+    annotations: { }
+    tolerations: [ ]
+    # - key: cattle.io/os
+    #   operator: "Equal"
+    #   value: minio
+    #   effect: "NoSchedule"
+    nodeSelector: { }
+      # node-role.kubernetes.io/minio: "yes"
+    affinity: { }
+
+  mountPath: /minio
+
+  metrics:
+    enabled: true
+    port: 9000
+    protocol: http
+  prometheusOperator: true
+
+  env:
+  - name: MINIO_PROMETHEUS_URL
+    value: "http://prometheus-k3suat-kube-pro-prometheus.monitoring.svc:9090"
+  
+  ###
+  # PriorityClassName indicates the Pod priority and hence importance of a Pod relative to other Pods.
+  # This is applied to MinIO pods only.
+  # Refer Kubernetes documentation for details https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass/
+  priorityClassName: ""
+
+ingress:
+  api:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/server-ssl: "true"
+    hosts:
+    - host: "minio-s1-api.lumigame.com"
+      paths: []
+    - host: "minio-s1-api.starixsoft.com"
+      paths: []
+    # tls:
+    # - hosts:
+    #   - minio-api.starixsoft.com
+    pathType: Prefix
+  console:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/server-ssl: "true"
+      # haproxy.org/backend-config-snippet: |
+      #   compression type text/html text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript image/x-icon image/bmp
+      #   compression algo gzip
+    hosts:
+    - host: "minio-s1.lumigame.com"
+      paths: []
+    pathType: Prefix
