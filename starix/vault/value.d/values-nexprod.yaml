@@ -117,6 +117,13 @@ server:
   nodeSelector:
     vault-workload: "yes"
 
+injector:
+  tolerations:
+  - key: node.role
+    operator: Equal
+    effect: NoSchedule
+    value: vault
+
 ui:
   enabled: true
   externalPort: 8200
