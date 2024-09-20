@@ -49,6 +49,9 @@ tenant:
     protocol: http
   prometheusOperator: true
 
+  certificate:
+    requestAutoCert: false
+
   env:
   - name: MINIO_PROMETHEUS_URL
     value: "http://prometheus-k3suat-kube-pro-prometheus.monitoring.svc:9090"
