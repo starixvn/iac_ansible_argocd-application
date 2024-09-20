@@ -29,7 +29,7 @@ tenant:
     servers: 2
     volumesPerServer: 2
     size: 10Gi
-    storageClassName: longhorn-single
+    storageClassName: longhorn-s1-single
     storageAnnotations: { }
     annotations: { }
     tolerations: [ ]
@@ -45,7 +45,7 @@ tenant:
 
   metrics:
     enabled: true
-    port: 9000
+    port: 80
     protocol: http
   prometheusOperator: true
 
