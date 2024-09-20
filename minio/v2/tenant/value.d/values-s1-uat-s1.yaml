@@ -66,16 +66,16 @@ ingress:
     annotations:
       haproxy.org/server-ssl: "true"
     hosts:
-    - host: "minio-s1-api.lumigame.com"
+    - host: "vn-s1-minio-api-uat.nebula.prod"
       paths: []
-    - host: "minio-s1-api.starixsoft.com"
+    - host: "minio-api.vgamesuat.com"
       paths: []
     # tls:
     # - hosts:
     #   - minio-api.starixsoft.com
     pathType: Prefix
   console:
-    enabled: true
+    enabled: false
     ingressClassName: "haproxy"
     annotations:
       haproxy.org/server-ssl: "true"
