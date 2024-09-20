@@ -78,6 +78,6 @@ ingress:
     enabled: false
     ingressClassName: "haproxy"
     hosts:
-    - host: "minio-s1.lumigame.com"
+    - host: ""
       paths: []
     pathType: Prefix
