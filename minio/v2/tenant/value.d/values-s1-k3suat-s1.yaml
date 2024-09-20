@@ -67,24 +67,16 @@ ingress:
     enabled: true
     ingressClassName: "haproxy"
     annotations:
-      haproxy.org/server-ssl: "true"
+      haproxy.org/ssl-redirect: "false"
     hosts:
     - host: "vn-s1-minio-api-uat.nebula.prod"
       paths: []
     - host: "minio-api.vgamesuat.com"
       paths: []
-    # tls:
-    # - hosts:
-    #   - minio-api.starixsoft.com
     pathType: Prefix
   console:
     enabled: false
     ingressClassName: "haproxy"
-    annotations:
-      haproxy.org/server-ssl: "true"
-      # haproxy.org/backend-config-snippet: |
-      #   compression type text/html text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript image/x-icon image/bmp
-      #   compression algo gzip
     hosts:
     - host: "minio-s1.lumigame.com"
       paths: []
