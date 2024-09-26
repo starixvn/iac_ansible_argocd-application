@@ -100,7 +100,6 @@ config:
       Exclude $log HTTP (response|request) headers after [0-9]+.[0-9]+ms - 200
       Exclude $log Content-Language:*
       Exclude $log Content-Type:*
-      Exclude $log info: *
 
     [FILTER]
       Name grep
