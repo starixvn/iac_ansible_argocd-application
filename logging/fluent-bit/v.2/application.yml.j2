@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentbit-{{team}}-{{env}}
+  namespace: argocd
+  labels:
+    name: fluentbit-{{team}}-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    server: "{{ info[org][env]['cluster'] }}"
+    namespace: logging
+  project: default
+  sources:
+  - repoURL: "{{repoURL}}"
+    path: logging/fluent-bit/{{chartVersion}}
+    targetRevision: HEAD
+    helm:
+      releaseName: fluentbit-{{team}}-{{env}}
+      valueFiles:
+        - $values/logging/fluent-bit/v.2/value.d/values-{{team}}-{{env}}.yaml
+      valuesObject:
+        image:
+          repository: "{{ info[org][env]['hub'] }}/base/fluent/fluent-bit"
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
+        
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m
