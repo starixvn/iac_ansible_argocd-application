@@ -21,7 +21,7 @@ spec:
     helm:
       releaseName: opensearch-{{team}}-{{env}}
       valueFiles:
-        - $values/logging/opensearch/v.2/value.d/values-{{org}}-{{env}}.yaml
+        - $values/logging/opensearch/v.2/value.d/values-{{team}}-{{env}}.yaml
       valuesObject:
         image:
           repository: "{{ info[org][env]['hub'] }}/base/opensearchproject/opensearch"
