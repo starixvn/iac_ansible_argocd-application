@@ -13,7 +13,7 @@ spec:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: logging
   project: default
-  source:
+  sources:
   - repoURL: "{{repoURL}}"
     path: logging/opensearch-dashboards/{{helmVersion}}
     targetRevision: HEAD
