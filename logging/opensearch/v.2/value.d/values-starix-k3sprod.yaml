@@ -13,7 +13,7 @@ persistence:
 
 service:
   type: NodePort
-  nodePort: "30920"
+  nodePort: "31920"
 
 resources:
   requests:

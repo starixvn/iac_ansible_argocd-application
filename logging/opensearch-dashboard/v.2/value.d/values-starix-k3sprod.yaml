@@ -16,7 +16,7 @@ ingress:
   enabled: true
   ingressClassName: "haproxy"
   hosts:
-  - host: logs.{{ info[org][env]['ingressDomain'] }}
+  - host: logs.starixplay.com
     paths:
       - path: /
         backend:
