@@ -58,13 +58,13 @@ info:
       storageClass: "longhorn-s1"
     uat:
       cluster: "https://s1-uat-apiserver.starixuat.com:16443"
-      hub: ""
-      ingressDomain: "s1hub.nebula.prod/kbt"
+      hub: "s1hub.nebula.prod/kbt"
+      ingressDomain: ""
       storageClass: ""
     prod:
       cluster: "https://s1-prod-apiserver.starixplay.com:16445"
-      hub: ""
-      ingressDomain: "s1hub.nebula.prod/kbt"
+      hub: "s1hub.nebula.prod/kbt"
+      ingressDomain: ""
       storageClass: ""      
 
   lumi:
