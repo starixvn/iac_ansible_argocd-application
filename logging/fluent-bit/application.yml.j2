@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fluentbit-{{env}}
+  name: fluentbit-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: fluentbit-{{env}}
+    name: fluentbit-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
 spec:
@@ -12,17 +12,20 @@ spec:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: logging
   project: default
-  source:
-    repoURL: "{{repoURL}}"
+  sources:
+  - repoURL: "{{repoURL}}"
     path: logging/fluent-bit/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: fluentbit-{{env}}
+      releaseName: fluentbit-{{team}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
+        - $values/logging/fluent-bit/value.d/values-{{team}}-{{env}}.yaml
       valuesObject:
         image:
           repository: "{{ info[org][env]['hub'] }}/base/fluent/fluent-bit"
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
         
 
   syncPolicy:
