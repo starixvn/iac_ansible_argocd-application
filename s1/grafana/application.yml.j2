@@ -22,6 +22,7 @@ spec:
       valueFiles:
         - $values/{{team}}/grafana/value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
+      skipCrds: true
 
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
