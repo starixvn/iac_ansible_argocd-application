@@ -4,10 +4,10 @@ operator:
 
 grafana:
   ingress:
-    enabled: false
+    enabled: true
     ingressClassName: ""
     host: grafana.nova88demo.com
-    
+
   persistence:
     enabled: true
     storageClass: "longhorn-s1"
