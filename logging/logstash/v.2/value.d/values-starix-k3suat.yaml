@@ -100,7 +100,7 @@ logstashPipeline:
   vault_output.conf: |
     output {
       if [type] == "vault" {
-        if "prod" in [tags] and "starix" in [tags] {
+        if "uat" in [tags] and "starix" in [tags] {
           opensearch {
             hosts => ["https://vn-st-ing-prod.nebula.prod:31920"]
             user => "logstash"
