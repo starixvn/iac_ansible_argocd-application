@@ -59,12 +59,12 @@ info:
     uat:
       cluster: "https://s1-uat-apiserver.starixuat.com:16443"
       hub: ""
-      ingressDomain: ""
+      ingressDomain: "s1hub.nebula.prod/kbt"
       storageClass: ""
     prod:
       cluster: "https://s1-prod-apiserver.starixplay.com:16445"
       hub: ""
-      ingressDomain: ""
+      ingressDomain: "s1hub.nebula.prod/kbt"
       storageClass: ""      
 
   lumi:
