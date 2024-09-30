@@ -1,8 +1,5 @@
 tolerations: 
-- effect: NoSchedule
-  key: cattle.io/os
-  operator: Equal
-  value: linux
+- operator: Exists
 affinity: 
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
