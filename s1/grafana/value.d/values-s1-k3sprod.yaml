@@ -6,8 +6,8 @@ grafana:
   ingress:
     enabled: false
     ingressClassName: ""
-    host: grafana.local
-
+    host: grafana.nova88demo.com
+    
   persistence:
     enabled: true
     storageClass: "longhorn-s1"
