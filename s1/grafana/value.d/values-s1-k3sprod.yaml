@@ -5,7 +5,7 @@ operator:
 grafana:
   ingress:
     enabled: true
-    ingressClassName: ""
+    ingressClassName: "haproxy"
     host: grafana.nova88demo.com
 
   persistence:
