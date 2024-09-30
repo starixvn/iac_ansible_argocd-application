@@ -10,7 +10,7 @@ grafana:
 
   persistence:
     enabled: true
-    storageClass: ""
+    storageClass: "longhorn-s1"
     accessModes:
       - ReadWriteOnce
     size: 10Gi
