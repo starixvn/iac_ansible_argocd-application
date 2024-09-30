@@ -130,3 +130,7 @@ ui:
   targetPort: 8200
   activeVaultPodOnly: false
   serviceType: "ClusterIP"
+
+serverTelemetry:
+  serviceMonitor:
+    enabled: true
