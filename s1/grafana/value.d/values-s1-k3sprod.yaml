@@ -1,0 +1,20 @@
+---
+operator:
+  replicaCount: 1
+
+grafana:
+  ingress:
+    enabled: false
+    ingressClassName: ""
+    host: grafana.local
+
+  persistence:
+    enabled: true
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
+  config:
+    security:
+      admin_password: "xp%P_TT)8)q)u^4R"
