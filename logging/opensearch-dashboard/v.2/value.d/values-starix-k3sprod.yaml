@@ -22,5 +22,5 @@ ingress:
         backend:
           serviceName: ""
           servicePort: ""
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "true"
+  # annotations:
+  #   ingress.kubernetes.io/ssl-redirect: "true"
