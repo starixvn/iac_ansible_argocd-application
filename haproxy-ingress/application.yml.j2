@@ -24,6 +24,8 @@ spec:
             timeout-connect: "5s"
             scale-server-slots: "7"
             maxconn: "20000"
+            forwarded-for: "true"
+            dontlognull: "true"
     path: kubernetes-ingress-ori
     repoURL: "{{ repoURL }}"
     targetRevision: HEAD
