@@ -1,0 +1,34 @@
+---
+clusterDomain: testlab.local
+
+operator:
+  enabled: true
+
+prometheus:
+  service:
+    nodePorts:
+      http: "30062"
+
+  retention: 1d
+  retentionSize: "2GB"
+
+  persistence:
+    enabled: false
+    storageClass: "longhorn"
+    size: 5Gi
+
+  additionalScrapeConfigs:
+    enabled: true
+    type: external
+    external:
+      ## Name of the secret that Prometheus should use for the additional scrape configuration
+      name: ""
+      ## Name of the key inside the secret to be used for the additional scrape configuration.
+      key: ""
+    internal:
+      jobList: []
+  ##
+  additionalScrapeConfigsExternal:
+    enabled: false
+    name: ""
+    key: ""
