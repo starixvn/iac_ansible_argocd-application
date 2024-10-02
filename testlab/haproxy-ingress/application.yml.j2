@@ -14,12 +14,12 @@ spec:
   project: default
   sources:
   - repoURL: "{{ repoURL }}"
-    path: kubernetes-ingress-ori
+    path: kubernetes-ingress/{{chartVersion}}
     targetRevision: HEAD
     helm:
       releaseName: haproxy-ingress-{{team}}-{{env}}
       valueFiles:
-      - value.d/values-{{org}}-{{env}}.yaml
+      - $values/haproxy-ingress/value.d/values-{{org}}-{{env}}.yaml
       parameters: []
       valuesObject: {}
 
