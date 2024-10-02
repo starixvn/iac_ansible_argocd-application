@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: haproxy-ingress-{{team}}-{{env}}
+  namespace: argocd
+  labels:
+    name: haproxy-ingress-{{team}}-{{env}}
+    env: {{env}}
+    org: {{org}}
+spec:
+  destination:
+    namespace: haproxy-ingress
+    server: "{{ info[org][env]['cluster'] }}"
+  project: default
+  sources:
+  - repoURL: "{{ repoURL }}"
+    path: kubernetes-ingress-ori
+    targetRevision: HEAD
+    helm:
+      releaseName: haproxy-ingress-{{team}}-{{env}}
+      valueFiles:
+      - value.d/values-{{org}}-{{env}}.yaml
+      parameters: []
+      valuesObject: {}
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m # the maximum amount of time allowed for the backoff strategy    
