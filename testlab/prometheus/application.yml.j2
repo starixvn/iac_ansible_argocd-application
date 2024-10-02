@@ -21,7 +21,7 @@ spec:
     helm:
       releaseName: prometheus-{{team}}-{{env}}
       valueFiles:
-        - $values/{{team}}/prometheus/value.d/values-{{team}}-{{env}}.yaml
+        - $values/testlab/prometheus/value.d/values-{{team}}-{{env}}.yaml
       parameters: []
       valuesObject: {}
       skipCrds: true
