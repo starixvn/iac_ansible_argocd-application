@@ -4,8 +4,6 @@ clusterDomain: testlab.local
 operator:
   enabled: true
 
-  resourcesPreset: "medium"
-
 prometheus:
   service:
     nodePorts:
@@ -18,6 +16,8 @@ prometheus:
     enabled: false
     storageClass: "longhorn"
     size: 5Gi
+
+  resourcesPreset: "medium"
 
   additionalScrapeConfigs:
     enabled: false
