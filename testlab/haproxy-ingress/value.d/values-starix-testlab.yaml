@@ -47,6 +47,10 @@ controller:
         path: /metrics
         scheme: http
         interval: 30s
+      - port: http
+        path: /metrics
+        scheme: http
+        interval: 30s
 
   
 
