@@ -90,9 +90,8 @@ logstashPipeline:
         if "hap-gw" in [tags] {
         }
         else if "hap-ing" in [tags] {
-          if [http_status_code] == 200 and  [time_backend_response] < 5000 {
-            drop {}
-          }
+          if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
+          else if [backend_name] == "stats" { drop {} }
         }
       }
     }
