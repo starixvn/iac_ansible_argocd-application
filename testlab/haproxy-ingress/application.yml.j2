@@ -19,7 +19,7 @@ spec:
     helm:
       releaseName: haproxy-ingress-{{team}}-{{env}}
       valueFiles:
-      - $values/haproxy-ingress/value.d/values-{{org}}-{{env}}.yaml
+      - $values/testlab/haproxy-ingress/value.d/values-{{team}}-{{env}}.yaml
       parameters: []
       valuesObject: {}
 
