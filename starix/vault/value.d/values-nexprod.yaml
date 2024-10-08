@@ -40,6 +40,7 @@ server:
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           tls_disable = 1
+          x_forwarded_for_authorized_addrs = "10.42.0.0/16"
           # Enable unauthenticated metrics access (necessary for Prometheus Operator)
           telemetry {
             unauthenticated_metrics_access = "true"
