@@ -20,7 +20,7 @@ spec:
     helm:
       releaseName: vault-{{team}}-{{env}}
       valueFiles:
-        - $values/{{team}}/vault/value.d/values-{{team}}-{{env}}.yaml
+        - $values/vault/vault-dev/value.d/values-{{team}}-{{env}}.yaml
       valuesObject:
         global:
           enabled: true
