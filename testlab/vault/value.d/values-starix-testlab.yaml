@@ -104,29 +104,9 @@ server:
   standalone:
     enabled: false
 
-  tolerations:
-  - key: node.role
-    operator: Equal
-    effect: NoSchedule
-    value: vault
-
-  nodeSelector:
-    vault-workload: "yes"
-
-injector:
-  tolerations:
-  - key: node.role
-    operator: Equal
-    effect: NoSchedule
-    value: vault
-
 ui:
   enabled: true
   externalPort: 8200
   targetPort: 8200
   activeVaultPodOnly: false
   serviceType: "ClusterIP"
-
-serverTelemetry:
-  serviceMonitor:
-    enabled: true
