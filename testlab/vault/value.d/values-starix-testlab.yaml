@@ -59,26 +59,14 @@ server:
         storage "raft" {
           path = "/vault/data"
           retry_join {
-            leader_api_addr = "http://vault-starix-testlab-active:8200"
+            leader_api_addr = "http://vault-starix-testlab-0.vault-starix-testlab-internal:8200"
           }
-          # retry_join {
-          #   leader_api_addr = "http://vault-starix-nexprod-0.vault-starix-nexprod-internal:8200"
-          #   # leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-          #   # leader_client_cert_file = "/vault/userconfig/tls-server/server.crt"
-          #   # leader_client_key_file = "/vault/userconfig/tls-server/server.key"
-          # }
-          # retry_join {
-          #   leader_api_addr = "http://vault-starix-nexprod-1.vault-starix-nexprod-internal:8200"
-          #   # leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-          #   # leader_client_cert_file = "/vault/userconfig/tls-server/server.crt"
-          #   # leader_client_key_file = "/vault/userconfig/tls-server/server.key"
-          # }
-          # retry_join {
-          #   leader_api_addr = "http://vault-starix-nexprod-2.vault-starix-nexprod-internal:8200"
-          #   # leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-          #   # leader_client_cert_file = "/vault/userconfig/tls-server/server.crt"
-          #   # leader_client_key_file = "/vault/userconfig/tls-server/server.key"
-          # }
+          retry_join {
+            leader_api_addr = "http://vault-starix-testlab-1.vault-starix-testlab-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-starix-testlab-2.vault-starix-testlab-internal:8200"
+          }
         }
 
         service_registration "kubernetes" {}
