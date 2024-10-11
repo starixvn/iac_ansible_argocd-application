@@ -50,9 +50,7 @@ server:
 
         seal "awskms" {
           region     = "ap-east-1"
-          kms_key_id = "7ba20a15-eac9-4f9d-9319-471a377ac8ca"
-          # kms_key_id = "10850e09-587e-4d50-ac05-bf71129ee7dd"
-          disabled = "true"
+          kms_key_id = "10850e09-587e-4d50-ac05-bf71129ee7dd"
         }
 
         telemetry {
