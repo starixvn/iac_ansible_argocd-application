@@ -58,6 +58,9 @@ server:
 
         storage "raft" {
           path = "/vault/data"
+          retry_join {
+            leader_api_addr = "http://vault-starix-testlab-active:8200"
+          }
           # retry_join {
           #   leader_api_addr = "http://vault-starix-nexprod-0.vault-starix-nexprod-internal:8200"
           #   # leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
