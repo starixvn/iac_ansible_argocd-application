@@ -11,11 +11,11 @@ cronjob:
   - name: S3_BUCKET
     value: vault-backup
   - name: S3_PATH
-    value: vault-backup/starix/local/
+    value: vault-backup/lumi/local/
   - name: VAULT_ROLE
     value: vault-snapshot
   - name: VAULT_ADDR
-    value: http://vault-starix-nexprod-active:8200
+    value: http://vault-lumi-lumprod-active:8200
   - name: AWS_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
