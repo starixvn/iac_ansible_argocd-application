@@ -20,6 +20,12 @@ logstashPipeline:
         type => "vault"
         tags => ["prod", "starix"]
       }
+
+      syslog {
+        port => 5077
+        type => "debug"
+        tags => ["prod"]
+      }
     }
 
   vault_filter.conf: |
@@ -98,6 +104,36 @@ logstashPipeline:
       }
     }
 
+  debug_filter.conf: |
+    filter {
+      if [type] == "debug" {
+        grok {
+          match => ["message","%{HAPROXYHTTPBASE}","message","%{HAPROXYHTTP}","message","%{HAPROXYTCP}"]
+        }
+        grok {
+          match => ["message", "%{HAPROXYDATE:accept_date}"]
+        }
+        grok {
+          match => {"captured_request_headers" => "%{DATA:request_host}\|%{DATA:user-agent}\|(%{DATA:request_referer}\|%{IP:TrueClientIP})"}
+        }
+        mutate {
+          remove_field => ["captured_response_cookie","haproxy_time","haproxy_month","haproxy_hour","srvconn","backend_queue","retries","termination_state"]
+          remove_field => ["haproxy_monthday","time_backend_connect","pid","srv_queue","beat","beconn","client_port","haproxy_milliseconds","@version"]
+          remove_field => ["haproxy_minute","offset","haproxy_second","actconn","source","program","haproxy_year","feconn","http_version"]
+          remove_field => ["prospector","time_duration","time_queue","syslog_timestamp","captured_request_cookie","timestamp8601"]
+          convert => {
+            "http_status_code" => "integer"
+            "time_backend_response" => "integer"
+          }
+        }
+        date {match => ["accept_date", "dd/MMM/yyyy:HH:mm:ss.SSS"]}
+        geoip {source => "TrueClientIP"}
+      }
+    }
+
+##############################################
+############### OUTPUT SESSION ###############
+
   vault_output.conf: |
     output {
       if [type] == "vault" {
@@ -172,9 +208,24 @@ logstashPipeline:
       }
     }
 
+  debug_output.conf: |
+    output {
+      if [type] == "debug" {
+        opensearch {
+          hosts => ["https://opensearch-cluster-master:9200"]
+          user => "logstash"
+          password => "logstash"
+          ssl => true
+          ssl_certificate_verification => false
+          index => "logstash-debug-%{+YYYY.MM.dd}"
+        }   
+      }
+    }
+
+
   main_output.conf: |
     output {
-      if [type] not in ["http", "tcp", "syslog", "vault"] {
+      if [type] not in ["http", "tcp", "syslog", "vault", "debug"] {
         opensearch {
           hosts => ["https://opensearch-cluster-master:9200"]
           user => "logstash"
@@ -213,6 +264,13 @@ extraPorts:
   - name: vault-st-prod
     containerPort: 5064
 
+  - name: debug-tcp
+    containerPort: 5077
+    protocol: TCP
+  - name: debug-udp
+    containerPort: 5077
+    protocol: UDP
+
 service:
   type: NodePort
   ports:
@@ -236,3 +294,14 @@ service:
     port: 5064
     protocol: TCP
     targetPort: vault-st-prod
+
+  - name: debug-tcp
+    nodePort: 30077
+    port: 5077
+    protocol: TCP
+    targetPort: debug-tcp
+  - name: debug-udp
+    nodePort: 30077
+    port: 5077
+    protocol: UDP
+    targetPort: debug-udp
