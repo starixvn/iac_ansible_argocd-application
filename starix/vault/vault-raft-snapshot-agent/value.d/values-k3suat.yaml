@@ -32,3 +32,6 @@ cronjob:
     value: lisasqd.nebula.prod:8801
   - name: no_proxy
     value: vault-starix-k3suat-active:8200
+
+  - name: ALERT_GROUP_ID
+    value: 19:5cf103014bf348b4a214935d021d09f3@thread.tacv2

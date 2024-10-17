@@ -26,3 +26,6 @@ cronjob:
       secretKeyRef:
         key: AWS_ACCESS_KEY_ID
         name: vault-snapshot-credentials
+
+  - name: ALERT_GROUP_ID
+    value: 19:5cf103014bf348b4a214935d021d09f3@thread.tacv2
