@@ -56,15 +56,18 @@ ingress:
     hosts:
     - host: "miniot-api.nexdev.net"
       paths: []
-    # - host: "minio-lumprod-api.lumigame.com"
-    #   paths: []
-    # - host: "minio-api.starixsoft.com"
-    #   paths: []
-    # - host: "minio-api.lumiplus.vn"
-    #   paths: []
-    # tls:
-    # - hosts:
-    #   - minio-api.starixsoft.com
+    - host: "s3-api.nexdev.net"
+      paths: []
+    - host: "minio-lumprod-api.lumigame.com"
+      paths: []
+    - host: "minio-api.starixsoft.com"
+      paths: []
+    - host: "minio-api.lumiplus.vn"
+      paths: []
+    tls:
+    - hosts:
+      - minio-api.starixsoft.com
+      - s3-api.nexdev.net
     pathType: Prefix
   console:
     enabled: true
@@ -75,6 +78,8 @@ ingress:
     hosts:
     - host: "miniot.nexdev.net"
       paths: []
-    # - host: "minio-lumprod.lumigame.com"
-    #   paths: []
+    - host: "s3.nexdev.net"
+      paths: []
+    - host: "minio-lumprod.lumigame.com"
+      paths: []
     pathType: Prefix
