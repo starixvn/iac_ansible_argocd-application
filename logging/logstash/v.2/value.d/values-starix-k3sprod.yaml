@@ -37,7 +37,9 @@ logstashPipeline:
     filter {
       if [type] == "beats" {
         if [@metadata][beat] == "winlogbeat" {
-          add_tag => ["winlogbeat"]
+          mutate {
+            add_tag => ["winlogbeat"]
+          }
         }
       }
     }
