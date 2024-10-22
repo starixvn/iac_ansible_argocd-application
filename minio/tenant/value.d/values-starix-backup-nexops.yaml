@@ -24,7 +24,7 @@ tenant:
       node-role.kubernetes.io/minio: "yes"
 
   metrics:
-    enabled: false
+    enabled: true
     port: 9000
     protocol: http
 
@@ -39,11 +39,11 @@ tenant:
   buckets: [ ]
   users: [ ]
 
-  prometheusOperator: false
+  prometheusOperator: true
 
   env:
-  # - name: MINIO_PROMETHEUS_URL
-  #   value: "http://prometheus-stack-kube-prom-prometheus.monitoring.svc:9090"
+  - name: MINIO_PROMETHEUS_URL
+    value: "http://prometheus-backup-kube-pro-prometheus.monitoring.svc:9090"
 
 
 ingress:
@@ -54,8 +54,6 @@ ingress:
       haproxy.org/ssl-redirect: "false"
     tls: [ ]
     hosts:
-    - host: "miniot-api.nexdev.net"
-      paths: []
     - host: "s3-api.nexdev.net"
       paths: []
     - host: "minio-lumprod-api.lumigame.com"
@@ -76,8 +74,6 @@ ingress:
       haproxy.org/ssl-redirect: "false"
     tls: [ ]
     hosts:
-    - host: "miniot.nexdev.net"
-      paths: []
     - host: "s3.nexdev.net"
       paths: []
     - host: "minio-lumprod.lumigame.com"
