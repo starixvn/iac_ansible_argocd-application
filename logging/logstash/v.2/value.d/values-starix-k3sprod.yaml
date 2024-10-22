@@ -7,6 +7,11 @@ logstashConfig:
 logstashPipeline:
   logstash.conf: |
     input {
+      beats {
+        port => 5000
+        type => "beats"
+        tags => ["prod"]
+      }
       tcp {
         port => 5044
       }
@@ -25,6 +30,15 @@ logstashPipeline:
         port => 5077
         type => "debug"
         tags => ["prod"]
+      }
+    }
+
+  beats_filter.conf: |
+    filter {
+      if [type] == "beats" {
+        if [@metadata][beat] == "winlogbeat" {
+          add_tag => ["winlogbeat"]
+        }
       }
     }
 
@@ -133,6 +147,20 @@ logstashPipeline:
 
 ##############################################
 ############### OUTPUT SESSION ###############
+
+  beats_output.conf: |
+    output {
+      if [type] == "beats" {
+        opensearch {
+          hosts => ["https://opensearch-cluster-master:9200"]
+          user => "logstash"
+          password => "logstash"
+          ssl => true
+          ssl_certificate_verification => false
+          index => "logstash-"%{[@metadata][beat]}-prod-%{+YYYY.MM.dd}"
+        }
+      }
+    }
 
   vault_output.conf: |
     output {
@@ -253,6 +281,8 @@ resources:
 
 httpPort: 9600
 extraPorts:
+  - name: beats
+    containerPort: 5000
   - name: tcp
     containerPort: 5044
   - name: syslog-tcp
@@ -274,6 +304,11 @@ extraPorts:
 service:
   type: NodePort
   ports:
+  - name: beats
+    nodePort: 30500
+    port: 5000
+    protocol: TCP
+    targetPort: beats
   - name: tcp
     nodePort: 30504
     port: 5044
