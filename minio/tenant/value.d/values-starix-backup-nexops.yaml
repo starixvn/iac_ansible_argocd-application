@@ -13,7 +13,7 @@ tenant:
   - servers: 2
     name: pool-0
     volumesPerServer: 2
-    size: 30Gi
+    size: 20Gi
     storageClassName: directpv-min-io
     # tolerations:
     # - key: node.role
