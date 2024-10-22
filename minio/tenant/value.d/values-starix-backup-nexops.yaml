@@ -1,0 +1,77 @@
+---
+tenant:
+  name: nexops
+  configuration:
+    name: myminio-env-configuration
+  configSecret:
+    name: myminio-env-configuration
+    accessKey: nexops
+    secretKey: Ilu@n3xc3l12
+
+
+  pools:
+  - servers: 2
+    name: pool-0
+    volumesPerServer: 2
+    size: 30Gi
+    storageClassName: directpv-min-io
+    # tolerations:
+    # - key: node.role
+    #   operator: "Equal"
+    #   value: minio
+    #   effect: "NoSchedule"
+    nodeSelector:
+      node-role.kubernetes.io/minio: "yes"
+
+  metrics:
+    enabled: false
+    port: 9000
+    protocol: http
+
+  features:
+    bucketDNS: false
+    domains: { }
+    enableSFTP: false
+
+  buckets: [ ]
+  users: [ ]
+
+  prometheusOperator: false
+
+  env:
+  # - name: MINIO_PROMETHEUS_URL
+  #   value: "http://prometheus-stack-kube-prom-prometheus.monitoring.svc:9090"
+
+
+ingress:
+  api:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/ssl-redirect: "false"
+    tls: [ ]
+    hosts:
+    - host: "miniot-api.nexdev.net"
+      paths: []
+    # - host: "minio-lumprod-api.lumigame.com"
+    #   paths: []
+    # - host: "minio-api.starixsoft.com"
+    #   paths: []
+    # - host: "minio-api.lumiplus.vn"
+    #   paths: []
+    # tls:
+    # - hosts:
+    #   - minio-api.starixsoft.com
+    pathType: Prefix
+  console:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/ssl-redirect: "false"
+    tls: [ ]
+    hosts:
+    - host: "miniot.nexdev.net"
+      paths: []
+    # - host: "minio-lumprod.lumigame.com"
+    #   paths: []
+    pathType: Prefix

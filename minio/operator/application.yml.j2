@@ -1,31 +1,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio-operator-{{org}}-{{env}}
+  name: minio-operator-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: "minio-operator-{{org}}-{{env}}"
+    name: "minio-operator-{{team}}-{{env}}"
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: minio
   project: default
-  source:
-    repoURL: "{{repoURL}}"
+  sources:
+  - repoURL: "{{repoURL}}"
     path: "minio/operator/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
-      releaseName: minio-operator-{{org}}-{{env}}
+      releaseName: minio-operator-{{team}}-{{env}}
       valueFiles:
-      - value.d/values-{{org}}-{{env}}.yaml
-      parameters: 
-      - name: "operator.image.repository"
-        value: "{{ info[org][env]['hub'] }}/base/minio/operator"
-      - name: "operator.image.sidecarImage.repository"
-        value: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
+      - $values/minio/operator/value.d/values-{{team}}-{{env}}.yaml
+      parameters: []
       valuesObject: {}
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
 
         
   syncPolicy:
