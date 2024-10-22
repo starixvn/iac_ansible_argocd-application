@@ -46,6 +46,9 @@ info:
       hub: ""
       ingressDomain: ""
       storageClass: ""
+    backup:
+      cluster: "https://10.10.50.136:6443"
+      hub: "hub.nexdev.net"
     testlab:
       cluster: "https://10.70.70.140:6443"
       hub: "hub.nexdev.net"
@@ -65,7 +68,7 @@ info:
       cluster: "https://s1-prod-apiserver.starixplay.com:16445"
       hub: "s1hub.nebula.prod/kbt"
       ingressDomain: ""
-      storageClass: ""      
+      storageClass: ""
 
   lumi:
     lumprod:
