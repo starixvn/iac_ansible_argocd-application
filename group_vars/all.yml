@@ -96,4 +96,9 @@ info:
       hub: ""
       ingressDomain: ""
       storageClass: ""
+    k3sprod:
+      cluster: "https://starix-k3sprod-api.starixplay.com:16446"
+      hub: "nexhub.nebula.prod/kbt"
+      ingressDomain: ""
+      storageClass: "longhorn"
 
