@@ -10,7 +10,6 @@ logstashPipeline:
       beats {
         port => 5000
         type => "beats"
-        tags => ["prod"]
       }
       tcp {
         port => 5044
@@ -37,6 +36,13 @@ logstashPipeline:
     filter {
       if [type] == "beats" {
         if [@metadata][beat] == "winlogbeat" {
+          if "uat" in [tags] {
+            add_field => {"env" => "uat"}
+          }
+          else if "prod" in [tags] {
+            add_field => {"env" => "prod"}
+          }
+
           mutate {
             add_tag => ["winlogbeat"]
           }
@@ -159,7 +165,7 @@ logstashPipeline:
           password => "logstash"
           ssl => true
           ssl_certificate_verification => false
-          index => "logstash-%{[@metadata][beat]}-prod-%{+YYYY.MM.dd}"
+          index => "logstash-%{[@metadata][beat]}-%{env}-%{+YYYY.MM.dd}"
         }
       }
     }
