@@ -37,10 +37,14 @@ logstashPipeline:
       if [type] == "beats" {
         if [@metadata][beat] == "winlogbeat" {
           if "uat" in [tags] {
-            add_field => {"env" => "uat"}
+            mutate {
+              add_field => {"env" => "uat"}
+            }
           }
           else if "prod" in [tags] {
-            add_field => {"env" => "prod"}
+            mutate {
+              add_field => {"env" => "prod"}
+            }
           }
 
           mutate {
