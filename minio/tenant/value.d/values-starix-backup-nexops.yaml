@@ -58,7 +58,7 @@ ingress:
       paths: []
     - host: "minio-lumprod-api.lumigame.com"
       paths: []
-    - host: "minio-api.starixsoft.com"
+    - host: "s3-api.starixsoft.com"
       paths: []
     - host: "minio-api.lumiplus.vn"
       paths: []
