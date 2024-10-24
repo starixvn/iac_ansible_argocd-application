@@ -23,11 +23,6 @@ tenant:
   - name: s1-bwing-banner
   - name: s1-tuk555-banner
 
-
-  ###
-  # Array of Kubernetes secrets from which the Operator generates MinIO users during tenant provisioning.
-  #
-  # Each secret should specify the ``CONSOLE_ACCESS_KEY`` and ``CONSOLE_SECRET_KEY`` as the access key and secret key for that user.
   users: [ ]
 
   features:
