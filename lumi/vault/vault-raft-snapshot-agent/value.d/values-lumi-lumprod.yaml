@@ -7,7 +7,7 @@ cronjob:
   - name: retainDay
     value: "3"
   - name: S3_HOST
-    value: https://minio-lumprod-api.lumigame.com
+    value: https://s3-api.nexdev.net
   - name: S3_BUCKET
     value: vault-backup
   - name: S3_PATH
