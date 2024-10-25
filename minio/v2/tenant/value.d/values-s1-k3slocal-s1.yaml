@@ -12,16 +12,11 @@ tenant:
 
   buckets:
   - name: s1-files
-  - name: s1-ailab-backoffice
-  - name: s1-ailab-bannerimgs
-  - name: s1-ailab-config
-  - name: s1-ailab-errorpage
-  - name: s1-ailab-payment
-  - name: s1-nova88-banner
-  - name: s1-ailab-gameimgs
-  - name: s1-goal123-banner
-  - name: s1-bwing-banner
-  - name: s1-tuk555-banner
+  - name: s1-ailab
+  - name: s1-nova88
+  - name: s1-goal123
+  - name: s1-bwing
+  - name: s1-tuk555
 
   users: [ ]
 
