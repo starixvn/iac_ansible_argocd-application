@@ -1,26 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-{{env}}
+  name: grafana-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: grafana-{{env}}
+    name: grafana-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: grafana
+    namespace: grafana-{{team}}
   project: default
   source:
     repoURL: "{{repoURL}}"
     path: grafana
     targetRevision: HEAD
     helm:
-      releaseName: grafana-{{env}}
       valueFiles:
-        - values.yaml
-        
+        - values-{{team}}-{{env}}.yaml
+      releaseName: grafana-{{team}}-{{env}}
+
   syncPolicy:
     automated:
       prune: false
