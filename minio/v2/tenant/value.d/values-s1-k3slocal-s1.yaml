@@ -65,10 +65,13 @@ ingress:
     annotations:
       haproxy.org/ssl-redirect: "false"
     hosts:
-    - host: "minio-lumprod-api.lumigame.com"
+    - host: "minio-api.lumigame.com"
       paths: []
     - host: "minio-api.lumiplus.vn"
       paths: []
+    tls:
+    - hosts:
+      - minio-api.lumigame.com
     pathType: Prefix
   console:
     enabled: false
