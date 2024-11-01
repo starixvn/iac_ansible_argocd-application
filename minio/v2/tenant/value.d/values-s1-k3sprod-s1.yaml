@@ -44,7 +44,7 @@ tenant:
   mountPath: /minio
 
   metrics:
-    enabled: true
+    enabled: false
     port: 80
     protocol: http
   prometheusOperator: true
