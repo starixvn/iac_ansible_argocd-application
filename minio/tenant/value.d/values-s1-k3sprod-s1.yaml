@@ -35,8 +35,6 @@ tenant:
       # node-role.kubernetes.io/minio: "yes"
     affinity: { }
 
-  # mountPath: /minio
-
   metrics:
     enabled: true
     port: 80

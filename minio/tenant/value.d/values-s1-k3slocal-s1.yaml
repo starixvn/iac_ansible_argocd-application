@@ -35,8 +35,6 @@ tenant:
     nodeSelector: { }
     affinity: { }
 
-  mountPath: /minio
-
   metrics:
     enabled: true
     port: 80
