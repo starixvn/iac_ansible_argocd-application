@@ -35,7 +35,7 @@ tenant:
       # node-role.kubernetes.io/minio: "yes"
     affinity: { }
 
-  mountPath: /minio
+  # mountPath: /minio
 
   metrics:
     enabled: true
