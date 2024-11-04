@@ -1,6 +1,8 @@
 ---
 server:
 
+  logLevel: "warn"
+
   ingress:
     activeService: true
     ingressClassName: "haproxy"
