@@ -8,7 +8,7 @@ operator:
   - name: PROMETHEUS_NAMESPACE
     value: "monitoring"
 
-  replicaCount: 3
+  replicaCount: 2
 
   # tolerations:
   # - key: cattle.io/os
