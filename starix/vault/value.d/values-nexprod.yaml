@@ -1,6 +1,8 @@
 ---
 server:
 
+  logLevel: "warn"
+
   ingress:
     enabled: true
     activeService: true
