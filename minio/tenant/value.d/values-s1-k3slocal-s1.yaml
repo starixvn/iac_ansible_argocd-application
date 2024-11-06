@@ -15,6 +15,7 @@ tenant:
   - name: s1-goal123
   - name: s1-bwing
   - name: s1-tuk555
+  - name: s1-banner
 
   users: [ ]
 
