@@ -11,13 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
-    
-    {% if team == 'starix' %}
+{% if team == 'starix' %}
     namespace: logging
-    {% else %}
+{% else %}
     namespace: logging-{{team}}
-    {% endif %}
-
+{% endif %}
   project: default
   
   sources:
