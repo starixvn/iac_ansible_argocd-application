@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
-    {% if env == 'starix' %}
+    {% if team == 'starix' %}
     namespace: logging
     {% else %}
     namespace: logging-{{team}}
