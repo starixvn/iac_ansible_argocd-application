@@ -1,0 +1,19 @@
+---
+tolerations:
+- key: "node.role"
+  values: "ops"
+  operator: Equal
+  effect: NoSchedule
+
+manager:
+  extraEnv: []
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 350Mi
+    watchNamespace:
+
+installCRDs: false
