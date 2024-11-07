@@ -25,7 +25,7 @@ opensearchCluster:
   - component: masters
     diskSize: "30Gi"
     replicas: 3
-    jvm: "-Xmx4G -Xms4G"
+    # jvm: "-Xmx4G -Xms4G"
     roles:
       - "master"
       - "ingest"
@@ -52,8 +52,7 @@ opensearchCluster:
   - component: nodes-hot
     diskSize: "800Gi"
     replicas: 2
-    jvm: "-Xmx4G -Xms4G"
-
+    # jvm: "-Xmx4G -Xms4G"
     roles:
       - "data"
     additionalConfig:
