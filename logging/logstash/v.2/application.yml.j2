@@ -11,7 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'starix' %}
     namespace: logging
+{% else %}
+    namespace: logging-{{team}}
+{% endif %}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
@@ -22,7 +26,6 @@ spec:
       valueFiles:
         - $values/logging/logstash/v.2/value.d/values-{{team}}-{{env}}.yaml
       valuesObject:
-        image: "{{ info[org][env]['hub'] }}/base/logstash/logstash"
         logstashPattern:
           pattern.conf: |
             HAPROXYGW %{IP:client_ip}:%{INT:client_port} \[%{HAPROXYDATE:accept_date}\] %{NOTSPACE:frontend_name} %{NOTSPACE:backend_name}/%{NOTSPACE:server_name} %{INT:time_queue}/%{INT:time_backend_connect}/%{NOTSPACE:time_duration} %{NOTSPACE:bytes_read} %{NOTSPACE:termination_state} %{INT:actconn}/%{INT:feconn}/%{INT:beconn}/%{INT:srvconn}/%{NOTSPACE:retries} %{INT:srv_queue}/%{INT:backend_queue}
