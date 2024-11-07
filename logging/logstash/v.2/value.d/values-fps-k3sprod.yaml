@@ -227,3 +227,11 @@ service:
     port: 5044
     protocol: TCP
     targetPort: tcp
+
+nodeSelector:
+  node-role.kubernetes.io/ops: ""
+tolerations:
+- key: "node.role"
+  value: "ops"
+  operator: Equal
+  effect: NoSchedule
