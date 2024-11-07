@@ -74,6 +74,9 @@ opensearchCluster:
 
 
   security:
+    config:
+      adminCredentialsSecret:
+        name: ops-admin-creds
     tls:
       transport:
         generate: true
