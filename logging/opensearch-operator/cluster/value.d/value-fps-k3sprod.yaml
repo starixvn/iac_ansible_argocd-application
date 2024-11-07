@@ -1,0 +1,65 @@
+---
+opensearchCluster:
+  enabled: true
+
+  general:
+    httpPort: "9200"
+    version: 2.17.1
+    serviceName: "fps-cluster"
+    drainDataNodes: false
+
+  dashboards:
+    enable: true
+    replicas: 1
+    version: 2.17.1
+
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: "500m"
+      limits:
+        memory: "4Gi"
+        cpu: "4"
+
+  nodePools:
+  - component: masters
+    diskSize: "30Gi"
+    replicas: 3
+    jvm: "-Xmx4G -Xms4G"
+    roles:
+      - "master"
+      - "ingest"
+    persistence:
+      pvc:
+        storageClass: longhorn
+        accessModes:
+        - ReadWriteOnce
+    resources: {}
+      # requests:
+      #   memory: "2Gi"
+      #   cpu: "500m"
+      # limits:
+      #   memory: "2Gi"
+      #   cpu: "500m"
+  - component: nodes-hot
+    diskSize: "800Gi"
+    replicas: 2
+    jvm: "-Xmx4G -Xms4G"
+    NodeSelector: {}
+    roles:
+      - "data"
+    additionalConfig:
+      node.attr.temp: hot
+    persistence:
+      pvc:
+        storageClass: local-storage
+        accessModes:
+        - ReadWriteOnce
+    resources: {}
+
+  security:
+    tls:
+      transport:
+        generate: true
+      http:
+        generate: true
