@@ -23,7 +23,7 @@ spec:
     path: logging/opensearch-operator/opensearch-cluster/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: opensearch-{{team}}-{{env}}
+      releaseName: opensearch-cluster-{{team}}-{{env}}
       valueFiles:
         - $values/logging/opensearch-operator/cluster/value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
