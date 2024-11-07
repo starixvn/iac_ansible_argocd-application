@@ -14,7 +14,8 @@ opensearchCluster:
     enable: true
     replicas: 1
     version: 2.17.1
-
+    opensearchCredentialsSecret: 
+      name: ops-admin-creds
     resources:
       requests:
         memory: "1Gi"
@@ -36,6 +37,10 @@ opensearchCluster:
         storageClass: longhorn
         accessModes:
         - ReadWriteOnce
+    env:
+    - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+      value: Y8cY3sn7hCwSmJLff2U7fkNG
+
     resources: {}
       # requests:
       #   memory: "2Gi"
@@ -75,9 +80,9 @@ opensearchCluster:
 
 
   security:
-    # config:
-    #   adminCredentialsSecret:
-    #     name: ops-admin-creds
+    config:
+      adminCredentialsSecret:
+        name: ops-admin-creds
     tls:
       transport:
         generate: true
