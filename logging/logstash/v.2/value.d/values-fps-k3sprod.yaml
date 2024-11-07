@@ -218,6 +218,7 @@ extraPorts:
 
 service:
   type: LoadBalancer
+  loadBalancerIP: "10.99.185.213"
   ports:
   - name: httplog
     port: 8080
