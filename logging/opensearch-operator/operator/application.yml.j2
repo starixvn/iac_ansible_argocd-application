@@ -4,7 +4,7 @@ metadata:
   name: opensearch-operator-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: opensearch-{{team}}-{{env}}
+    name: opensearch-operator-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
     team: {{team}}
@@ -23,7 +23,7 @@ spec:
     path: logging/opensearch-operator/opensearch-operator/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: opensearch-{{team}}-{{env}}
+      releaseName: opensearch-operator-{{team}}-{{env}}
       valueFiles:
         - $values/logging/opensearch-operator/operator/value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
