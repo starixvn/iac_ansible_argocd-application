@@ -41,11 +41,19 @@ opensearchCluster:
       # limits:
       #   memory: "2Gi"
       #   cpu: "500m"
+    nodeSelector:
+      node-role.kubernetes.io/ops: ""
+    tolerations:
+    - key: "node.role"
+      value: "ops"
+      operator: Equal
+      effect: NoSchedule
+      
   - component: nodes-hot
     diskSize: "800Gi"
     replicas: 2
     jvm: "-Xmx4G -Xms4G"
-    NodeSelector: {}
+
     roles:
       - "data"
     additionalConfig:
@@ -56,6 +64,14 @@ opensearchCluster:
         accessModes:
         - ReadWriteOnce
     resources: {}
+    nodeSelector:
+      node-role.kubernetes.io/ops: ""
+    tolerations:
+    - key: "node.role"
+      value: "ops"
+      operator: Equal
+      effect: NoSchedule
+
 
   security:
     tls:
