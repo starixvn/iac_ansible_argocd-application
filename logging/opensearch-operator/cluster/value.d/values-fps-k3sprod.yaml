@@ -37,9 +37,6 @@ opensearchCluster:
         storageClass: longhorn
         accessModes:
         - ReadWriteOnce
-    env:
-    - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
-      value: Y8cY3sn7hCwSmJLff2U7fkNG
 
     resources: {}
       # requests:
@@ -81,6 +78,7 @@ opensearchCluster:
 
   security:
     config:
+      adminSecret:
       adminCredentialsSecret:
         name: ops-admin-creds
     tls:
