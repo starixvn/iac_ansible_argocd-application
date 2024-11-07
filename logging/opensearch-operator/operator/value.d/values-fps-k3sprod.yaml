@@ -17,3 +17,5 @@ manager:
     watchNamespace:
 
 installCRDs: false
+
+nodeSelector: {}
