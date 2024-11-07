@@ -14,7 +14,7 @@ manager:
     requests:
       cpu: 100m
       memory: 350Mi
-    watchNamespace:
+  dnsBase: starix.k3sprod
 
 installCRDs: false
 
