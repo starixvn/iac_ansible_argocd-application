@@ -17,6 +17,14 @@ tenant:
   - name: s1-tuk555
   - name: s1-banner
 
+  - name: s1-backoffice
+  - name: s1-bannerimgs
+  - name: s1-config
+  - name: s1-errorpage
+  - name: s1-payment
+  - name: s1-gameimgs
+  - name: s1-sportsimgs
+
   users: [ ]
 
   features:
