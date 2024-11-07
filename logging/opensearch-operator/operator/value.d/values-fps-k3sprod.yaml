@@ -1,7 +1,7 @@
 ---
 tolerations:
 - key: "node.role"
-  values: "ops"
+  value: "ops"
   operator: Equal
   effect: NoSchedule
 
