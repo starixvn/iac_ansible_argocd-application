@@ -56,7 +56,7 @@ opensearchCluster:
       #   memory: "2Gi"
       #   cpu: "500m"
     nodeSelector:
-      node-role.kubernetes.io/ops: ""
+      ops-master: "yes"
     tolerations:
     - key: "node.role"
       value: "ops"
