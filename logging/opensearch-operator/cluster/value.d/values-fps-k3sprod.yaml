@@ -38,10 +38,6 @@ opensearchCluster:
         storageClass: longhorn
         accessModes:
         - ReadWriteOnce
-    env:
-      HTTP_PROXY: lisasqd.nebula.prod:8801
-      HTTPS_PROXY: lisasqd.nebula.prod:8801
-      NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.nebula.prod,.svc,.starix.k3sprod
 
     resources: {}
       # requests:
@@ -71,10 +67,6 @@ opensearchCluster:
         storageClass: local-storage
         accessModes:
         - ReadWriteOnce
-    env:
-      HTTP_PROXY: lisasqd.nebula.prod:8801
-      HTTPS_PROXY: lisasqd.nebula.prod:8801
-      NO_PROXY: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.nebula.prod,.svc,.starix.k3sprod
     resources: {}
     nodeSelector:
       node-role.kubernetes.io/ops: ""
