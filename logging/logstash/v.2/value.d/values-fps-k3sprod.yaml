@@ -91,7 +91,7 @@ logstashPipeline:
           if [Properties][Environment] == "LOCAL" {
             if "deposit" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -101,7 +101,7 @@ logstashPipeline:
             }
             else if "deposit-apigateway" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -111,7 +111,7 @@ logstashPipeline:
             }
             else if "deposit-player" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -121,7 +121,7 @@ logstashPipeline:
             }          
             else {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -136,7 +136,7 @@ logstashPipeline:
           if [Properties][Environment] == "LOCAL" {
             if "deposit-apigw" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -146,7 +146,7 @@ logstashPipeline:
             }
             else if "licensee-adminsetting" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://fps-cluster:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -159,7 +159,7 @@ logstashPipeline:
 
         else if "LoginTransaction" in [Tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://fps-cluster:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -169,7 +169,7 @@ logstashPipeline:
         }
         else {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://fps-cluster:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
