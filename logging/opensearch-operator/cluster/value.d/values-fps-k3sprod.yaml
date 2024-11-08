@@ -39,12 +39,8 @@ opensearchCluster:
         accessModes:
         - ReadWriteOnce
     env:
-    - name: http_proxy
-      value: http://lisasqd.nebula.prod:8801
-    - name: https_proxy
-      value: http://lisasqd.nebula.prod:8801
-    - name: no_proxy
-      value: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.nebula.prod,.svc,.starix.k3sprod
+    - name: OPENSEARCH_JAVA_OPTS
+      value: -Xmx4G -Xms4G -Dopensearch.transport.cname_in_publish_address=true -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801
 
     resources: {}
       # requests:
@@ -75,12 +71,8 @@ opensearchCluster:
         accessModes:
         - ReadWriteOnce
     env:
-    - name: http_proxy
-      value: http://lisasqd.nebula.prod:8801
-    - name: https_proxy
-      value: http://lisasqd.nebula.prod:8801
-    - name: no_proxy
-      value: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.nebula.prod,.svc,.starix.k3sprod
+    - name: OPENSEARCH_JAVA_OPTS
+      value: -Xmx4G -Xms4G -Dopensearch.transport.cname_in_publish_address=true -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801
 
     resources: {}
     nodeSelector:
