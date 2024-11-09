@@ -16,7 +16,7 @@ opensearchCluster:
     replicas: 1
     version: 2.17.1
     opensearchCredentialsSecret: 
-      name: ops-admin-creds
+      name: ops-dashboard-creds
     resources:
       requests:
         memory: "1Gi"
@@ -27,12 +27,9 @@ opensearchCluster:
     additionalConfig:
       opensearch.hosts: "['https://fps-cluster:9200']"
       opensearchDashboards.index: ".kibana"
-      opensearchDashboards.configIndex: ".opensearch_dashboards_config"
-      # data_source_management.manageableBy: "all"
+      # opensearchDashboards.index: ".opensearch_dashboards"
       opensearch_security.multitenancy.enabled: "true"
-      # opensearch_security.multitenancy.tenants.preferred: "[Private, Global]"
       opensearch_security.readonly_mode.roles: "[kibana_read_only]"
-      # opensearch_security.cookie.secure: "false"
       opensearch.requestHeadersWhitelist: "[authorization, securitytenant]"
 
 
