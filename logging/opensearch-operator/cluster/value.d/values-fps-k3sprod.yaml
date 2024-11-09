@@ -16,7 +16,7 @@ opensearchCluster:
     replicas: 1
     version: 2.17.1
     opensearchCredentialsSecret: 
-      name: ops-dashboard-creds
+      name: ops-admin-creds
     resources:
       requests:
         memory: "1Gi"
