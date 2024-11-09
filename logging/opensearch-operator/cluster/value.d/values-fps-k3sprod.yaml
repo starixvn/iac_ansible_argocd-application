@@ -28,7 +28,7 @@ opensearchCluster:
       opensearch.hosts: "['https://fps-cluster:9200']"
       opensearchDashboards.index: ".opensearch_dashboards"
       opensearchDashboards.configIndex: ".opensearch_dashboards_config"
-      migrations.delete.enabled: false
+      migrations.delete.enabled: "false"
       # data_source_management.manageableBy: "all"
       opensearch_security.multitenancy.enabled: "true"
       # opensearch_security.multitenancy.tenants.preferred: "[Private, Global]"
