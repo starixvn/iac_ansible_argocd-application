@@ -26,7 +26,7 @@ opensearchCluster:
         cpu: "4"
     additionalConfig:
       opensearch.hosts: "['https://fps-cluster:9200']"
-      opensearchDashboards.index: ".opensearch_dashboards"
+      opensearchDashboards.index: ".kibana"
       opensearchDashboards.configIndex: ".opensearch_dashboards_config"
       # data_source_management.manageableBy: "all"
       opensearch_security.multitenancy.enabled: "true"
