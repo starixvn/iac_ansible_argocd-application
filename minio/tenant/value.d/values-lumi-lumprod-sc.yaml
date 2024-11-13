@@ -1,6 +1,6 @@
 ---
 tenant:
-  name: SC
+  name: sc
   configuration:
     name: nexops-env-configuration
   configSecret:
