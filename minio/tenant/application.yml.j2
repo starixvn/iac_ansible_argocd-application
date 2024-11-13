@@ -14,7 +14,7 @@ spec:
 {% if team == 's1' or team == 'starix' %}
     namespace: minio
 {% else %}
-    namespace: minio-{{tenant}}
+    namespace: minio-{{tenantName}}
 {% endif %}
   project: default
   sources:
