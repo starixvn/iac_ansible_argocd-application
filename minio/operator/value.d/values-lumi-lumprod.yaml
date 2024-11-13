@@ -4,7 +4,7 @@ operator:
   - name: MINIO_OPERATOR_RUNTIME
     value: "Rancher"
   - name: CLUSTER_DOMAIN
-    value: "starix.k3slocal"
+    value: "lumi.lumprod"
   - name: PROMETHEUS_NAMESPACE
     value: "monitoring"
 
