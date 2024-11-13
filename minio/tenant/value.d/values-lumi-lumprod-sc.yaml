@@ -8,7 +8,7 @@ tenant:
     secretKey: Ilu@n3xc3l12
 
   buckets:
-  - sc-stream
+  - name: sc-stream
   users: [ ]
 
   features:
