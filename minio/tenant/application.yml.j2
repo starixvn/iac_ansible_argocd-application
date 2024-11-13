@@ -26,7 +26,9 @@ spec:
       valueFiles:
         - $values/minio/tenant/value.d/values-{{team}}-{{env}}-{{tenantName}}.yaml
       parameters: []
-      valuesObject: {}
+      valuesObject:
+        tenant:
+          name: {{tenantName}}
       
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
