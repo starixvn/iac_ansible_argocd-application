@@ -11,7 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 's1' or team == 'starix' %}
     namespace: minio
+{% else %}
+    namespace: minio-{{tenant}}
+{% endif %}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
