@@ -21,8 +21,8 @@ spec:
       valueFiles:
         - value.d/values-{{org}}-{{env}}.yaml
       valuesObject:
-        image:
-          repository: "{{ info[org][env]['hub'] }}/base/opensearchproject/opensearch"
+        # image:
+        #   repository: "{{ info[org][env]['hub'] }}/base/opensearchproject/opensearch"
         nodeSelector:
           nexops-tools: "yes"
   syncPolicy:
