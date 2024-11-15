@@ -69,7 +69,7 @@ logstashPipeline:
           add_field => {"type" => "vault"}
         }
 
-        if [auth].[display_name] == "approle" and [request][mount_type] == "kv" and [request][operation] == "read" { drop {} }
+        if [auth][display_name] == "approle" and [request][mount_type] == "kv" and [request][operation] == "read" { drop {} }
         else if [auth][display_name] == "approle" and [request][operation] == "read" and [request][path] == "auth/token/lookup-self" { drop {} }
       }
     }
