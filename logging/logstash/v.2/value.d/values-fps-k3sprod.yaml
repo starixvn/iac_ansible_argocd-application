@@ -39,7 +39,7 @@ logstashPipeline:
   dev_output.conf: |
     output {
       if [type] == "dev-logs" {
-        else if "LoginTransaction" in [Tags] {
+        if "LoginTransaction" in [Tags] {
           opensearch {
             hosts => ["https://fps-cluster:9200"]
             user => "logstash"
