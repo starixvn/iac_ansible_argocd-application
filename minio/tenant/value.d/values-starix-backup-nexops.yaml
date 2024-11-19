@@ -60,6 +60,8 @@ ingress:
       paths: []
     - host: "s3-api.lumigame.com"
       paths: []
+    - host: "minio.lumigame.com"
+      paths: []
     tls:
     - hosts:
       - minio-api.starixsoft.com
@@ -73,5 +75,7 @@ ingress:
     tls: [ ]
     hosts:
     - host: "s3.nexdev.net"
+      paths: []
+    - host: "minio-console.lumigame.com"
       paths: []
     pathType: Prefix
