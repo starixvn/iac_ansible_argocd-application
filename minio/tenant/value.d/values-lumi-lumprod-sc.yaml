@@ -53,14 +53,14 @@ tenant:
 
 ingress:
   api:
-    enabled: true
+    enabled: false
     ingressClassName: "haproxy"
     hosts:
     - host: "minio.lumigame.com"
       paths: []
     pathType: Prefix
   console:
-    enabled: true
+    enabled: false
     ingressClassName: "haproxy"
     hosts:
     - host: "minio-console.lumigame.com"
