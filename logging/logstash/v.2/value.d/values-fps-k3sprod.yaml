@@ -81,7 +81,6 @@ logstashPipeline:
 extraEnvs:
 - name: LS_JAVA_OPTS
   value: -Xmx6G -Xms6G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801
-logstashJavaOpts: "-Xmx6g -Xms6g"
 
 resources:
   requests:
