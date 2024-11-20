@@ -17,7 +17,7 @@ spec:
     namespace: vault-{{team}}
 {% endif %}
   project: default
-  source:
+  sources:
   - repoURL: "{{repoURL}}"
     path: vault/vault-raft-snapshot-agent/{{chartVersion}}
     targetRevision: HEAD
