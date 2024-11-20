@@ -1,29 +1,38 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-snapshot-agent-{{env}}
+  name: vault-snapshot-agent-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: vault-snapshot-agent-{{env}}
+    name: vault-snapshot-agent-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'starix' %}
     namespace: vault
+{% else %}
+    namespace: vault-{{team}}
+{% endif %}
   project: default
-  source:
-    repoURL: "{{repoURL}}"
+  sources:
+  - repoURL: "{{repoURL}}"
     path: vault/vault-raft-snapshot-agent/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: vault-snapshot-agent-{{env}}
+      releaseName: vault-snapshot-agent-{{team}}-{{env}}
       valueFiles:
-      - value.d/values-{{org}}-{{env}}.yaml
+      - $values/vault/vault-raft-snapshot-agent/value.d/values-{{team}}-{{env}}.yaml
       parameters:
       - name: "image.repository"
         value: "{{ info[org][env]['hub'] }}/base/nexops-tools/vault-snapshot"
       valuesObject: {} 
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
       
   syncPolicy:
     automated:

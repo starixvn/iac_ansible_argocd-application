@@ -1,40 +1,36 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-{{env}}
+  name: vault-secrets-operator-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: vault-{{env}}
+    name: vault-secrets-operator-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'starix' %}
     namespace: vault
+{% else %}
+    namespace: vault-{{team}}
+{% endif %}
   project: default
-  source:
-    repoURL: "{{repoURL}}"
-    path: vault/{{chartVersion}}
+  sources:
+  - repoURL: "{{repoURL}}"
+    path: vault/vault-secrets-operator/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: vault-{{env}}
+      releaseName: vault-secrets-operator-{{team}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
-      valuesObject:
-        global:
-          enabled: true
-          tlsDisable: true
-        injector:
-          enabled: true
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
-          agentImage:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-          
-        server:
-          # Use the Enterprise Image
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
+      - $values/vault/vault-secrets-operator/value.d/values-{{team}}-{{env}}.yaml
+      parameters: []
+      valuesObject: {}
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
 
   syncPolicy:
     automated:

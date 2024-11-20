@@ -14,11 +14,25 @@ logstashPipeline:
       tcp {
         port => 5044
       }
+
+      udp {
+        port => 5099
+        type => "dev-s1"
+        tags => ["udp-s1", "s1"]
+      }
+
+      tcp {
+        port => 5099
+        type => "dev-s1"
+        tags => ["tcp-s1", "s1"]
+      }
+
       syslog {
         port => 5045
         type => "syslog"
         tags => ["prod"]
       }
+
       tcp {
         port => 5064
         type => "vault"
@@ -69,7 +83,8 @@ logstashPipeline:
           add_field => {"type" => "vault"}
         }
 
-        if [request][mount_type] == "kv" and [request][operation] == "read" { drop {} }
+        if [auth][display_name] == "approle" and [request][mount_type] == "kv" and [request][operation] == "read" { drop {} }
+        else if [auth][display_name] == "approle" and [request][operation] == "read" and [request][path] == "auth/token/lookup-self" { drop {} }
       }
     }
 
@@ -134,6 +149,15 @@ logstashPipeline:
         else if "hap-ing" in [tags] {
           if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
           else if [backend_name] == "stats" { drop {} }
+        }
+      }
+    }
+
+  dev_s1_filter.conf: |
+    filter {
+      if [type] == "dev-s1" {
+        json {
+          source => "message"
         }
       }
     }
@@ -204,6 +228,43 @@ logstashPipeline:
             ssl_certificate_verification => false
             index => "logstash-vault-unknown-%{+YYYY.MM.dd}"
           }       
+        }
+      }
+    }
+
+
+  dev_s1_output.conf: |
+    output {
+      if [type] == "dev-s1" {
+        if [Properties][Env] == "UAT" {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-s1-ne-uat-%{+YYYY.MM.dd}"
+          }
+        }
+        else if [Properties][Env] == "PROD" {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-s1-ne-prod-%{+YYYY.MM.dd}"
+          }          
+        }
+        else {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-s1-ne-unknown-%{+YYYY.MM.dd}"
+          }        
         }
       }
     }
@@ -305,6 +366,12 @@ extraPorts:
     containerPort: 5000
   - name: tcp
     containerPort: 5044
+  - name: tcp-s1
+    protocol: TCP
+    containerPort: 5099
+  - name: udp-s1
+    protocol: UDP
+    containerPort: 5099
   - name: syslog-tcp
     containerPort: 5045
     protocol: TCP
@@ -329,6 +396,16 @@ service:
     port: 5000
     protocol: TCP
     targetPort: beats
+  - name: tcp-s1
+    port: 5099
+    protocol: TCP
+    nodePort: 31853
+    targetPort: tcp-s1
+  - name: udp-s1
+    port: 5099
+    protocol: UDP
+    nodePort: 31853
+    targetPort: udp-s1
   - name: tcp
     nodePort: 30504
     port: 5044

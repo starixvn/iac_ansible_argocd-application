@@ -23,141 +23,24 @@ logstashPipeline:
   dev_filter.conf: |
     filter {
       if [type] == "dev-logs" {
+        json { source => "message" }
         if "LoginTransaction" in [Tags] {
           useragent {
             source => '[Message][UserAgent]'
+            target => "user_agent"
+          }
+          geoip {
+            source => "[Message][IP]"
+            target => "geo"
           }
         }
-
-        ### LEGION TEAM
-        if [Properties][Team] == "Legion" {
-          mutate {
-            remove_field => ["[Renderings][HttpLog]", "[Properties][HttpLog]" ]
-            add_tag => ["legion"]
-          }
-
-          if [Properties][RequestPath] == "/" {
-            drop {}
-          }
-
-          if [Properties][Application] == "DepositAPI" {
-            mutate {
-              add_tag => ["deposit"]
-            }
-          }
-          if [Properties][Application] == "DepositAPIGateway" {
-            mutate {
-              add_tag => ["deposit-apigateway"]
-            }
-          }
-
-          if [Properties][Application] == "DepositPlayerAPI" {
-            mutate {
-              add_tag => ["deposit-player"]
-            }
-          }                
-        }
-
-
-        ### ROME TEAM
-        if [Properties][Team] == "Rome" {
-          mutate {
-            # remove_field => ["[Renderings]", "[Properties][HttpLog]", "MessageTemplate", "[Properties][Elapsed]", "[Properties][SourceContext]"]
-            add_tag => ["rome"]
-          }
-
-          if [Properties][RequestPath] == "/" {
-            drop {}
-          }
-
-          if [Properties][Application] == "Deposit.ApiGateways" {
-            mutate {
-              add_tag => ["deposit-apigw"]
-            }
-          }
-          if [Properties][Application] == "Licensee.AdminSetting.API" {
-            mutate {
-              add_tag => ["licensee-adminsetting"]
-            }
-          }
-        }        
       }
     }
 
   dev_output.conf: |
     output {
       if [type] == "dev-logs" {
-        if "legion" in [tags] {
-          if [Properties][Environment] == "LOCAL" {
-            if "deposit" in [tags] {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-legion-deposit-local-%{+YYYY.MM.dd}"
-              }
-            }
-            else if "deposit-apigateway" in [tags] {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-legion-deposit-apigateway-local-%{+YYYY.MM.dd}"
-              }            
-            }
-            else if "deposit-player" in [tags] {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-legion-deposit-player-local-%{+YYYY.MM.dd}"
-              }            
-            }          
-            else {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-legion-unknown-local-%{+YYYY.MM.dd}"
-              }           
-            }
-          }
-        }
-
-        else if "rome" in [tags] {
-          if [Properties][Environment] == "LOCAL" {
-            if "deposit-apigw" in [tags] {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-rome-deposit-apigw-local-%{+YYYY.MM.dd}"
-              }
-            }
-            else if "licensee-adminsetting" in [tags] {
-              opensearch {
-                hosts => ["https://fps-cluster:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-rome-licensee-adminsetting-local-%{+YYYY.MM.dd}"
-              }              
-            }
-          }
-        }
-
-        else if "LoginTransaction" in [Tags] {
+        if "LoginTransaction" in [Tags] {
           opensearch {
             hosts => ["https://fps-cluster:9200"]
             user => "logstash"
@@ -183,7 +66,7 @@ logstashPipeline:
 
   main_output.conf: |
     output {
-      if [type] not in ["http", "tcp", "syslog", "vault"] {
+      if [type] not in ["http", "tcp", "dev-logs"] {
         opensearch {
           hosts => ["https://vn-st-ing-prod.nebula.prod:31920"]
           user => "logstash"
@@ -196,8 +79,8 @@ logstashPipeline:
     }
     
 
-
-logstashJavaOpts: "-Xmx6g -Xms6g"
+extraEnvs: []
+logstashJavaOpts: "-Xmx6G -Xms6G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
 
 resources:
   requests:

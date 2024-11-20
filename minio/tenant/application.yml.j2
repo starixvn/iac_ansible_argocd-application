@@ -11,7 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 's1' or team == 'starix' %}
     namespace: minio
+{% else %}
+    namespace: minio-{{tenantName}}
+{% endif %}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
@@ -22,7 +26,9 @@ spec:
       valueFiles:
         - $values/minio/tenant/value.d/values-{{team}}-{{env}}-{{tenantName}}.yaml
       parameters: []
-      valuesObject: {}
+      valuesObject:
+        tenant:
+          name: {{tenantName}}
       
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD

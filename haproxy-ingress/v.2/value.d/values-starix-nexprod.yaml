@@ -23,7 +23,7 @@ controller:
     #   protocol: TCP
 
   logging:
-    level: info
+    level: debug
     traffic:
       address: "logstash-nexprod-logstash.logging.svc"
       port: "5045"
