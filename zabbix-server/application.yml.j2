@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: zabbix-server-{{team}}
+    namespace: zabbix-server-{{team}}-{{env}}
   project: default
   source:
     repoURL: "{{repoURL}}"
@@ -19,7 +19,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-test.yaml
+        - values-{{team}}-{{env}}.yaml
       releaseName: zabbix-server-{{team}}-{{env}}
 
   syncPolicy:
