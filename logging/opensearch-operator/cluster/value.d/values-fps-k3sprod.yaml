@@ -36,7 +36,7 @@ opensearchCluster:
   - component: masters
     diskSize: "30Gi"
     replicas: 3
-    jvm: "-Xmx4G -Xms4G"
+    jvm: "-Xmx4G -Xms4G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
     roles:
       - "master"
       - "ingest"
@@ -45,9 +45,6 @@ opensearchCluster:
         storageClass: longhorn
         accessModes:
         - ReadWriteOnce
-    env:
-    - name: OPENSEARCH_JAVA_OPTS
-      value: -Xmx4G -Xms4G -Dopensearch.transport.cname_in_publish_address=true -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801
 
     resources: {}
       # requests:
@@ -67,7 +64,7 @@ opensearchCluster:
   - component: nodes-hot
     diskSize: "800Gi"
     replicas: 2
-    jvm: "-Xmx4G -Xms4G"
+    jvm: "-Xmx8G -Xms8G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
     roles:
       - "data"
     additionalConfig:
@@ -77,9 +74,29 @@ opensearchCluster:
         storageClass: local-storage
         accessModes:
         - ReadWriteOnce
-    env:
-    - name: OPENSEARCH_JAVA_OPTS
-      value: -Xmx4G -Xms4G -Dopensearch.transport.cname_in_publish_address=true -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801
+
+    resources: {}
+    nodeSelector:
+      node-role.kubernetes.io/ops: ""
+    tolerations:
+    - key: "node.role"
+      value: "ops"
+      operator: Equal
+      effect: NoSchedule
+
+  - component: nodes-cold
+    diskSize: "5800Gi"
+    replicas: 1
+    jvm: "-Xmx4G -Xms4G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
+    roles:
+      - "data"
+    additionalConfig:
+      node.attr.temp: cold
+    persistence:
+      pvc:
+        storageClass: local-storage
+        accessModes:
+        - ReadWriteOnce
 
     resources: {}
     nodeSelector:
