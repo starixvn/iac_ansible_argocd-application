@@ -24,8 +24,8 @@ spec:
     helm:
       releaseName: vault-secrets-operator-{{team}}-{{env}}
       valueFiles:
-        - $values/vault/vault-secrets-operator/value.d/values-{{team}}-{{env}}.yaml
-        parameters: []
+      - $values/vault/vault-secrets-operator/value.d/values-{{team}}-{{env}}.yaml
+      parameters: []
       valuesObject: {}
 
   - repoURL: "{{values_repoURL}}"
