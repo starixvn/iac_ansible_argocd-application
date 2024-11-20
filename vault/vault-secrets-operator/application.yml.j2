@@ -27,6 +27,7 @@ spec:
       - $values/vault/vault-secrets-operator/value.d/values-{{team}}-{{env}}.yaml
       parameters: []
       valuesObject: {}
+      skipCrds: true
 
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
