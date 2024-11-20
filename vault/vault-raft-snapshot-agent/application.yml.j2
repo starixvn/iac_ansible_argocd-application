@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-snapshot-agent-{{env}}
+  name: vault-snapshot-agent-{{team}}-{{env}}
   namespace: argocd
   labels:
     name: vault-snapshot-agent-{{team}}-{{env}}
