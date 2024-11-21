@@ -4,3 +4,7 @@ server:
 
 ui:
   enabled: false
+
+injector:
+  externalVaultAddr: "https://vault.nexdev.net"
+  authPath: "auth/kubernetes-st-backup"
