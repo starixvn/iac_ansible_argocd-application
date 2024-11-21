@@ -14,7 +14,7 @@ extraResources:
   apiVersion: v1
   kind: ServiceAccount
   metadata:
-    name: {{ template "vault.serviceAccount.name" . }}
+    name: {{ template "vault.serviceAccount.name" . }}-cus
     namespace: {{ include "vault.namespace" . }}
     labels:
       app.kubernetes.io/name: {{ include "vault.name" . }}
@@ -23,7 +23,7 @@ extraResources:
   apiVersion: v1
   kind: Secret
   metadata:
-    name: {{ template "vault.serviceAccount.name" . }}-token
+    name: {{ template "vault.serviceAccount.name" . }}-token-cus
     namespace: {{ include "vault.namespace" . }}
     annotations:
       kubernetes.io/service-account.name: {{ template "vault.serviceAccount.name" . }}
@@ -35,7 +35,7 @@ extraResources:
   apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRoleBinding
   metadata:
-    name: {{ template "vault.fullname" . }}-server-binding
+    name: {{ template "vault.fullname" . }}-server-binding-cus
     labels:
       app.kubernetes.io/name: {{ include "vault.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
@@ -45,5 +45,5 @@ extraResources:
     name: system:auth-delegator
   subjects:
   - kind: ServiceAccount
-    name: {{ template "vault.serviceAccount.name" . }}
+    name: {{ template "vault.serviceAccount.name" . }}-cus
     namespace: {{ include "vault.namespace" . }}
