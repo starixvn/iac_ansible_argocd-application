@@ -19,8 +19,8 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        #- values.yaml
-        - values-{{team}}-{{env}}.yaml
+        - values.yaml
+        #- values-{{team}}-{{env}}.yaml
       releaseName: zabbix-server
 
   syncPolicy:
