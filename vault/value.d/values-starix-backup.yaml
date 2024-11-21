@@ -1,0 +1,6 @@
+---
+server:
+  enabled: false
+
+ui:
+  enabled: false
