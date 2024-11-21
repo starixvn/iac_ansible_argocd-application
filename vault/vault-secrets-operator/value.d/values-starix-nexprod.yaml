@@ -15,5 +15,5 @@ metricsService:
 
 defaultVaultConnection:
   enabled: true
-  address: "https://vault-starix-nexprod-active:8201"
+  address: "http://vault-starix-nexprod-active:8200"
   skipTLSVerify: true
