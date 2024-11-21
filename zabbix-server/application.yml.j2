@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: zabbix-server-{{team}}-{{env}}
+  name: zabbix-server
   namespace: argocd
   labels:
-    name: zabbix-server-{{team}}-{{env}}
+    name: zabbix-server
     env: {{env}}
     org: {{org}}
     team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: zabbix-server-{{team}}-{{env}}
+    namespace: zabbix-server
   project: default
   source:
     repoURL: "{{repoURL}}"
@@ -19,9 +19,9 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values.yaml
-        #- values-{{team}}-{{env}}.yaml
-      releaseName: zabbix-server-{{team}}-{{env}}
+        #- values.yaml
+        - values-{{team}}-{{env}}.yaml
+      releaseName: zabbix-server
 
   syncPolicy:
     automated:
