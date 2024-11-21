@@ -8,3 +8,43 @@ ui:
 injector:
   externalVaultAddr: "https://vault.nexdev.net"
   authPath: "auth/kubernetes-st-backup"
+  
+nexops-extra:
+  extraResources:
+  - | ## ServiceAccount for authentication reviewer
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: {{ template "vault.serviceAccount.name" . }}
+      namespace: {{ include "vault.namespace" . }}
+      labels:
+        app.kubernetes.io/name: {{ include "vault.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+  - | ## ServiceAccount Secret
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: {{ template "vault.serviceAccount.name" . }}-token
+      namespace: {{ include "vault.namespace" . }}
+      annotations:
+        kubernetes.io/service-account.name: {{ template "vault.serviceAccount.name" . }}
+      labels:
+        app.kubernetes.io/name: {{ include "vault.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    type: kubernetes.io/service-account-token
+  - | ## ClusterRoleBinding for ServiceAccount Reviewer
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: {{ template "vault.fullname" . }}-server-binding
+      labels:
+        app.kubernetes.io/name: {{ include "vault.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: system:auth-delegator
+    subjects:
+    - kind: ServiceAccount
+      name: {{ template "vault.serviceAccount.name" . }}
+      namespace: {{ include "vault.namespace" . }}
