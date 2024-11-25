@@ -27,13 +27,12 @@ tenant:
     tolerations: [ ]
     nodeSelector:
       node-longhorn-strict: "yes"
-
     affinity: { }
 
   mountPath: /minio
 
   metrics:
-    enabled: false
+    enabled: true
     port: 80
     protocol: http
   prometheusOperator: false
