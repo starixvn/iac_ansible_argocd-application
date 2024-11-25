@@ -36,7 +36,7 @@ opensearchCluster:
   - component: masters
     diskSize: "30Gi"
     replicas: 3
-    jvm: "-Xmx8G -Xms8G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
+    jvm: "-Xmx6G -Xms6G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
     roles:
       - "master"
       - "ingest"
