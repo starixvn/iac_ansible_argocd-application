@@ -33,7 +33,7 @@ tenant:
   mountPath: /minio
 
   metrics:
-    enabled: true
+    enabled: false
     port: 80
     protocol: http
   prometheusOperator: false
@@ -55,14 +55,14 @@ tenant:
 
 ingress:
   api:
-    enabled: false
+    enabled: true
     ingressClassName: "haproxy"
     hosts:
     - host: "minio.lumigame.com"
       paths: []
     pathType: Prefix
   console:
-    enabled: false
+    enabled: true
     ingressClassName: "haproxy"
     hosts:
     - host: "minio-console.lumigame.com"
