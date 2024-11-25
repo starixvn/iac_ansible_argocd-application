@@ -7,8 +7,8 @@ tenant:
     accessKey: nexops
     secretKey: Ilu@n3xc3l12
 
-  buckets:
-  - name: sc-stream
+  buckets: []
+  # - name: sc-stream
   users: [ ]
 
   features:
