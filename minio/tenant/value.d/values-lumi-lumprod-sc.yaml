@@ -21,7 +21,7 @@ tenant:
     servers: 2
     volumesPerServer: 2
     size: 5Gi
-    storageClassName: longhorn-single
+    storageClassName: longhorn-stricted
     storageAnnotations: { }
     annotations: { }
     tolerations: [ ]
