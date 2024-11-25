@@ -25,7 +25,9 @@ tenant:
     storageAnnotations: { }
     annotations: { }
     tolerations: [ ]
-    nodeSelector: { }
+    nodeSelector:
+      node-longhorn-strict: "yes"
+
     affinity: { }
 
   mountPath: /minio
