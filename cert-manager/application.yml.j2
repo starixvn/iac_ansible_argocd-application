@@ -1,12 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-{{env}}
+  name: cert-manager-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: cert-manager-{{env}}
+    name: cert-manager-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
@@ -17,9 +18,9 @@ spec:
     path: cert-manager/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: cert-manager-{{env}}
+      releaseName: cert-manager-{{team}}-{{env}}
       valueFiles:
-        - $values/cert-manager/value.d/values-{{env}}.yaml
+        - $values/cert-manager/value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
 
   - repoURL: "{{values_repoURL}}"
