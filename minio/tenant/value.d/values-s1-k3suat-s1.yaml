@@ -9,12 +9,6 @@ tenant:
     secretKey: Ilu@n3xc3lS1
 
   buckets:
-  - name: s1-files
-  - name: s1-ailab
-  - name: s1-nova88
-  - name: s1-goal123
-  - name: s1-bwing
-  - name: s1-tuk555
   - name: s1-banner
   - name: s1-backoffice
   - name: s1-bannerimgs
