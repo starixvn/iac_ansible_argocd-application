@@ -1,6 +1,5 @@
 tlsSecrets:
-- name: nex-info-vn
-- name: nexdev-net
+- name: lumigame-com
 # serviceAccount: "cert-manager-starix-nexprod-vault-updater"
 
 cronjob:
