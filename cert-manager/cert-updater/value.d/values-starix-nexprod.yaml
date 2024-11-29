@@ -1,0 +1,14 @@
+tlsSecrets:
+- name: nex-info-vn
+- name: nexdev-net
+# serviceAccount: "cert-manager-starix-nexprod-vault-updater"
+
+cronjob:
+  schedule: "20 0 * * *"
+  env:
+  - name: VAULT_ROLE
+    value: cert-updater
+  - name: VAULT_ADDR
+    value: https://vault.nexdev.net
+  - name: ALERT_GROUP_ID
+    value: 19:7bbc32eca7a74681adb19e97d9ead538@thread.tacv2
