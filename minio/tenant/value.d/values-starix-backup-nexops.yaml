@@ -56,11 +56,11 @@ ingress:
     hosts:
     - host: "s3-api.nexdev.net"
       paths: []
-    - host: "s3-api.starixsoft.com"
+    - host: "s3-api.starixsoft.com"   # API-access from KBT
       paths: []
-    - host: "s3-api.lumigame.com"
+    - host: "s3-api.lumigame.com"     # API-access for git3
       paths: []
-    - host: "minio.lumigame.com"
+    - host: "s3-api.nex.info.vn"      # API-access for git3
       paths: []
     tls:
     - hosts:
@@ -75,7 +75,5 @@ ingress:
     tls: [ ]
     hosts:
     - host: "s3.nexdev.net"
-      paths: []
-    - host: "minio-console.lumigame.com"
       paths: []
     pathType: Prefix
