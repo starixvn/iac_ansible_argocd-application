@@ -66,6 +66,7 @@ ingress:
     - hosts:
       - minio-api.starixsoft.com
       - s3-api.nexdev.net
+      - s3-api.nex.info.vn
     pathType: Prefix
   console:
     enabled: true
