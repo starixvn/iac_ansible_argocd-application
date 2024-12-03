@@ -10,7 +10,7 @@ tenant:
 
 
   pools:
-  - servers: 2
+  - servers: 4
     name: pool-0
     volumesPerServer: 2
     size: 120Gi
