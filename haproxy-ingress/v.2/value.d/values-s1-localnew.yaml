@@ -19,6 +19,7 @@ controller:
   service:
     type: LoadBalancer
     externalTrafficPolicy: "Local"
+    ipFamilies: [IPv4]
 
   logging:
     level: info
