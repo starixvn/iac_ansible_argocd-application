@@ -21,6 +21,9 @@ controller:
     externalTrafficPolicy: "Local"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
+  
+  extraArgs:
+    - --disable-ipv6
 
   logging:
     level: info
