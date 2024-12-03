@@ -1,5 +1,6 @@
 ---
 controller:
+  replicaCount: 3
   config:
     ssl-certificate: "haproxy-ingress/starixnet-cert"
     stats-config-snippet: |
