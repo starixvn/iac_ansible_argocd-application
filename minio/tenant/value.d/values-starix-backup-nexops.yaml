@@ -10,7 +10,7 @@ tenant:
 
 
   pools:
-  - servers: 4
+  - servers: 2
     name: pool-0
     volumesPerServer: 2
     size: 120Gi
@@ -20,6 +20,13 @@ tenant:
     #   operator: "Equal"
     #   value: minio
     #   effect: "NoSchedule"
+    nodeSelector:
+      node-role.kubernetes.io/minio: "yes"
+  - servers: 2
+    name: pool-1
+    volumesPerServer: 2
+    size: 120Gi
+    storageClassName: directpv-min-io
     nodeSelector:
       node-role.kubernetes.io/minio: "yes"
 
