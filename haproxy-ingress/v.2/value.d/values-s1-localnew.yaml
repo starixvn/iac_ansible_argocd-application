@@ -19,6 +19,7 @@ controller:
   service:
     type: LoadBalancer
     externalTrafficPolicy: "Local"
+    ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
 
   logging:
