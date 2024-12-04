@@ -53,6 +53,17 @@ controller:
         scheme: http
         interval: 30s
 
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: node-role.kubernetes.io/master
+            operator: Exists
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+        topologyKey: kubernetes.io/hostname 
+
 defaultBackend:
   image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
 
