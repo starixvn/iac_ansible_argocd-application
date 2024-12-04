@@ -55,14 +55,14 @@ info:
 
   s1:
     local:
-      cluster: "https://10.10.50.127:6443"
-      hub: "hub.nexdev.net"
-      ingressDomain: ""
-      storageClass: "longhorn-s1"
-    localnew:
       cluster: "https://10.17.200.40:6443"
       hub: "hub.nexdev.net"
       ingressDomain: ""
+      storageClass: "longhorn-s1"
+    # localnew:
+    #   cluster: "https://10.17.200.40:6443"
+    #   hub: "hub.nexdev.net"
+    #   ingressDomain: ""
     uat:
       cluster: "https://s1-uat-apiserver.starixuat.com:16443"
       hub: "s1hub.nebula.prod/kbt"
