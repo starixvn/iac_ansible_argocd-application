@@ -17,9 +17,14 @@ controller:
       option forwardfor if-none
 
 
+  extraArgs:
+    - --disable-ipv6
+
   service:
     type: LoadBalancer
     externalTrafficPolicy: "Local"
+    ipFamilyPolicy: SingleStack
+    ipFamilies: [IPv4]
 
   logging:
     level: info
