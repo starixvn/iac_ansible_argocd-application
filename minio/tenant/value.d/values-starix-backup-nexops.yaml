@@ -22,6 +22,13 @@ tenant:
     #   effect: "NoSchedule"
     nodeSelector:
       node-role.kubernetes.io/minio: "yes"
+  - servers: 2
+    name: pool-1
+    volumesPerServer: 2
+    size: 120Gi
+    storageClassName: directpv-min-io
+    nodeSelector:
+      node-role.kubernetes.io/minio: "yes"
 
   metrics:
     enabled: true
