@@ -55,6 +55,10 @@ controller:
         scheme: http
         interval: 30s
 
+
+defaultBackend:
+  image: "hub.lumigame.com/base/nexops-tools/default-backend-ingress"
+
 extraResources:
 ##############################
 ## DEFAULT BACKEND CONF
