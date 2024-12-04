@@ -11,11 +11,14 @@ controller:
       stats show-modules
   
   extraArgs:
+  - --disable-ipv6
   - --configmap-tcp-services=haproxy-ingress/tcp-configmap
 
   service:
     type: LoadBalancer
     externalTrafficPolicy: "Local"
+    ipFamilyPolicy: SingleStack
+    ipFamilies: [IPv4]
     # tcpPorts:
     # - name: logstash
     #   port: 5044
