@@ -34,9 +34,9 @@ controller:
       format: "rfc3164"
       facility: "local6"
 
-  nodeSelector:
-    node-role.kubernetes.io/master: ""
-    node-role.kubernetes.io/control-plane: ""
+  # nodeSelector:
+  #   node-role.kubernetes.io/master: ""
+  #   node-role.kubernetes.io/control-plane: ""
 
   tolerations:
   - effect: NoSchedule
