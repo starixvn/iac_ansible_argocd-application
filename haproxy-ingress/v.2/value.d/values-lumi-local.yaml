@@ -19,6 +19,12 @@ controller:
   service:
     type: NodePort
 
+    ipFamilyPolicy: SingleStack
+    ipFamilies: [IPv4]
+
+  extraArgs:
+    - --disable-ipv6
+
   logging:
     level: info
     traffic:
