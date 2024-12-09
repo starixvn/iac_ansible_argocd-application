@@ -76,6 +76,27 @@ defaultBackend:
   image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
 
 extraResources:
+##############################
+## WILDCARD SSL CONF
+##############################
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: dummy-load-starixwork-cert
+    namespace: haproxy-ingress
+  spec:
+    ingressClassName: haproxy
+    tls:
+    - hosts:
+      - "*.starixwork.net"
+      secretName: starixwork-cert
+    rules:
+    - host: "*.starixwork.com"
+
+##############################
+## INGRESS STAT SITE
+##############################
 - |
   apiVersion: networking.k8s.io/v1
   kind: Ingress
