@@ -10,4 +10,4 @@ cronjob:
   - name: VAULT_ADDR
     value: https://vault.nexdev.net
   - name: ALERT_GROUP_ID
-    value: 19:7bbc32eca7a74681adb19e97d9ead538@thread.tacv2
+    value: 19:7bbc32eca7a74681adb19e97d9ead538@thread.tacv2l
