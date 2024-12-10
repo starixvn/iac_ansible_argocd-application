@@ -86,7 +86,7 @@ info:
       ingressDomain: "lumigame.com"
       storageClass: "longhorn"
     localnew:
-      cluster: "https://10.10.50.144:6443'"
+      cluster: "https://10.10.50.144:6443"
       hub: "hub.lumigame.com"
       ingressDomain: "lumigame.com"
       storageClass: "longhorn"
