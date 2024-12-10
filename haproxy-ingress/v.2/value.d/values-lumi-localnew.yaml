@@ -1,5 +1,8 @@
 ---
 controller:
+  image:
+    repository: hub.lumigame.com/base/haproxytech/kubernetes-ingress 
+    tag: 1.11.4
   replicaCount: 3
   config:
     ssl-certificate: "haproxy-ingress/lumigame-cert"
@@ -90,10 +93,10 @@ extraResources:
     ingressClassName: haproxy
     tls:
     - hosts:
-      - "*.starixwork.net"
-      secretName: starixwork-cert
+      - "*.lumigame.com"
+      secretName: lumigame-cert
     rules:
-    - host: "*.starixwork.com"
+    - host: "*.lumigame.com"
 
 ##############################
 ## INGRESS STAT SITE
@@ -109,7 +112,7 @@ extraResources:
   spec:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     rules:
-    - host: ing-stat-new.starixnet.com
+    - host: ing-stat-new.lumigame.com
       http:
         paths:
         - backend:
