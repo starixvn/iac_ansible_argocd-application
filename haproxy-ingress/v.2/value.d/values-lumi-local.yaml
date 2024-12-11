@@ -1,5 +1,6 @@
 ---
 controller:
+  kind: DaemonSet
   config:
     ssl-certificate: "haproxy-ingress/lumigame-cert"
     stats-config-snippet: |

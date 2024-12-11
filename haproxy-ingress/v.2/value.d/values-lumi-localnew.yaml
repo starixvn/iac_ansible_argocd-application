@@ -1,9 +1,9 @@
 ---
 controller:
+  kind: DaemonSet
   image:
     repository: hub.lumigame.com/base/haproxytech/kubernetes-ingress 
     tag: 1.11.4
-  replicaCount: 3
   config:
     ssl-certificate: "haproxy-ingress/lumigame-cert"
     stats-config-snippet: |
