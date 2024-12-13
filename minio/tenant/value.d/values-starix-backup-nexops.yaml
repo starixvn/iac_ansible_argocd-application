@@ -61,7 +61,7 @@ ingress:
       haproxy.org/ssl-redirect: "false"
     tls: [ ]
     hosts:
-    - host: "s3-api.nexdev.net"
+    - host: "s3-api.nexdev.net"       # API-access from LOCAL
       paths: []
     - host: "s3-api.starixsoft.com"   # API-access from KBT
       paths: []
