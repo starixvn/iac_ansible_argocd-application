@@ -5,5 +5,44 @@ crds:
 replicaCount: 1
 dns01RecursiveNameservers: ""
 
-deploymentAnnotations:
-  certmanager.k8s.io/disable-validation: "true"
+# deploymentAnnotations:
+#   certmanager.k8s.io/disable-validation: "true"
+
+extraObjects:
+- | ## Vault Authentication
+  apiVersion: secrets.hashicorp.com/v1beta1
+  kind: VaultAuth
+  metadata:
+    name: {{ include "cert-manager.fullname" . }}
+    namespace: {{ include "cert-manager.namespace" . }}
+  spec:
+    method: kubernetes
+    mount: kubernetes
+    kubernetes:
+      role: aws-local-cert-challenger
+      serviceAccount: {{ template "cert-manager.serviceAccountName" . }}
+      audiences:
+        - vault
+- | ## Vault Static Secret Injector
+  apiVersion: secrets.hashicorp.com/v1beta1
+  kind: VaultStaticSecret
+  metadata:
+    name: {{ include "cert-manager.fullname" . }}-aws-creds
+    namespace: {{ include "cert-manager.namespace" . }}
+  spec:
+    type: kv-v2
+    mount: nexops
+    path: cloud/aws/local/cert-challenger
+
+    destination:
+      name: {{ include "cert-manager.fullname" . }}-aws-creds
+      create: true
+      type: Opaque
+      transformation:
+        excludeRaw: true
+
+    # static secret refresh interval
+    refreshAfter: 24h
+
+    # Name of the CRD to authenticate to Vault
+    vaultAuthRef: {{ include "cert-manager.fullname" . }}
