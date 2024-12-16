@@ -1,9 +1,9 @@
 tlsSecrets:
 - name: lumigame-com
-# serviceAccount: "cert-manager-starix-nexprod-vault-updater"
+- name: luminetsoft-com
 
 cronjob:
-  schedule: "20 0 * * *"
+  schedule: "0 0 * * *"
   env:
   - name: VAULT_ROLE
     value: cert-updater
