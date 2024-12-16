@@ -17,6 +17,9 @@ controller:
     backend-config-snippet: |
       option forwardfor if-none
 
+  extraArgs:
+    - --disable-ipv6
+
   service:
     type: LoadBalancer
     externalTrafficPolicy: "Local"
