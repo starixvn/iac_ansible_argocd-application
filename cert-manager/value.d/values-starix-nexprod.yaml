@@ -9,7 +9,7 @@ dns01RecursiveNameservers: ""
 #   certmanager.k8s.io/disable-validation: "true"
 
 # Nexops vars for extra Object setup
-route53RoleArn: arn:aws:iam::584102114761:role/lumi-cert-challenger
+route53RoleArn: "arn:aws:iam::584102114761:role/lumi-cert-challenger"
 
 
 extraObjects:
