@@ -77,7 +77,7 @@ extraObjects:
             secretAccessKeySecretRef:
               name: {{ include "cert-manager.fullname" . }}-aws-creds
               key: secret-access-key
-            role: {{ Values.route53RoleArn }}
+            role: {{ .Values.route53RoleArn }}
 
 - | ## Certificate - *.lumigame.com
   apiVersion: cert-manager.io/v1
