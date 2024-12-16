@@ -96,3 +96,49 @@ extraObjects:
     issuerRef:
       name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
       kind: Issuer
+
+- | ## Issuer Route53 - luminetsoft.com - Z02126733MHUGLG64UHMO
+  apiVersion: cert-manager.io/v1
+  kind: Issuer
+  metadata:
+    name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
+    namespace: {{ include "cert-manager.namespace" . }}
+  spec:
+    acme:
+      server: https://acme-v02.api.letsencrypt.org/directory
+      email: nexops@starixsoft.com
+      privateKeySecretRef:
+        name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
+      solvers:
+      - selector: {}
+          # dnsZones:
+          #   - "nex.info.vn"
+        dns01:
+          route53:
+            hostedZoneID: Z02126733MHUGLG64UHMO
+            region: ap-east-1
+            accessKeyIDSecretRef:
+              name: {{ include "cert-manager.fullname" . }}-aws-creds
+              key: access-key-id
+            secretAccessKeySecretRef:
+              name: {{ include "cert-manager.fullname" . }}-aws-creds
+              key: secret-access-key
+            role: "arn:aws:iam::584102114761:role/lumi-local-cert-challenger"
+
+- | ## Certificate - *.lumigame.com
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    # name: wildcard-nex-info-vn
+    name: {{ include "cert-manager.name" . }}-luminetsoft-com
+    namespace: {{ include "cert-manager.namespace" . }}
+  spec:
+    # secretName: wildcard-nex-info-vn
+    secretName: luminetsoft-com
+    dnsNames:
+    - '*.luminetsoft.com'
+    duration: 1920h
+    renewBefore: 24h
+    issuerRef:
+      name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
+      kind: Issuer
