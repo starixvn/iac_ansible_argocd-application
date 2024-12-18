@@ -1,6 +1,6 @@
 ---
 controller:
-  replicaCount: 3
+  kind: DaemonSet
 
   # podAnnotations:
   #   vault.hashicorp.com/agent-inject: 'true'
@@ -27,6 +27,17 @@ controller:
   extraArgs:
   - --disable-ipv6
   - --configmap-tcp-services=haproxy-ingress/tcp-configmap
+  
+  service:
+    externalTrafficPolicy: "Local"
+    type: LoadBalancer
+    ipFamilyPolicy: SingleStack
+    ipFamilies: [IPv4]
+    # tcpPorts:
+    # - name: logstash
+    #   port: 15044
+    #   targetPort: 15044
+    #   protocol: TCP
 
   logging:
     level: info
@@ -34,15 +45,10 @@ controller:
       address: "stdout"
       format: "raw"
       facility: "daemon"
-  
-  service:
-    externalTrafficPolicy: "Local"
-    type: LoadBalancer
-    # tcpPorts:
-    # - name: logstash
-    #   port: 15044
-    #   targetPort: 15044
-    #   protocol: TCP
+
+  nodeSelector:
+    node-role.kubernetes.io/master: "true"
+    node-role.kubernetes.io/control-plane: "true"
 
   serviceMonitor:
     enabled: true
