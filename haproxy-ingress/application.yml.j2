@@ -18,7 +18,9 @@ spec:
       releaseName: haproxy-ingress-{{team}}-{{env}}
       valueFiles:
       - $values/haproxy-ingress/value.d/values-{{team}}-{{env}}.yaml
-      parameters: []
+      parameters:
+      - name: "controller.image.repository"
+        value: {{ info[org][env]['hub'] }}/base/haproxytech/kubernetes-ingress
       valuesObject:
         controller:
           config:
