@@ -1,22 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: haproxy-ingress-{{env}}
+  name: haproxy-ingress-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: haproxy-ingress-{{env}}
+    name: haproxy-ingress-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     namespace: haproxy-ingress
     server: "{{ info[org][env]['cluster'] }}"
   project: default
-  source:
-    helm:
-      releaseName: haproxy-ingress-{{env}}
+  sources:
+  - helm:
+      releaseName: haproxy-ingress-{{team}}-{{env}}
       valueFiles:
-      - value.d/values-{{org}}-{{env}}.yaml
+      - $values/haproxy-ingress/value.d/values-{{team}}-{{env}}.yaml
       parameters: []
       valuesObject:
         controller:
@@ -26,9 +27,14 @@ spec:
             maxconn: "20000"
             forwarded-for: "true"
             dontlognull: "true"
-    path: kubernetes-ingress-ori
+    path: kubernetes-ingress/{{chartVersion}}
     repoURL: "{{ repoURL }}"
     targetRevision: HEAD
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
+
   syncPolicy:
     automated:
       prune: true
