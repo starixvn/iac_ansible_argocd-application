@@ -16,12 +16,13 @@ controller:
       capture request header X-Forwarded-For len 20
     backend-config-snippet: |
       option forwardfor if-none
-
+    
   service:
-    type: NodePort
+    type: LoadBalancer
+    externalTrafficPolicy: "Local"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
-
+  
   extraArgs:
     - --disable-ipv6
 
@@ -42,11 +43,42 @@ controller:
         scheme: http
         interval: 30s
 
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+    node-role.kubernetes.io/control-plane: ""
+
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    
 
 defaultBackend:
   image: "hub.lumigame.com/base/nexops-tools/default-backend-ingress"
 
 extraResources:
+##############################
+## WILDCARD SSL CONF
+##############################
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: dummy-load-starixwork-cert
+    namespace: haproxy-ingress
+  spec:
+    ingressClassName: haproxy
+    tls:
+    - hosts:
+      - "*.lumigame.com"
+      secretName: lumigame-cert
+    rules:
+    - host: "*.lumigame.com"
+
+##############################
+## INGRESS STAT SITE
+##############################
 - |
   apiVersion: networking.k8s.io/v1
   kind: Ingress
@@ -58,7 +90,7 @@ extraResources:
   spec:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     rules:
-    - host: ing-stat.lumigame.com
+    - host: ing-stat-new.lumigame.com
       http:
         paths:
         - backend:

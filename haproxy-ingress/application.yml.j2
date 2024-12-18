@@ -21,6 +21,8 @@ spec:
       parameters:
       - name: "controller.image.repository"
         value: {{ info[org][env]['hub'] }}/base/haproxytech/kubernetes-ingress
+      - name: "defaultBackend.image"
+        value: {{ info[org][env]['hub'] }}/base/nexops-tools/default-backend-ingress
       valuesObject:
         controller:
           config:
