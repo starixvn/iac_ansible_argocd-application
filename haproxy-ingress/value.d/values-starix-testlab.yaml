@@ -39,6 +39,16 @@ controller:
     #   targetPort: 15044
     #   protocol: TCP
 
+    tcpPorts:
+    - name: http-pub
+      port: 80
+      targetPort: http
+      nodePort: 32081
+    #  - name: http-alt
+    #    port: 8080
+    #    targetPort: http-alt
+    #    nodePort: 32080
+
   logging:
     level: info
     traffic:
