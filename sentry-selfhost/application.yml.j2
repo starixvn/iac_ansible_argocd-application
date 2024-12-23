@@ -19,7 +19,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values.d/values-{{team}}-{{env}}.yml
+        - value.d/values-{{team}}-{{env}}.yml
       releaseName: sentry-{{team}}-{{env}}
 
   syncPolicy:
