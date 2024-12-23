@@ -56,30 +56,30 @@ controller:
         interval: 30s
 
 extraResources:
-##############################
-## INGRESS STAT SITE
-##############################
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: stat-{{ .Release.Name }}
-    namespace: {{ include "kubernetes-ingress.namespace" . }}
-    annotations:
-      haproxy.org/ssl-redirect: "true"
-  spec:
-    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
-    rules:
-    - host: vn-lu-ing-k3slocal.lumigame.com
-      http:
-        paths:
-        - backend:
-            service:
-              name: {{ include "kubernetes-ingress.fullname" . }}
-              port:
-                number: 1024
-          path: /
-          pathType: Prefix
+# ##############################
+# ## INGRESS STAT SITE
+# ##############################
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: stat-{{ .Release.Name }}
+#     namespace: {{ include "kubernetes-ingress.namespace" . }}
+#     annotations:
+#       haproxy.org/ssl-redirect: "true"
+#   spec:
+#     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+#     rules:
+#     - host: vn-lu-ing-k3slocal.lumigame.com
+#       http:
+#         paths:
+#         - backend:
+#             service:
+#               name: {{ include "kubernetes-ingress.fullname" . }}
+#               port:
+#                 number: 1024
+#           path: /
+#           pathType: Prefix
           
 ##############################
 ## DEFAULT BACKEND CONF
