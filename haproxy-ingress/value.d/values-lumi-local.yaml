@@ -90,7 +90,7 @@ extraResources:
   spec:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     rules:
-    - host: ing-stat-new.lumigame.com
+    - host: ing-stat.lumigame.com
       http:
         paths:
         - backend:
