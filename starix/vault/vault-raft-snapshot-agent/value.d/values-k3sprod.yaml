@@ -5,7 +5,7 @@ cronjob:
   - name: TZ
     value: Asia/Bangkok
   - name: retainDay
-    value: "3"
+    value: "7"
   - name: S3_HOST
     value: https://s3-api.starixsoft.com:9000
   - name: S3_BUCKET
