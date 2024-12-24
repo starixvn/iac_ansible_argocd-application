@@ -57,28 +57,46 @@ extraResources:
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    name: dummy-load-starixsoft-cert
-    namespace: haproxy-ingress
+    name: dummy-cert-loader
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
   spec:
-    ingressClassName: haproxy
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     tls:
     - hosts:
       - "*.starixsoft.com"
       secretName: starixsoft-cert
-    rules:
-    - host: "*.starixsoft.com"
-
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: dummy-load-lumigame-cert
-    namespace: haproxy-ingress
-  spec:
-    ingressClassName: haproxy
-    tls:
     - hosts:
       - "*.lumigame.com"
       secretName: lumigame-cert
     rules:
-    - host: "*.lumigame.com"
+    - host: "*.starix.backup"
+
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-starixsoft-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.starixsoft.com"
+#       secretName: starixsoft-cert
+#     rules:
+#     - host: "*.starixsoft.com"
+
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-lumigame-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.lumigame.com"
+#       secretName: lumigame-cert
+#     rules:
+#     - host: "*.lumigame.com"
