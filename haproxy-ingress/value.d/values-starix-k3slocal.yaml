@@ -53,73 +53,99 @@ defaultBackend:
 
 extraResources:
 ##############################
-## WILDCARD SSL - STARIXWORK.NET
+## WILDCARD SSL LOADER
 ##############################
 - |
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    name: dummy-load-starixwork-cert
-    namespace: haproxy-ingress
+    name: dummy-cert-loader
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
   spec:
-    ingressClassName: haproxy
-    tls:
-    - hosts:
-      - "*.starixwork.net"
-      secretName: starixwork-cert
-    rules:
-    - host: "*.starixwork.net"
-##############################
-## WILDCARD SSL - STARIXNET.COM
-##############################
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: dummy-load-starixnet-cert
-    namespace: haproxy-ingress
-  spec:
-    ingressClassName: haproxy
-    tls:
-    - hosts:
-      - "*.starixnet.com"
-      secretName: starixnet-cert
-    rules:
-    - host: "*.starixnet.com"
-##############################
-## WILDCARD SSL - NEXDEV.NET
-##############################
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: dummy-load-nexdev-cert
-    namespace: haproxy-ingress
-  spec:
-    ingressClassName: haproxy
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     tls:
     - hosts:
       - "*.nexdev.net"
       secretName: nexdev-cert
-    rules:
-    - host: "*.nexdev.net"
-##############################
-## WILDCARD SSL - LUMIGAME.COM
-##############################
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: dummy-load-lumigame-cert
-    namespace: haproxy-ingress
-  spec:
-    ingressClassName: haproxy
-    tls:
+    - hosts:
+      - "*.starixwork.net"
+      secretName: starixwork-cert
+    - hosts:
+      - "*.starixnet.com"
+      secretName: starixnet-cert
     - hosts:
       - "*.lumigame.com"
       secretName: lumigame-cert
     rules:
-    - host: "*.lumigame.com"
+    - host: "*.starix.k3slocal"
+# ##############################
+# ## WILDCARD SSL - STARIXWORK.NET
+# ##############################
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-starixwork-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.starixwork.net"
+#       secretName: starixwork-cert
+#     rules:
+#     - host: "*.starixwork.net"
+# ##############################
+# ## WILDCARD SSL - STARIXNET.COM
+# ##############################
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-starixnet-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.starixnet.com"
+#       secretName: starixnet-cert
+#     rules:
+#     - host: "*.starixnet.com"
+# ##############################
+# ## WILDCARD SSL - NEXDEV.NET
+# ##############################
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-nexdev-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.nexdev.net"
+#       secretName: nexdev-cert
+#     rules:
+#     - host: "*.nexdev.net"
+# ##############################
+# ## WILDCARD SSL - LUMIGAME.COM
+# ##############################
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: dummy-load-lumigame-cert
+#     namespace: haproxy-ingress
+#   spec:
+#     ingressClassName: haproxy
+#     tls:
+#     - hosts:
+#       - "*.lumigame.com"
+#       secretName: lumigame-cert
+#     rules:
+#     - host: "*.lumigame.com"
 
 ##############################
 ## STAT INGRESS
