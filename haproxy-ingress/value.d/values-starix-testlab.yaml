@@ -41,8 +41,8 @@ controller:
 
     tcpPorts:
     - name: http-pub
-      port: 80
-      targetPort: http
+      port: 8080
+      targetPort: http-pub
       nodePort: 32081
     #  - name: http-alt
     #    port: 8080
@@ -72,18 +72,3 @@ controller:
         path: /metrics
         scheme: http
         interval: 30s
-
-  
-
-
-# Add-on component
-# extraResources:
-#   - |
-#     apiVersion: v1
-#     kind: ConfigMap
-#     metadata:
-#       name: tcp-configmap
-#       namespace: haproxy-ingress
-#     data:
-#       15044:
-#         logging/logstash-testlab-logstash:5044
