@@ -82,4 +82,6 @@ ingress:
     hosts:
     - host: "s3.nexdev.net"
       paths: []
+    - host: "s3.lumigame.com"
+      paths: []
     pathType: Prefix
