@@ -41,8 +41,8 @@ controller:
 
     tcpPorts:
     - name: http-pub
-      port: 8082
-      targetPort: http-pub
+      port: 8080
+      targetPort: http
       nodePort: 32082
     #  - name: http-alt
     #    port: 8080
