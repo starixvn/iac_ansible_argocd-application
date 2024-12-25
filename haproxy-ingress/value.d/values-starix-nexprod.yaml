@@ -9,12 +9,6 @@ controller:
       stats show-legends
       stats show-node
       stats show-modules
-    stats-config-snippet: |
-      stats auth nexops:NexOps!QAZ
-      stats refresh 300s
-      stats show-legends
-      stats show-node
-      stats show-modules
     frontend-config-snippet: |
       capture request header Host len 30
       capture request header User-Agent len 200
@@ -25,7 +19,6 @@ controller:
   
   extraArgs:
   - --disable-ipv6
-  - --configmap-tcp-services=haproxy-ingress/tcp-configmap
 
   service:
     type: LoadBalancer
@@ -39,7 +32,7 @@ controller:
     #   protocol: TCP
 
   logging:
-    level: debug
+    level: info
     traffic:
       address: "logstash-nexprod-logstash.logging.svc"
       port: "5045"
