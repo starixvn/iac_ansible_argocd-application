@@ -73,6 +73,11 @@ info:
       hub: "s1hub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
+    nexprod:
+      cluster: "https://kubernetes.default.svc"
+      hub: "hub.nexdev.net"
+      ingressDomain: "nexdev.net"
+      storageClass: "longhorn"
 
   lumi:
     lumprod:
