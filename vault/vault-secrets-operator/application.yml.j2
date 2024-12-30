@@ -28,6 +28,8 @@ spec:
       parameters:
       - name: "controller.manager.image.repository"
         value: {{ info[org][env]['hub'] }}/base/hashicorp/vault-secrets-operator
+      - name: "controller.kubeRbacProxy.image.repository"
+        value: {{ info[org][env]['hub'] }}/base/quay.io/brancz/kube-rbac-proxy
       valuesObject: {}
 
   - repoURL: "{{values_repoURL}}"

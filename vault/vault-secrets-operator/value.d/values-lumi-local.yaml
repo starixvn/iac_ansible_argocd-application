@@ -20,6 +20,8 @@ defaultVaultConnection:
 
 
 ###################################
+# Persist Service Account Token
+###################################
 extraResources:
 - |
   apiVersion: v1
