@@ -17,3 +17,19 @@ defaultVaultConnection:
   enabled: true
   address: "https://vault.nexdev.net"
   skipTLSVerify: true
+
+
+###################################
+extraResources:
+- |
+  apiVersion: v1
+  kind: Secret
+  type: kubernetes.io/service-account-token
+  metadata:
+    name: {{ include "vso.chart.fullname" . }}-token
+    namespace: {{ .Release.Namespace }}
+    annotations:
+      kubernetes.io/service-account.name: {{ include "vso.chart.fullname" . }}-controller-manager
+    labels:
+      app.kubernetes.io/component: controller-manager
+    {{- include "vso.chart.labels" . | nindent 4 }}
