@@ -25,7 +25,9 @@ spec:
       releaseName: vault-secrets-operator-{{team}}-{{env}}
       valueFiles:
       - $values/vault/vault-secrets-operator/value.d/values-{{team}}-{{env}}.yaml
-      parameters: []
+      parameters:
+      - name: "controller.manager.image.repository"
+        value: {{ info[org][env]['hub'] }}/base/hashicorp/vault-secrets-operator
       valuesObject: {}
 
   - repoURL: "{{values_repoURL}}"
