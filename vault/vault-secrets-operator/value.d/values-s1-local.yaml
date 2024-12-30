@@ -1,0 +1,19 @@
+---
+controller:
+  replicas: 1
+
+manager:
+  kubernetesClusterDomain: s1.local
+
+metricsService:
+  ports:
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  type: ClusterIP
+
+defaultVaultConnection:
+  enabled: true
+  address: "https://vault.nexdev.net"
+  skipTLSVerify: true
