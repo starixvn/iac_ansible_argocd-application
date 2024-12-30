@@ -32,7 +32,7 @@ info:
       ingressDomain: ""
       storageClass: "longhorn"
     k3slocal:
-      cluster: "https://10.10.50.130:6443"
+      cluster: "https://kubernetes.default.svc"
       hub: "hub.nexdev.net"
       ingressDomain: ""
       storageClass: "longhorn"
