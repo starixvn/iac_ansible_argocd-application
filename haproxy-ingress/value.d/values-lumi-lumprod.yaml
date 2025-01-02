@@ -56,6 +56,26 @@ controller:
         interval: 30s
 
 extraResources:
+##############################
+## WILDCARD SSL LOADER
+##############################
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: dummy-cert-loader
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+  spec:
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+    tls:
+    - hosts:
+      - "*.lumigame.com"
+      secretName: lumigame-cert
+    - hosts:
+      - "*.nexentgame.com"
+      secretName: nexentgame-cert
+    rules:
+    - host: "*.lumi.local"
 # ##############################
 # ## INGRESS STAT SITE
 # ##############################
