@@ -65,12 +65,12 @@ info:
     #   ingressDomain: ""
     uat:
       cluster: "https://s1-uat-apiserver.starixuat.com:16443"
-      hub: "s1hub.nebula.prod/kbt"
+      hub: "nexhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
     prod:
       cluster: "https://s1-prod-apiserver.starixplay.com:16445"
-      hub: "s1hub.nebula.prod/kbt"
+      hub: "nexhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
     nexprod:
