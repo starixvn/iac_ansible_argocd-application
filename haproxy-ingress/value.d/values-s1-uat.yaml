@@ -32,15 +32,15 @@ controller:
 
   logging:
     level: info
-    # traffic:
-    #   address: "vn-st-ing-uat.nebula.prod"
-    #   port: "30045"
-    #   format: "rfc3164"
-    #   facility: "local5"
     traffic:
-      address: "stdout"
-      format: "raw"
-      facility: "daemon"
+      address: "vn-st-ing-uat.nebula.prod"
+      port: "30045"
+      format: "rfc3164"
+      facility: "local5"
+    # traffic:
+    #   address: "stdout"
+    #   format: "raw"
+    #   facility: "daemon"
 
   nodeSelector:
     node-role.kubernetes.io/master: ""
