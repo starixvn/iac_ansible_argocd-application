@@ -30,7 +30,6 @@ controller:
       http: 31080
       https: 31443
       stat: 31024
-      prometheus: 36060
 
   logging:
     level: info
