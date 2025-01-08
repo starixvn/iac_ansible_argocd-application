@@ -2,7 +2,7 @@
 server:
 
   ingress:
-    activeService: false
+    activeService: true
     ingressClassName: "haproxy"
     enabled: false
     hosts: 
@@ -28,8 +28,8 @@ server:
 
       listener "tcp" {
         tls_disable = 1
-        address = "[::]:8200"
-        cluster_address = "[::]:8201"
+        address = "0.0.0.0:8200"
+        cluster_address = "0.0.0.0:8201"
         x_forwarded_for_authorized_addrs = ["10.42.0.0/16"]
         telemetry {
           unauthenticated_metrics_access = "true"
