@@ -61,6 +61,10 @@ server:
 
   updateStrategyType: "RollingUpdate"
 
+  extraEnvironmentVars:
+    VAULT_RAFT_NODE_ID: "vault-dev-k3slocal-0"
+
+
 ui:
   enabled: true
   externalPort: 8200
