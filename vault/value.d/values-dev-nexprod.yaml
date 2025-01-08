@@ -39,10 +39,10 @@ server:
         path = "/vault/data"
       }
 
-      seal "awskms" {
-        region     = "ap-east-1"
-        kms_key_id = "10850e09-587e-4d50-ac05-bf71129ee7dd"
-      }
+      # seal "awskms" {
+      #   region     = "ap-east-1"
+      #   kms_key_id = "10850e09-587e-4d50-ac05-bf71129ee7dd"
+      # }
 
       telemetry {
         prometheus_retention_time = "24h",
