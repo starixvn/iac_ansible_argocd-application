@@ -34,6 +34,11 @@ controller:
       port: 8022
       targetPort: 8022
 
+    nodePorts:
+      http: 31080
+      https: 31443
+      stat: 31024
+
   logging:
     level: info
     traffic:

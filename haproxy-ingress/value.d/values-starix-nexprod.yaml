@@ -31,6 +31,11 @@ controller:
     #   targetPort: 5044
     #   protocol: TCP
 
+    nodePorts:
+      http: 31080
+      https: 31443
+      stat: 31024
+
   logging:
     level: info
     traffic:

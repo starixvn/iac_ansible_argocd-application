@@ -22,6 +22,11 @@ controller:
     externalTrafficPolicy: "Local"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
+
+    nodePorts:
+      http: 31080
+      https: 31443
+      stat: 31024
   
   extraArgs:
     - --disable-ipv6
