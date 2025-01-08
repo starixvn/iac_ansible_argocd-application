@@ -11,7 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'starix' %}
     namespace: vault
+{% else %}
+    namespace: vault-{{team}}
+{% endif %}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
