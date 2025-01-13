@@ -8,7 +8,7 @@ opensearchCluster:
     serviceName: "fps-cluster"
     drainDataNodes: false
     monitoring:
-      enable: false
+      enable: true
       scrapeInterval: 30s
 
   dashboards:
