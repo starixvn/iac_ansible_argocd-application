@@ -10,8 +10,8 @@ opensearchCluster:
     monitoring:
       enable: true
       scrapeInterval: 30s
-    tlsConfig:
-      insecureSkipVerify: true
+      tlsConfig:
+        insecureSkipVerify: true
 
   dashboards:
     enable: true
