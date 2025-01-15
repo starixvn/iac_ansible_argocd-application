@@ -3,6 +3,7 @@ excludeNamespaces: ""
 
 operator:
   metricsVulnIdEnabled: true
+  scanJobsConcurrentLimit: 3
 
 trivyOperator:
   scanJobTolerations:
