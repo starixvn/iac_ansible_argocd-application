@@ -21,6 +21,9 @@ spec:
       releaseName: trivy-operator-{{team}}-{{env}}
       valueFiles:
         - $values/trivy-stack/trivy-operator/value.d/values-{{team}}-{{env}}.yaml
+      parameters:
+      - name: "global.image.registry"
+        value: "{{ info[org][env]['hub'] }}/base"
       valuesObject:
 
   - repoURL: "{{values_repoURL}}"
