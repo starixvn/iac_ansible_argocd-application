@@ -1,4 +1,6 @@
 ---
+excludeNamespaces: "gitlab-runner"
+
 operator:
   metricsVulnIdEnabled: true
 
@@ -12,7 +14,8 @@ trivy:
   # Standalone or ClientServer
   mode: ClientServer
 
-  serverURL: "https://trivy.nexdev.net"
+  # serverURL: "https://trivy.nexdev.net"
+  serverURL: "http://trivy-starix-nexprod.trivy-stack:4954"
   clientServerSkipUpdate: true
   serverInsecure: false
   serverToken: "H5nF5ywy262wt881ZWpq"
