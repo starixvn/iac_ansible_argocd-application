@@ -17,7 +17,7 @@ trivy:
   # serverURL: "https://trivy.nexdev.net"
   serverURL: "http://trivy-starix-nexprod.trivy-stack:4954"
   clientServerSkipUpdate: true
-  serverInsecure: false
+  serverInsecure: true
   serverToken: "H5nF5ywy262wt881ZWpq"
 
   severity: HIGH,CRITICAL
