@@ -5,6 +5,7 @@ operator:
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
 
+  sbomGenerationEnabled: false
   clusterSbomCacheEnabled: true
 
 trivyOperator:
