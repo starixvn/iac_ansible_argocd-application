@@ -5,6 +5,8 @@ operator:
   metricsVulnIdEnabled: false
   scanJobsConcurrentLimit: 3
 
+  sbomGenerationEnabled: false
+
 trivyOperator:
   scanJobTolerations:
   - operator: Exists
