@@ -6,7 +6,7 @@ operator:
   scanJobsConcurrentLimit: 3
 
   sbomGenerationEnabled: false
-  clusterSbomCacheEnabled: true
+  controllerCacheSyncTimeout: "60m"
 
 trivyOperator:
   scanJobTolerations:
