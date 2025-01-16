@@ -1,0 +1,46 @@
+---
+excludeNamespaces: ""
+
+operator:
+  metricsVulnIdEnabled: true
+  scanJobsConcurrentLimit: 3
+
+trivyOperator:
+  scanJobTolerations:
+  - operator: Exists
+
+trivy:
+  debug: false
+
+  # Standalone or ClientServer
+  mode: ClientServer
+
+  # serverURL: "https://trivy.nexdev.net"
+  serverURL: "https://trivy.nexdev.net"
+  clientServerSkipUpdate: true
+  serverInsecure: true
+  serverToken: "H5nF5ywy262wt881ZWpq"
+
+  severity: HIGH,CRITICAL
+  ignoreUnfixed: true
+  offlineScan: true
+  # -- vulnType can be used to tell Trivy to filter vulnerabilities by a pkg-type (library, os)
+  vulnType: ~
+
+  skipJavaDBUpdate: true
+
+  # -- httpProxy is the HTTP proxy used by Trivy to download the vulnerabilities database from GitHub.
+  # httpProxy: "http://proxysqd.nexdev.net:3128"
+  # -- httpsProxy is the HTTPS proxy used by Trivy to download the vulnerabilities database from GitHub.
+  # httpsProxy: "http://proxysqd.nexdev.net:3128"
+  # -- noProxy is a comma separated list of IPs and domain names that are not subject to proxy settings.
+  # noProxy: "localhost,127.0.0.1,10.0.0.0/8,192.168.0.0/16,.svc,.starix.nexprod"
+
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+  interval: 5m
+
+nodeCollector:
+  tolerations:
+  - operator: Exists

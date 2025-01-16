@@ -1,41 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-{{team}}-{{env}}
+  name: trivy-operator-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: vault-{{team}}-{{env}}
+    name: trivy-operator-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
     team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
-    namespace: vault-dev
+    namespace: trivy-operator-{{team}}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
-    path: vault/{{chartVersion}}
+    path: trivy-stack/trivy-operator/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: vault-{{team}}-{{env}}
+      releaseName: trivy-operator-{{team}}-{{env}}
       valueFiles:
-        - $values/vault/vault-dev/value.d/values-{{team}}-{{env}}.yaml
+        - $values/trivy-stack/trivy-operator/value.d/values-{{team}}-{{env}}.yaml
+      parameters:
+      - name: "global.image.registry"
+        value: "{{ info[org][env]['hub'] }}/base"
       valuesObject:
-        global:
-          enabled: true
-          tlsDisable: true
-        injector:
-          enabled: true
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault-k8s"
-          agentImage:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
-          
-        server:
-          # Use the Enterprise Image
-          image:
-            repository: "{{ info[org][env]['hub'] }}/base/hashicorp/vault"
 
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
