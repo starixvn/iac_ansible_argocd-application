@@ -2,7 +2,7 @@
 excludeNamespaces: ""
 
 operator:
-  metricsVulnIdEnabled: true
+  metricsVulnIdEnabled: false
   scanJobsConcurrentLimit: 3
 
 trivyOperator:
