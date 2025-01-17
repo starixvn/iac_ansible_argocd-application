@@ -2,12 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-{{env}}
+  name: prometheus-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: prometheus-{{env}}
+    name: prometheus-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
@@ -18,9 +19,9 @@ spec:
     path: monitoring/kube-prometheus/{{chartVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: prometheus-{{env}}
+      releaseName: prometheus-{{team}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
+        - value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
       skipCrds: true
         
