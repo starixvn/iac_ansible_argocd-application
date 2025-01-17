@@ -22,7 +22,7 @@ spec:
       releaseName: prometheus-{{team}}-{{env}}
       parameters:
       - name: "global.imageRegistry"
-        value: "{{ info[org][env]['hub'] }}"
+        value: "{{ info[org][env]['hub'] }}/base"
       valueFiles:
         - value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
