@@ -20,6 +20,9 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: prometheus-{{team}}-{{env}}
+      parameters:
+      - name: "global.imageRegistry"
+        value: "{{ info[org][env]['hub'] }}"
       valueFiles:
         - value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
