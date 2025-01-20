@@ -19,6 +19,9 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: minio-operator-{{team}}-{{env}}
+      parameters:
+      - name: "operator.image.repository"
+        value: "{{ info[org][env]['hub'] }}/base/minio/operator"
       valueFiles:
       - $values/minio/operator/value.d/values-{{team}}-{{env}}.yaml
       parameters: []
