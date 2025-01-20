@@ -19,6 +19,9 @@ spec:
     path: monitoring/prometheus-msteams
     targetRevision: HEAD
     helm:
+      parameters:
+      - name: "image.repository"
+        value: {{ info[org][env]['hub'] }}/base/bitnami/alertmanager
       valueFiles:
         - values-{{team}}-{{env}}.yaml
       releaseName: prometheus-msteams-{{team}}-{{env}}
