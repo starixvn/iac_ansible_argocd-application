@@ -66,7 +66,7 @@ opensearchCluster:
   - component: nodes-hot
     diskSize: "800Gi"
     replicas: 2
-    jvm: "-Xmx16G -Xms16G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
+    jvm: "-Xmx12G -Xms12G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
     roles:
       - "data"
     additionalConfig:
