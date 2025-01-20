@@ -87,10 +87,10 @@ logstashJavaOpts: "-Xmx6G -Xms6G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.pro
 resources:
   requests:
     cpu: "1"
-    memory: "2Gi"
+    memory: "4Gi"
   limits:
     cpu: "4"
-    memory: "4Gi"
+    memory: "6Gi"
 
 
 
