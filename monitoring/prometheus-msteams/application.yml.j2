@@ -2,12 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-msteams-{{env}}
+  name: prometheus-msteams-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: prometheus-msteams-{{env}}
+    name: prometheus-msteams-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
