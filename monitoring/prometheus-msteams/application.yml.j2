@@ -21,7 +21,7 @@ spec:
     helm:
       parameters:
       - name: "image.repository"
-        value: {{ info[org][env]['hub'] }}/base/bitnami/alertmanager
+        value: {{ info[org][env]['hub'] }}/base/prometheusmsteams/prometheus-msteams
       valueFiles:
         - values-{{team}}-{{env}}.yaml
       releaseName: prometheus-msteams-{{team}}-{{env}}
