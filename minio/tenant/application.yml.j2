@@ -23,6 +23,9 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: minio-tenant-{{tenantName}}-{{team}}-{{env}}
+      parameters:
+      - name: "tenant.image.repository"
+        value: "{{ info[org][env]['hub'] }}/base/minio/minio"
       valueFiles:
         - $values/minio/tenant/value.d/values-{{team}}-{{env}}-{{tenantName}}.yaml
       parameters: []
