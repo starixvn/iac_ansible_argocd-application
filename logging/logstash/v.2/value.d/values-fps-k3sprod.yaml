@@ -1,5 +1,7 @@
 replicas: 2
 
+imageTag: "8.9.0-opensearch"
+
 logstashConfig:
   logstash.yml: |
     http.host: "0.0.0.0"
