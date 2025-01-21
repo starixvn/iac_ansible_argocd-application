@@ -20,7 +20,7 @@ prometheus:
     storageClass: "longhorn"
     size: 5Gi
 
-  resourcesPreset: "medium"
+  resourcesPreset: "large"
 
   additionalScrapeConfigs:
     enabled: false
@@ -37,3 +37,6 @@ prometheus:
     enabled: false
     name: ""
     key: ""
+    
+alertmanager:
+  enabled: false
