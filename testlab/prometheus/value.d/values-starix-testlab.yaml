@@ -39,4 +39,4 @@ prometheus:
     key: ""
     
 alertmanager:
-  enabled: false
+  enabled: true
