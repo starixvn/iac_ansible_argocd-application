@@ -86,7 +86,7 @@ prometheus:
 
       #  Opensearch no new documents 
       - alert: OpensearchNoNewDocuments
-        expr: increase(opensearch_indices_indexing_index_count{job="ops-cluster-nodes-hot"}[10m]) < 1
+        expr: increase(opensearch_indices_indexing_index_count{job="ops-cluster-nodes-hot"}[1m]) < 1
         for: 0m
         labels:
           severity: warning
