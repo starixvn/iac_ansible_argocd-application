@@ -49,7 +49,7 @@ prometheus:
         expr: opensearch_fs_total_available_bytes / opensearch_fs_total_total_bytes * 100 < 10
         for: 0m
         labels:
-          severity: critical
+          severity: CRITICAL
         annotations:
           summary: Opensearch disk out of space (instance {{ $labels.pod }})
           description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -59,7 +59,7 @@ prometheus:
         expr: max_over_time(opensearch_cluster_nodes_number[5m]) < max_over_time(opensearch_cluster_nodes_number[1d:5m])
         for: 0m
         labels:
-          severity: critical
+          severity: CRITICAL
         annotations:
           summary: Opensearch node goes offline (instance {{ $labels.pod }})
           description: "Some node go offline!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -69,7 +69,7 @@ prometheus:
         expr: opensearch_cluster_status == 2
         for: 0m
         labels:
-          severity: critical
+          severity: CRITICAL
         annotations:
           summary: Opensearch Cluster Red (instance {{ $labels.pod }})
           description: "Opensearch Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -79,7 +79,7 @@ prometheus:
         expr: opensearch_cluster_status == 1
         for: 0m
         labels:
-          severity: warning
+          severity: WARNING
         annotations:
           summary: Opensearch Cluster Yellow (instance {{ $labels.pod }})
           description: "Elastic Cluster Yellow status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -89,7 +89,7 @@ prometheus:
         expr: increase(opensearch_indices_indexing_index_count{job="ops-cluster-nodes-hot"}[1m]) < 1
         for: 0m
         labels:
-          severity: warning
+          severity: WARNING
         annotations:
           summary: Opensearch no new documents (instance {{ $labels.pod }})
           description: "No new documents for 1 min!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
