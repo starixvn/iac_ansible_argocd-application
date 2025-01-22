@@ -123,7 +123,7 @@ alertmanager:
       routes:
         - receiver: prometheus-msteams-warning
           match:
-            severity: warning
+            severity: WARNING
         - receiver: prometheus-msteams-critical
           match:
-            severity: critical
+            severity: CRITICAL
