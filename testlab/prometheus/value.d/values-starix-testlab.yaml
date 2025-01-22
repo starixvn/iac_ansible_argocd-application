@@ -92,7 +92,7 @@ prometheus:
           severity: warning
         annotations:
           summary: Opensearch no new documents (instance {{ $labels.pod }})
-          description: "No new documents for 10 min!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "No new documents for 1 min!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     
 alertmanager:
