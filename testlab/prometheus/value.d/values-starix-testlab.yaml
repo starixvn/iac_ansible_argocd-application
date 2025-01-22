@@ -51,8 +51,8 @@ prometheus:
         labels:
           severity: critical
         annotations:
-        summary: Opensearch disk out of space (instance {{ $labels.pod }})
-        description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          summary: Opensearch disk out of space (instance {{ $labels.pod }})
+          description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
         
       #  Opensearch Node Offline
       - alert: OpensearchNodeOffline
