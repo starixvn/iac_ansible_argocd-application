@@ -121,7 +121,7 @@ alertmanager:
       - send_resolved: true
         url: 'http://prometheus-msteams:2000/alertmanager-critical' 
     route:
-      group_by: ['alertname','job']
+      group_by: ['alerxxx']
       group_interval: 1m
       group_wait: 10s
       repeat_interval: 1440m
