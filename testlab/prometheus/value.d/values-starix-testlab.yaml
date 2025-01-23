@@ -50,9 +50,9 @@ prometheus:
         for: 0m
         labels:
           severity: CRITICAL
+
         annotations:
           investigate_link: "https://ops-fps.starixplay.com"
-          template: "group"
           title: "Opensearch: Disk running out of space"
           summary: Opensearch disk out of space (instance {{ $labels.pod }})
           description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -64,7 +64,6 @@ prometheus:
         labels:
           severity: CRITICAL
         annotations:
-          template: "group"
           title: "Opensearch: Nodes go Offline"
           summary: Opensearch node goes offline (instance {{ $labels.pod }})
           description: "Some node go offline!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -76,7 +75,6 @@ prometheus:
         labels:
           severity: CRITICAL
         annotations:
-          template: "group"
           title: "Opensearch: Cluster in Read Health"
           summary: Opensearch Cluster Red (instance {{ $labels.pod }})
           description: "Opensearch Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -88,7 +86,6 @@ prometheus:
         labels:
           severity: WARNING
         annotations:
-          template: "group"
           title: "Opensearch: Cluster in Yellow Health"
           summary: Opensearch Cluster Yellow (instance {{ $labels.pod }})
           description: "Elastic Cluster Yellow status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -100,7 +97,6 @@ prometheus:
         labels:
           severity: WARNING
         annotations:
-          template: "group"
           title: "Opensearch: No new Docs been written"
           summary: Opensearch no new documents (instance {{ $labels.pod }})
           description: "No new documents for 1 min!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
@@ -119,22 +115,22 @@ alertmanager:
     - name: devnull
     - name: 'prometheus-msteams-warning'
       webhook_configs:
-        - send_resolved: true
-          url: 'http://prometheus-msteams:2000/alertmanager-warning'
+      - send_resolved: true
+        url: 'http://prometheus-msteams:2000/alertmanager-warning'
     - name: 'prometheus-msteams-critical'
       webhook_configs:
-        - send_resolved: true
-          url: 'http://prometheus-msteams:2000/alertmanager-critical' 
+      - send_resolved: true
+        url: 'http://prometheus-msteams:2000/alertmanager-critical' 
     route:
-      group_by: ['alerts-msteams']
+      group_by: ['alertname']
       group_interval: 1m
-      group_wait: 1m
+      group_wait: 10s
       repeat_interval: 1440m
       receiver: devnull
       routes:
-        - receiver: prometheus-msteams-warning
-          match:
-            severity: WARNING
-        - receiver: prometheus-msteams-critical
-          match:
-            severity: CRITICAL
+      - receiver: prometheus-msteams-warning
+        match:
+          severity: WARNING
+      - receiver: prometheus-msteams-critical
+        match:
+          severity: CRITICAL
