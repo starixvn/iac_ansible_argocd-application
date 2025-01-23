@@ -55,6 +55,7 @@ prometheus:
           title: "Opensearch: Disk running out of space"
           summary: Opensearch disk out of space (component {{ $labels.job }})
           description: "The disk usage is over 90%"
+          template: "automate"
         
       #  Opensearch Node Offline
       - alert: OpensearchNodeOffline
@@ -66,6 +67,7 @@ prometheus:
           title: "Opensearch: Nodes go Offline"
           summary: Opensearch node goes offline (component {{ $labels.job }})
           description: "Some node go offline!"
+          template: "automate"
 
       # Opensearch Cluster Red 
       - alert: OpensearchClusterRed
@@ -77,6 +79,7 @@ prometheus:
           title: "Opensearch: Cluster in Read Health"
           summary: Opensearch Cluster Red (component {{ $labels.job }})
           description: "Opensearch Cluster Red status"
+          template: "automate"
 
       # Opensearch Cluster Yellow 
       - alert: OpensearchClusterYellow
@@ -88,6 +91,7 @@ prometheus:
           title: "Opensearch: Cluster in Yellow Health"
           summary: Opensearch Cluster Yellow (component {{ $labels.job }})
           description: "Elastic Cluster Yellow status"
+          template: "automate"
 
       #  Opensearch no new documents 
       - alert: OpensearchNoNewDocuments
@@ -99,6 +103,7 @@ prometheus:
           title: "Opensearch: No new Docs been written"
           summary: Opensearch no new documents (component {{ $labels.job }})
           description: "No new documents for 2 min!"
+          template: "automate"
 
     
 alertmanager:
@@ -121,7 +126,7 @@ alertmanager:
       - send_resolved: true
         url: 'http://prometheus-msteams:2000/alertmanager-critical' 
     route:
-      group_by: ['alerxxx']
+      group_by: ['alertname','job']
       group_interval: 1m
       group_wait: 10s
       repeat_interval: 1440m
