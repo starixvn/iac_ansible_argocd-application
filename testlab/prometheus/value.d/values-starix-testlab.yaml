@@ -55,7 +55,7 @@ prometheus:
           investigate_link: "https://ops-fps.starixplay.com"
           title: "Opensearch: Disk running out of space"
           summary: Opensearch disk out of space (component {{ $labels.job }})
-          description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "The disk usage is over 90%"
         
       #  Opensearch Node Offline
       - alert: OpensearchNodeOffline
@@ -66,7 +66,7 @@ prometheus:
         annotations:
           title: "Opensearch: Nodes go Offline"
           summary: Opensearch node goes offline (component {{ $labels.job }})
-          description: "Some node go offline!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "Some node go offline!"
 
       # Opensearch Cluster Red 
       - alert: OpensearchClusterRed
@@ -77,7 +77,7 @@ prometheus:
         annotations:
           title: "Opensearch: Cluster in Read Health"
           summary: Opensearch Cluster Red (component {{ $labels.job }})
-          description: "Opensearch Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "Opensearch Cluster Red status"
 
       # Opensearch Cluster Yellow 
       - alert: OpensearchClusterYellow
@@ -88,7 +88,7 @@ prometheus:
         annotations:
           title: "Opensearch: Cluster in Yellow Health"
           summary: Opensearch Cluster Yellow (component {{ $labels.job }})
-          description: "Elastic Cluster Yellow status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "Elastic Cluster Yellow status"
 
       #  Opensearch no new documents 
       - alert: OpensearchNoNewDocuments
@@ -99,7 +99,7 @@ prometheus:
         annotations:
           title: "Opensearch: No new Docs been written"
           summary: Opensearch no new documents (component {{ $labels.job }})
-          description: "No new documents for 1 min!\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          description: "No new documents for 1 min!"
 
     
 alertmanager:
