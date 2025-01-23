@@ -50,7 +50,6 @@ prometheus:
         for: 0m
         labels:
           severity: CRITICAL
-
         annotations:
           investigate_link: "https://ops-fps.starixplay.com"
           title: "Opensearch: Disk running out of space"
@@ -122,7 +121,7 @@ alertmanager:
       - send_resolved: true
         url: 'http://prometheus-msteams:2000/alertmanager-critical' 
     route:
-      group_by: ['alertname', 'job']
+      group_by: ['alertname','job']
       group_interval: 1m
       group_wait: 10s
       repeat_interval: 1440m
