@@ -1,9 +1,9 @@
 ---
-excludeNamespaces: "gitlab-runner"
+excludeNamespaces: gitlab-runner
 
 operator:
   metricsVulnIdEnabled: true
-  scanJobsConcurrentLimit: 3
+  scanJobsConcurrentLimit: 2
 
 trivyOperator:
   scanJobTolerations:
