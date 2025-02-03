@@ -3,7 +3,7 @@ excludeNamespaces: gitlab-runner,gitlab-runner-debug
 
 operator:
   metricsVulnIdEnabled: true
-  scanJobsConcurrentLimit: 3
+  scanJobsConcurrentLimit: 2
   sbomGenerationEnabled: false
 
 trivyOperator:
