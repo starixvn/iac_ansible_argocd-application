@@ -4,6 +4,7 @@ excludeNamespaces: gitlab-runner,gitlab-runner-debug
 operator:
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
+  sbomGenerationEnabled: false
 
 trivyOperator:
   scanJobTolerations:
