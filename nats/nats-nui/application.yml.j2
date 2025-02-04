@@ -15,7 +15,7 @@ spec:
   project: default
   sources:
   - repoURL: "{{repoURL}}"
-    path: nats-nui
+    path: "nats/nats-nui/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
       releaseName: nats-nui-{{team}}-{{env}}

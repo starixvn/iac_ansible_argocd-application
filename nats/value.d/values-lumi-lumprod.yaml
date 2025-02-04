@@ -1,23 +1,19 @@
 config:
   cluster:
     enabled: true
-    name: nats
     replicas: 3
 
   jetstream:
     enabled: true
-    memoryStore:
-      enabled: false
     fileStore:
       pvc:
         enabled: true
         size: 8Gi
         storageClassName: longhorn
+    memoryStore:
+      enabled: false
 
 promExporter:
   enabled: true
-  image: 
-    tag: 0.15.0
-
   podMonitor:
     enabled: true

@@ -15,7 +15,7 @@ spec:
   project: default
   sources:
   - repoURL: "{{repoURL}}"
-    path: nats
+    path: "nats/{{ chartVersion }}"
     targetRevision: HEAD
     helm:
       releaseName: nats-{{team}}-{{env}}
