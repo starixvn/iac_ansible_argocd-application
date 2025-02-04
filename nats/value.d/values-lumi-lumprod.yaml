@@ -14,8 +14,8 @@ config:
         size: 8Gi
         storageClassName: longhorn
 
-  nats:
-    nodePort: 30222
+  # nats:
+  #   nodePort: 30222
 
 promExporter:
   enabled: true
