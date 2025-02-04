@@ -15,7 +15,7 @@ config:
         storageClassName: longhorn
 
   nats:
-    nodePort: 31580
+    nodePort: 30222
 
 promExporter:
   enabled: true
