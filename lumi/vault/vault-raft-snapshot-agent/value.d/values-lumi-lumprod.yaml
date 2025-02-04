@@ -4,6 +4,8 @@ cronjob:
   env:
   - name: TZ
     value: Asia/Bangkok
+  - name: S3_POLICY_ID
+    value: cugonc7cc6pmrf3ulesg
   - name: retainDay
     value: "7"
   - name: S3_HOST
