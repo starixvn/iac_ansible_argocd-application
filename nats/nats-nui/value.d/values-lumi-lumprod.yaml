@@ -2,10 +2,6 @@ replicaCount: 1
 
 clusterDomain: lumi.lumprod
 
-service:
-  type: ClusterIP
-  port: 31311
-
 ingress:
   enabled: true
   className: "haproxy"
