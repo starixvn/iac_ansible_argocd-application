@@ -20,7 +20,7 @@ spec:
     helm:
       releaseName: nats-nui-{{team}}-{{env}}
       valueFiles:
-        - $values/nats/nats-nui/value.d/values-{{system}}-{{env}}.yaml
+        - $values/nats/nats-nui/value.d/values-{{team}}-{{env}}.yaml
       parameters:
       - name: "image.repository"
         value: "{{ info[org][env]['hub'] }}/base/nats-nui/nui"
