@@ -99,7 +99,7 @@ info:
       cluster: "https://sc-uat-apiserver.sgamesuat.com:16447"
       hub: "lumhub.nebula.prod/kbt"
       ingressDomain: "sgamesuat.com"
-      storageClass: "longhorn"
+      storageClass: ""
     prod:
       cluster: "https://sc-prod-apiserver.starixplay.com:16448"
       hub: "lumhub.nebula.prod/kbt"
