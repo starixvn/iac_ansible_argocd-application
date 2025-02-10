@@ -96,7 +96,7 @@ info:
       ingressDomain: ""
       storageClass: ""
     uat:
-      cluster: "https://uat-sc-apiserver.starixplay.com:16443"
+      cluster: "https://sc-uat-apiserver.sgamesuat.com:16447"
       hub: "lumhub.nebula.prod/kbt"
       ingressDomain: "sgamesuat.com"
       storageClass: "longhorn"
