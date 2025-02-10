@@ -101,8 +101,8 @@ info:
       ingressDomain: "sgamesuat.com"
       storageClass: "longhorn"
     prod:
-      cluster: ""
-      hub: ""
+      cluster: "https://sc-prod-apiserver.starixplay.com:16448"
+      hub: "lumhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
     k3sprod:
