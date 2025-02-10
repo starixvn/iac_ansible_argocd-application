@@ -4,7 +4,7 @@ controller:
   config:
     ssl-certificate: "haproxy-ingress/nebula-prod-cert"
     stats-config-snippet: |
-      stats auth s1:s1@Nova888
+      stats auth lumi:lum!onRock
       stats refresh 300s
       stats show-legends
       stats show-node
@@ -58,9 +58,6 @@ controller:
         scheme: http
         interval: 30s
 
-defaultBackend:
-  image: "nexhub.nebula.prod/kbt/base/nexops-tools/default-backend-ingress"
-
 extraResources:
 ##############################
 ## DEFAULT BACKEND CONF
@@ -74,7 +71,7 @@ extraResources:
   spec:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     rules:
-    - host: vn-s1-ing-prod.nebula.prod
+    - host: vn-sc-ing-prod.nebula.prod
       http:
         paths:
         - backend:
