@@ -26,6 +26,11 @@ info:
       hub: ""
       ingressDomain: ""
       storageClass: ""
+    prod:
+      cluster: ""
+      hub: ""
+      ingressDomain: ""
+      storageClass: ""
     k3suat:
       cluster: "https://starix-k3suat-api.starixuat.com:16444"
       hub: "nexhub.nebula.prod/kbt"
@@ -41,11 +46,6 @@ info:
       hub: "nexhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: "longhorn"
-    prod:
-      cluster: ""
-      hub: ""
-      ingressDomain: ""
-      storageClass: ""
     backup:
       cluster: "https://10.10.50.136:6443"
       hub: "hub.nexdev.net"
@@ -53,31 +53,31 @@ info:
       cluster: "https://10.70.70.140:6443"
       hub: "hub.nexdev.net"
 
-  s1:
-    local:
-      cluster: "https://10.17.200.40:6443"
-      hub: "hub.nexdev.net"
-      ingressDomain: ""
-      storageClass: "longhorn-s1"
-    # localnew:
-    #   cluster: "https://10.17.200.40:6443"
-    #   hub: "hub.nexdev.net"
-    #   ingressDomain: ""
-    uat:
-      cluster: "https://s1-uat-apiserver.starixuat.com:16443"
-      hub: "nexhub.nebula.prod/kbt"
-      ingressDomain: ""
-      storageClass: ""
-    prod:
-      cluster: "https://s1-prod-apiserver.starixplay.com:16445"
-      hub: "nexhub.nebula.prod/kbt"
-      ingressDomain: ""
-      storageClass: ""
-    nexprod:
-      cluster: "https://kubernetes.default.svc"
-      hub: "hub.nexdev.net"
-      ingressDomain: "nexdev.net"
-      storageClass: "longhorn"
+  # s1:
+  #   local:
+  #     cluster: "https://10.17.200.40:6443"
+  #     hub: "hub.nexdev.net"
+  #     ingressDomain: ""
+  #     storageClass: "longhorn-s1"
+  #   # localnew:
+  #   #   cluster: "https://10.17.200.40:6443"
+  #   #   hub: "hub.nexdev.net"
+  #   #   ingressDomain: ""
+  #   uat:
+  #     cluster: "https://s1-uat-apiserver.starixuat.com:16443"
+  #     hub: "nexhub.nebula.prod/kbt"
+  #     ingressDomain: ""
+  #     storageClass: ""
+  #   prod:
+  #     cluster: "https://s1-prod-apiserver.starixplay.com:16445"
+  #     hub: "nexhub.nebula.prod/kbt"
+  #     ingressDomain: ""
+  #     storageClass: ""
+  #   nexprod:
+  #     cluster: "https://kubernetes.default.svc"
+  #     hub: "hub.nexdev.net"
+  #     ingressDomain: "nexdev.net"
+  #     storageClass: "longhorn"
 
   lumi:
     lumprod:
@@ -105,9 +105,4 @@ info:
       hub: "lumhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
-    k3sprod:
-      cluster: "https://starix-k3sprod-api.starixplay.com:16446"
-      hub: "nexhub.nebula.prod/kbt"
-      ingressDomain: ""
-      storageClass: "longhorn"
 
