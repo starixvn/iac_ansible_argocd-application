@@ -51,7 +51,7 @@ extraResources:
   metadata:
     name: 
       $tplYaml: >
-        {{ include "nats.fullname" $ | quote }}-lb
+        {{ include "nats.fullname" $ | printf "%s-lb" | quote }}
     labels:
       $tplYaml: |
         {{ include "nats.labels" $ }}
@@ -65,4 +65,5 @@ extraResources:
         port: 4222
         protocol: TCP
         targetPort: nats
+        nodePort: 30222
     type: NodePort
