@@ -24,9 +24,12 @@ extraResources:
 - apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    name: {{ include "nats.fullname" $ }}
+    name: 
+      $tplYaml: >
+        {{ include "nats.fullname" $ | quote }}
     labels:
-      {{- include "nats.labels" $ | nindent 4 }}
+      $tplYaml: |
+        {{ include "nats.labels" $ }}
   spec:
     rules:
     - host: "nats.lumigame.com"
@@ -36,6 +39,8 @@ extraResources:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Values.service.name }}
+              name:
+                $tplYaml: >
+                  {{ .Values.service.name | quote }}
               port:
                 name: nats
