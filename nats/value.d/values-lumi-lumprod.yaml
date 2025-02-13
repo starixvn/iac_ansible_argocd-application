@@ -58,7 +58,7 @@ extraResources:
   spec:
     selector:
       $tplYaml: |
-        {{- include "nats.selectorLabels" $ | nindent 4 }}
+        {{- include "nats.selectorLabels" $ }}
     ports:
       - appProtocol: tcp
         name: nats
