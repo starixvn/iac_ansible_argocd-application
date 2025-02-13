@@ -21,8 +21,33 @@ promExporter:
 
 
 extraResources:
-- apiVersion: networking.k8s.io/v1
-  kind: Ingress
+# - apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: 
+#       $tplYaml: >
+#         {{ include "nats.fullname" $ | quote }}
+#     labels:
+#       $tplYaml: |
+#         {{ include "nats.labels" $ }}
+#   spec:
+#     ingressClassName: haproxy
+#     rules:
+#     - host: "nats.lumigame.com"
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name:
+#                 $tplYaml: >
+#                   {{ .Values.service.name | quote }}
+#               port:
+#                 name: nats
+
+- apiVersion: v1
+  kind: Service
   metadata:
     name: 
       $tplYaml: >
@@ -31,17 +56,13 @@ extraResources:
       $tplYaml: |
         {{ include "nats.labels" $ }}
   spec:
-    ingressClassName: haproxy
-    rules:
-    - host: "nats.lumigame.com"
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name:
-                $tplYaml: >
-                  {{ .Values.service.name | quote }}
-              port:
-                name: nats
+    selector:
+      $tplYaml: |
+        {{- include "nats.selectorLabels" $ | nindent 4 }}
+    ports:
+      - appProtocol: tcp
+        name: nats
+        port: 4222
+        protocol: TCP
+        targetPort: nats
+    type: LoadBalancer
