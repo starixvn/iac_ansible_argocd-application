@@ -51,7 +51,7 @@ extraResources:
   metadata:
     name: 
       $tplYaml: >
-        {{ include "nats.fullname" $ | quote }}
+        {{ include "nats.fullname" $ | quote }}-lb
     labels:
       $tplYaml: |
         {{ include "nats.labels" $ }}
