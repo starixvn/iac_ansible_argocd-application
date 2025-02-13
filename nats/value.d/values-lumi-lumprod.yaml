@@ -65,5 +65,5 @@ extraResources:
         port: 4222
         protocol: TCP
         targetPort: nats
-        nodePort: 30222
-    type: NodePort
+        # nodePort: 30222
+    type: LoadBalancer
