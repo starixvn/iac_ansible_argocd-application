@@ -22,21 +22,21 @@ promExporter:
 
 extraResources:
 - |
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ include "nats.fullname" $ }}
-  labels:
-    {{- include "nats.labels" $ | nindent 4 }}
-spec:
-  rules:
-  - host: "nats.lumigame.com"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.service.name }}
-            port:
-              name: nats
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: {{ include "nats.fullname" $ }}
+    labels:
+      {{- include "nats.labels" $ | nindent 4 }}
+  spec:
+    rules:
+    - host: "nats.lumigame.com"
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Values.service.name }}
+              port:
+                name: nats
