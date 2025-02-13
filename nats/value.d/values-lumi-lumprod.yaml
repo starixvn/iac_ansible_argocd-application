@@ -31,6 +31,7 @@ extraResources:
       $tplYaml: |
         {{ include "nats.labels" $ }}
   spec:
+    ingressClassName: haproxy
     rules:
     - host: "nats.lumigame.com"
       http:
