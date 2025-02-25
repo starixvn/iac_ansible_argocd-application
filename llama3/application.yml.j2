@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: llama3-{{team}}
+    namespace: llama3-{{env}}
   project: default
   source:
     repoURL: "{{repoURL}}"
