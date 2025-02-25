@@ -137,7 +137,7 @@ extraResources:
     name: be-default-{{ .Release.Name }}
     namespace: {{ include "kubernetes-ingress.namespace" . }}
   spec:
-    replicas: 2
+    replicas: 1
     selector:
       matchLabels:
         app: nexops
