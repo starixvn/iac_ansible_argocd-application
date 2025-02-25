@@ -65,7 +65,10 @@ controller:
   #   key: node-role.kubernetes.io/master
   # - effect: NoSchedule
   #   key: node-role.kubernetes.io/control-plane
-    
+
+  resources:
+    requests:
+      memory: "400Mi"
 
 defaultBackend:
   image: "lumhub.sportsfun.app/aws/base/nexops-tools/default-backend-ingress"
