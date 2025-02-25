@@ -1,0 +1,23 @@
+---
+replicas: 3
+
+hostname: rancher.lumigame.com
+
+auditLog:
+  image:
+    repository: hub.lumigame.com/base/rancher/mirrored-bci-micro
+
+rancherImage: hub.lumigame.com/base/rancher/rancher
+
+postDelete:
+  image:
+    repository: hub.lumigame.com/base/rancher/shell
+
+tls: external
+
+ingress:
+  tls:
+    # options: rancher, letsEncrypt, secret
+    ingressClassName: ""
+    source: rancher
+    secretName: tls-rancher-ingress
