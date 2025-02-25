@@ -23,6 +23,8 @@ controller:
     # externalTrafficPolicy: "Local"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
+    enablePorts:
+      quic: false
 
     nodePorts:
       http: 31080
