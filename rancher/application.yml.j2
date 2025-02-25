@@ -19,10 +19,16 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: rancher-{{team}}-{{env}}
+      parameters:
+      - name: tls
+        value: external
+      - name: ingress.tls.ingressClassName
+        value: haproxy
+
       valueFiles:
-        - value.d/values-{{team}}-{{env}}.yaml
+        -  $values/rancher/value.d/values-{{team}}-{{env}}.yaml
       valuesObject: {}
-      
+
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
     ref: values

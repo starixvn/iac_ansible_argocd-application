@@ -12,12 +12,3 @@ rancherImage: hub.lumigame.com/base/rancher/rancher
 postDelete:
   image:
     repository: hub.lumigame.com/base/rancher/shell
-
-tls: external
-
-ingress:
-  tls:
-    # options: rancher, letsEncrypt, secret
-    ingressClassName: ""
-    source: rancher
-    secretName: tls-rancher-ingress
