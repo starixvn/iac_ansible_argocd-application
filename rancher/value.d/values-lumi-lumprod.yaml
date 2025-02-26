@@ -3,6 +3,10 @@ replicas: 3
 
 hostname: rancher.lumigame.com
 
+
+agentTLSMode: "system-store"
+
+
 auditLog:
   image:
     repository: hub.lumigame.com/base/rancher/mirrored-bci-micro
