@@ -31,13 +31,13 @@ controller:
       https: 31443
       stat: 31024
     annotations:
-      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Dept=VNTeam,Team=Lumi,ManageBy=vnTerraform,map-migrated=migQK0IMQ5LFK
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Dept=VNTeam,Team=Lumi,ManageBy=vnTerraform,map-migrated=migQK0IMQ5LFK,Environment=UAT,Name=lumi-uat-eks-lb-1
       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
       service.beta.kubernetes.io/aws-load-balancer-internal: "true"
       service.beta.kubernetes.io/aws-load-balancer-name: lumi-uat-eks-lb-1
       service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-0ae72c2068513e76b,subnet-0ba2a5f74ec351acc,subnet-0f92f11b87239fbd5
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
-      
+
   extraArgs:
     - --disable-ipv6
 
