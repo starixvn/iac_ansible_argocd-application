@@ -31,7 +31,7 @@ controller:
       https: 31443
       stat: 31024
     annotations:
-      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Dept=VNTeam,Team=Lumi,ManageBy=vnTerraform,map-migrated=migQK0IMQ5LFK,Environment=UAT,Name=lumi-uat-eks-lb-1
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Dept=VNTeam,Team=Lumi,ManageBy=vnArgoCD,map-migrated=migQK0IMQ5LFK,Environment=UAT,Name=lumi-uat-eks-lb-1
       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
       service.beta.kubernetes.io/aws-load-balancer-internal: "true"
       service.beta.kubernetes.io/aws-load-balancer-name: lumi-uat-eks-lb-1
@@ -59,10 +59,10 @@ controller:
         interval: 30s
 
   ingressClassResource:
-    name: haproxy-nexops
-    default: false
+    name: haproxy
+    default: true
   
-  ingressClass: haproxy-nexops
+  ingressClass: haproxy
 
   nodeSelector:
     haproxy: "yes"
@@ -102,27 +102,27 @@ extraResources:
 ##############################
 ## INGRESS STAT SITE
 ##############################
-- |
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: stat-{{ .Release.Name }}
-    namespace: {{ include "kubernetes-ingress.namespace" . }}
-    annotations:
-      haproxy.org/ssl-redirect: "true"
-  spec:
-    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
-    rules:
-    - host: ing-stat-eks-new.sgamesuat.com
-      http:
-        paths:
-        - backend:
-            service:
-              name: {{ include "kubernetes-ingress.fullname" . }}
-              port:
-                number: 1024
-          path: /
-          pathType: Prefix         
+# - |
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: stat-{{ .Release.Name }}
+#     namespace: {{ include "kubernetes-ingress.namespace" . }}
+#     annotations:
+#       haproxy.org/ssl-redirect: "true"
+#   spec:
+#     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+#     rules:
+#     - host: ing-stat-eks-new.sgamesuat.com
+#       http:
+#         paths:
+#         - backend:
+#             service:
+#               name: {{ include "kubernetes-ingress.fullname" . }}
+#               port:
+#                 number: 1024
+#           path: /
+#           pathType: Prefix         
 
 ##############################
 ## DEFAULT BACKEND CONF
