@@ -41,11 +41,11 @@ controller:
 
     tcpPorts:
     - name: opensearch-http
-      port: 8200
-      targetPort: 8200
+      port: 9200
+      targetPort: 9200
     - name: opensearch-transport
-      port: 8300
-      targetPort: 8300
+      port: 9300
+      targetPort: 9300
     #  - name: http-alt
     #    port: 8080
     #    targetPort: http-alt
