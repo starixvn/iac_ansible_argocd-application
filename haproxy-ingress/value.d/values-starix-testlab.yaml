@@ -39,13 +39,13 @@ controller:
     #   targetPort: 15044
     #   protocol: TCP
 
-    tcpPorts:
-    - name: opensearch-http
-      port: 9200
-      targetPort: 9200
-    - name: opensearch-transport
-      port: 9300
-      targetPort: 9300
+    # tcpPorts:
+    # - name: opensearch-http
+    #   port: 9200
+    #   targetPort: 9200
+    # - name: opensearch-transport
+    #   port: 9300
+    #   targetPort: 9300
     #  - name: http-alt
     #    port: 8080
     #    targetPort: http-alt
