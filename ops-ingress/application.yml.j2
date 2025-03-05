@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ops-ingress-{{team}}-{{env}}
+  namespace: argocd
+  labels:
+    name: ops-ingress-{{team}}-{{env}}
+    env: {{env}}
+    org: {{org}}
+    team: {{team}}
+spec:
+  destination:
+    namespace: ops-ingress
+    server: "{{ info[org][env]['cluster'] }}"
+  project: default
+  sources:
+  - helm:
+      releaseName: ops-ingress-{{team}}-{{env}}
+      valueFiles:
+      - $values/ops-ingress/value.d/values-{{team}}-{{env}}.yaml
+      parameters:
+      - name: "controller.image.repository"
+        value: {{ info[org][env]['hub'] }}/base/haproxytech/kubernetes-ingress
+      - name: "defaultBackend.image"
+        value: {{ info[org][env]['hub'] }}/base/nexops-tools/default-backend-ingress
+      valuesObject:
+        controller:
+          config:
+            timeout-connect: "5s"
+            scale-server-slots: "7"
+            maxconn: "20000"
+            forwarded-for: "true"
+            dontlognull: "true"
+    path: kubernetes-ingress/{{chartVersion}}
+    repoURL: "{{ repoURL }}"
+    targetRevision: HEAD
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m # the maximum amount of time allowed for the backoff strategy    
