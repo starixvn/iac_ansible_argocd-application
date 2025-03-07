@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yml
+        - value.d/{{chartVersion}}/values-{{org}}-{{env}}.yml
       releaseName: rocketchat-{{org}}-{{env}}
 
   syncPolicy:
