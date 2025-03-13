@@ -20,7 +20,7 @@ spec:
     helm:
       releaseName: minio-operator-{{team}}-{{env}}
       valueFiles:
-      - $values/minio/v2/operator/value.d/values-{{team}}-{{env}}.yaml
+      - $values/minio/operator/value.d/values-{{team}}-{{env}}.yaml
       parameters: 
       - name: "operator.image.repository"
         value: "{{ info[org][env]['hub'] }}/base/minio/operator"
