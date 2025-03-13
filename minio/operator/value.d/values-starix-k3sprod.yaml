@@ -7,8 +7,6 @@ operator:
     value: "starix.k3sprod"
   - name: PROMETHEUS_NAMESPACE
     value: "monitoring"
-  - name: MINIO_PROMETHEUS_AUTH_TYPE
-    value: "public"
 
   replicaCount: 2
 

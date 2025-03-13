@@ -11,7 +11,11 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'backup' %}
     namespace: minio
+{% else %}
+    namespace: minio-{{tenantName}}
+{% endif %}
   project: default
   sources:
   - repoURL: "{{repoURL}}"
@@ -26,8 +30,10 @@ spec:
         value: "{{ info[org][env]['hub'] }}/base/minio/operator"
       - name: "operator.image.sidecarImage.repository"
         value: "{{ info[org][env]['hub'] }}/base/minio/operator-sidecar"
-      valuesObject: {}
-
+      valuesObject:
+        tenant:
+          name: {{tenantName}}
+          
   - repoURL: "{{values_repoURL}}"
     targetRevision: HEAD
     ref: values
