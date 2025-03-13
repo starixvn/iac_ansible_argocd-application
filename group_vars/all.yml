@@ -12,9 +12,9 @@ info:
       ingressDomain: "nexdev.net"
       storageClass: "longhorn"
     local:
-      cluster: ""
-      hub: ""
-      ingressDomain: ""
+      cluster: "https://10.17.200.90:6443"
+      hub: "hub.nexdev.net"
+      ingressDomain: "nexdev.net"
       storageClass: ""
     sit:
       cluster: ""
