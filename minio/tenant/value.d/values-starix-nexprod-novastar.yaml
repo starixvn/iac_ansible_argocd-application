@@ -60,7 +60,7 @@ ingress:
     annotations:
       haproxy.org/ssl-redirect: "false"
     hosts:
-    - host: "minio-api.nexdev.net"
+    - host: "novastar-s3.nexdev.net"
       paths: []
     # - host: "minio-api.starixsoft.com"
     #   paths: []
