@@ -92,7 +92,7 @@ extraObjects:
     dnsNames:
     - '*.lumigame.com'
     duration: 1920h
-    renewBefore: 24h
+    renewBefore: 48h
     issuerRef:
       name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
       kind: Issuer
@@ -138,7 +138,7 @@ extraObjects:
     dnsNames:
     - '*.luminetsoft.com'
     duration: 1920h
-    renewBefore: 24h
+    renewBefore: 48h
     issuerRef:
       name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
       kind: Issuer
