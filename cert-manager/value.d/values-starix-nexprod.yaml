@@ -91,8 +91,8 @@ extraObjects:
     secretName: lumigame-com
     dnsNames:
     - '*.lumigame.com'
-    duration: 1920h
-    renewBefore: 48h
+    duration: 2160h
+    renewBefore: 96h
     issuerRef:
       name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
       kind: Issuer
@@ -137,8 +137,8 @@ extraObjects:
     secretName: luminetsoft-com
     dnsNames:
     - '*.luminetsoft.com'
-    duration: 1920h
-    renewBefore: 48h
+    duration: 2160h
+    renewBefore: 96h
     issuerRef:
       name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
       kind: Issuer
