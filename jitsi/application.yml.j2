@@ -1,25 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jitsi-{{org}}-{{env}}
+  name: jitsi-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: jitsi-{{org}}-{{env}}
+    name: jitsi-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
-    namespace: jitsi
+    namespace: jitsi-{{env}}
   project: default
   source:
     repoURL: "{{repoURL}}"
-    path: rocketchat/jitsi-integration
+    path: rocketchat/jitsi
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yml
-      releaseName: jitsi-{{org}}-{{env}}
+        - value.d/values-{{team}}-{{env}}.yaml
+      releaseName: jitsi-{{team}}-{{env}}
 
   syncPolicy:
     automated:
