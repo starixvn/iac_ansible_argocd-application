@@ -4,20 +4,11 @@ operator:
   - name: MINIO_OPERATOR_RUNTIME
     value: "Rancher"
   - name: CLUSTER_DOMAIN
-    value: "starix.k3slocal"
+    value: "starix.nexprod"
   - name: PROMETHEUS_NAMESPACE
     value: "monitoring"
 
-  replicaCount: 3
-
-  # tolerations:
-  # - key: cattle.io/os
-  #   operator: "Equal"
-  #   value: minio
-  #   effect: "NoSchedule"
-
-  # nodeSelector:
-  #   node-role.kubernetes.io/minio: "yes"
+  replicaCount: 2
 
   resources:
     requests:

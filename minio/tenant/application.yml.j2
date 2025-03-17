@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
-{% if team == 's1' or team == 'starix' %}
+{% if team == 'backup' %}
     namespace: minio
 {% else %}
     namespace: minio-{{tenantName}}

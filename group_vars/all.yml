@@ -12,9 +12,9 @@ info:
       ingressDomain: "nexdev.net"
       storageClass: "longhorn"
     local:
-      cluster: ""
-      hub: ""
-      ingressDomain: ""
+      cluster: "https://10.17.200.90:6443"
+      hub: "hub.nexdev.net"
+      ingressDomain: "nexdev.net"
       storageClass: ""
     sit:
       cluster: ""
@@ -105,4 +105,8 @@ info:
       hub: "lumhub.nebula.prod/kbt"
       ingressDomain: ""
       storageClass: ""
+    eksuat:
+      cluster: "https://9BC49F9AC7F6B376024A540ABC94CEE6.gr7.ap-northeast-1.eks.amazonaws.com"
+      hub: "lumhub.sportsfun.app/aws"
+
 

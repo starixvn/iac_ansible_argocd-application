@@ -1,6 +1,6 @@
 tlsSecrets:
 - name: lumigame-com
-- name: luminetsoft-com
+# - name: luminetsoft-com
 
 cronjob:
   schedule: "0 0 * * *"

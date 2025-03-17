@@ -1,14 +1,16 @@
 ---
 tenant:
+  name: s1
   configuration:
     name: nexops-env-configuration
   configSecret:
     name: nexops-env-configuration
     accessKey: nexops
-    secretKey: Ilu@n3xc3l12
+    secretKey: Ilu@n3xc3l
 
   buckets: []
-  # - name: sc-stream
+  # buckets:
+  # - name: banner
   users: [ ]
 
   features:
@@ -20,13 +22,12 @@ tenant:
   - name: pool-0
     servers: 2
     volumesPerServer: 2
-    size: 5Gi
-    storageClassName: longhorn-stricted
+    size: 10Gi
+    storageClassName: longhorn-effort
     storageAnnotations: { }
     annotations: { }
     tolerations: [ ]
-    nodeSelector:
-      node-longhorn-strict: "yes"
+    nodeSelector: { }
     affinity: { }
 
   mountPath: /minio
@@ -35,14 +36,14 @@ tenant:
     enabled: true
     port: 80
     protocol: http
-  prometheusOperator: false
+  prometheusOperator: true
 
   certificate:
     requestAutoCert: false
 
   env:
   - name: MINIO_PROMETHEUS_URL
-    value: "http://prometheus-stack-kube-prom-prometheus.monitoring.svc:9090"
+    value: "http://prometheus-nexprod-kube-pr-prometheus.monitoring.svc:9090"
   - name: MINIO_PROMETHEUS_AUTH_TYPE
     value: "public"
   
@@ -56,14 +57,21 @@ ingress:
   api:
     enabled: true
     ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/ssl-redirect: "false"
     hosts:
-    - host: "minio.lumigame.com"
+    - host: "novastar-s3.nexdev.net"
       paths: []
+    # - host: "minio-api.starixsoft.com"
+    #   paths: []
+    # tls:
+    # - hosts:
+    #   - minio-api.starixsoft.com
     pathType: Prefix
   console:
-    enabled: true
+    enabled: false
     ingressClassName: "haproxy"
     hosts:
-    - host: "minio-console.lumigame.com"
+    - host: ""
       paths: []
     pathType: Prefix
