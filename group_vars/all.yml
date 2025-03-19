@@ -108,5 +108,8 @@ info:
     eksuat:
       cluster: "https://9BC49F9AC7F6B376024A540ABC94CEE6.gr7.ap-northeast-1.eks.amazonaws.com"
       hub: "lumhub.sportsfun.app/aws"
+    eksprod:
+      cluster: "https://40BDDB6295C73364C0CAC899C976A812.gr7.ap-northeast-1.eks.amazonaws.com"
+      hub: "lumhub.sportsfun.app/aws"
 
 
