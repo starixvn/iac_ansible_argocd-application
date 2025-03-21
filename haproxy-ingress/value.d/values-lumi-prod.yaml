@@ -71,7 +71,7 @@ extraResources:
   spec:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     rules:
-    - host: sc-ing-stat.starixplay.com
+    - host: vn-sc-ing-prod.nebula.prod
       http:
         paths:
         - backend:
