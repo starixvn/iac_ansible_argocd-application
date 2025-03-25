@@ -60,7 +60,7 @@ controller:
     
 
 defaultBackend:
-  image: "hub.lumigame.com/base/nexops-tools/default-backend-ingress"
+  image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
 
 extraResources:
 ##############################
@@ -144,6 +144,9 @@ extraResources:
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
+          env:
+          - name: CLUSTER_NAME
+            value: "k8s-sc-local"
 - |
   apiVersion: v1
   kind: Service
