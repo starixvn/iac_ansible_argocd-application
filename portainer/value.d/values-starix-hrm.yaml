@@ -1,0 +1,13 @@
+service:
+  type: ClusterIP
+ingress:
+  enabled: true
+  ingressClassName: "haproxy"
+  hosts:
+  - host: "portainer-hrm.starixplay.com"
+    paths:
+    - path: "/"
+      pathType: "Prefix"
+persistence:
+  storageClass: "longhorn"
+  size: "5Gi"
