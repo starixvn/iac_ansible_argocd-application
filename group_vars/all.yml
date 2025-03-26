@@ -31,6 +31,11 @@ info:
       hub: ""
       ingressDomain: ""
       storageClass: ""
+    hrm:
+      cluster: "https://st-hrm-apiserver.starixplay.com:16445"
+      hub: "harbor.byb6181.com/vn-st"
+      ingressDomain: ""
+      storageClass: "longhorn"
     k3suat:
       cluster: "https://starix-k3suat-api.starixuat.com:16444"
       hub: "nexhub.nebula.prod/kbt"
