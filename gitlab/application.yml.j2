@@ -11,7 +11,7 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: gitlab-server
-  project: default
+  project: "{{ argo_project | default('default') }}"
   source:
     repoURL: "{{repoURL}}"
     path: gitlab
