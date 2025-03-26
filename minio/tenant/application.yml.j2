@@ -16,7 +16,7 @@ spec:
 {% else %}
     namespace: minio-{{tenantName}}
 {% endif %}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{repoURL}}"
     path: "minio/tenant/{{ chartVersion }}"

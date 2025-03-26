@@ -12,7 +12,7 @@ spec:
   destination:
     namespace: ops-ingress
     server: "{{ info[org][env]['cluster'] }}"
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - helm:
       releaseName: ops-ingress-{{team}}-{{env}}

@@ -11,7 +11,7 @@ spec:
   destination:
     namespace: haproxy-ingress
     server: "{{ info[org][env]['cluster'] }}"
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{ repoURL }}"
     path: kubernetes-ingress/{{chartVersion}}

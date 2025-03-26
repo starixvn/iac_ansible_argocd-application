@@ -16,7 +16,7 @@ spec:
 {% else %}
     namespace: logging-{{team}}
 {% endif %}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   
   sources:
   - repoURL: "{{repoURL}}"

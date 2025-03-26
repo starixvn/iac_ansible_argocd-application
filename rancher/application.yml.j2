@@ -12,7 +12,7 @@ spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: rancher-{{team}}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{repoURL}}"
     path: rancher/{{chartVersion}}

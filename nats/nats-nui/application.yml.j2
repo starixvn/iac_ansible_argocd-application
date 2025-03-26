@@ -12,7 +12,7 @@ spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
     namespace: nats-{{team}}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{repoURL}}"
     path: "nats/nats-nui/{{ chartVersion }}"

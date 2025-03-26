@@ -16,7 +16,7 @@ spec:
 {% else %}
     namespace: vault-{{team}}
 {% endif %}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{repoURL}}"
     path: vault/vault-secrets-operator/{{chartVersion}}
