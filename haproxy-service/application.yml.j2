@@ -12,7 +12,7 @@ spec:
   destination:
     server: "{{ info[org][env]["cluster"] }}"
     namespace: haproxy-service-{{team}}
-  project: default
+  project: "{{ argo_project | default('default') }}"
   source:
     repoURL: "{{repoURL}}"
     path: haproxy-service
