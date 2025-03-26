@@ -12,7 +12,7 @@ spec:
   destination:
     namespace: haproxy-ingress
     server: "{{ info[org][env]['cluster'] }}"
-  project: default
+  project: "{{ argo_project | default('default') }}"
   sources:
   - helm:
       releaseName: haproxy-ingress-{{team}}-{{env}}
