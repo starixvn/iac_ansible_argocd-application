@@ -35,9 +35,9 @@ controller:
     loadBalancerIP: "10.99.91.10"
 
     tcpPorts:
-    - name: redis-nap-m
-      port: 16379
-      targetPort: 16379
+    - name: nats
+      port: 4222
+      targetPort: 4222
 
     # nodePorts:
     #   http: 31080
