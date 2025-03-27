@@ -30,6 +30,7 @@ controller:
   
   extraArgs:
     - --disable-ipv6
+    - --configmap-errorfiles=haproxy-ingress/errorfile
 
   logging:
     level: info
