@@ -57,6 +57,9 @@ info:
     testlab:
       cluster: "https://10.70.70.140:6443"
       hub: "hub.nexdev.net"
+    kc:
+      cluster: "https://10.70.70.220:6443"
+      hub: "hub.nexdev.net"
 
   # s1:
   #   local:
