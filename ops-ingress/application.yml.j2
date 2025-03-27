@@ -10,7 +10,7 @@ metadata:
     team: {{team}}
 spec:
   destination:
-    namespace: ops-ingress
+    namespace: ops-ingress-{{team}}
     server: "{{ info[org][env]['cluster'] }}"
   project: "{{ argo_project | default('default') }}"
   sources:
