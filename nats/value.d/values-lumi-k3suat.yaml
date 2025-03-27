@@ -19,3 +19,33 @@ promExporter:
     enabled: true
 
 extraResources:
+- apiVersion: "ingress.v1.haproxy.org/v1"
+  kind: TCP
+  metadata:
+    name:
+      $tplYaml: >
+        {{ include "nats.fullname" $ | printf "%s-tcp" | quote }}
+    labels: 
+      $tplYaml: |
+        {{ include "nats.labels" $ }}
+    annotations:
+      ingress.class: "sc-ops-ingress"
+  spec:
+    - name:
+      $tplYaml: >
+        {{ include "nats.fullname" $ }}
+      frontend:
+        name: 
+          $tplYaml: >
+            {{ include "nats.fullname" $ | printf "%s-tcp" | quote }}
+        tcplog: true
+        binds:
+        - name:
+            $tplYaml: >
+              {{ include "nats.fullname" $ }}
+          port: 4222
+      service:
+        name:
+          $tplYaml: >
+            {{ include "nats.fullname" $ }}
+        port: 4222
