@@ -32,8 +32,8 @@ extraResources:
       ingress.class: "sc-ops-ingress"
   spec:
     - name:
-      $tplYaml: >
-        {{ include "nats.fullname" $ }}
+        $tplYaml: >
+          {{ include "nats.fullname" $ }}
       frontend:
         name: 
           $tplYaml: >
