@@ -32,7 +32,7 @@ controller:
     externalTrafficPolicy: "Local"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
-    loadBalancerIP: "10.18.200.195"
+    loadBalancerIP: "10.99.91.10"
 
     tcpPorts:
     - name: redis-nap-m
