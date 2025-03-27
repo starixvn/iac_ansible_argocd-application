@@ -3,11 +3,11 @@ controller:
   kind: DaemonSet
 
   ingressClassResource:
-    name: ops-ingress
+    name: sc-ops-ingress
     default: false
     parameters: {}
 
-  ingressClass: ops-ingress
+  ingressClass: sc-ops-ingress
 
   config:
     stats-config-snippet: |
