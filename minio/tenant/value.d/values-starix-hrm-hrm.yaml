@@ -53,7 +53,7 @@ tenant:
 
 ingress:
   api:
-    enabled: false
+    enabled: true
     ingressClassName: "haproxy"
     annotations:
       haproxy.org/ssl-redirect: "false"
