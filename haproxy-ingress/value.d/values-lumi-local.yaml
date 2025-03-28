@@ -110,61 +110,61 @@ extraResources:
           path: /
           pathType: Prefix         
 
-# ##############################
-# ## DEFAULT BACKEND CONF
-# ##############################
-# - |
-#   apiVersion: networking.k8s.io/v1
-#   kind: Ingress
-#   metadata:
-#     name: be-default-{{ .Release.Name }}
-#     namespace: {{ include "kubernetes-ingress.namespace" . }}
-#   spec:
-#     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
-#     defaultBackend:
-#       service:
-#         name: be-default-{{ .Release.Name }}
-#         port:
-#           number: 80
-# - |
-#   apiVersion: apps/v1
-#   kind: Deployment
-#   metadata:
-#     name: be-default-{{ .Release.Name }}
-#     namespace: {{ include "kubernetes-ingress.namespace" . }}
-#   spec:
-#     replicas: 2
-#     selector:
-#       matchLabels:
-#         app: nexops
-#     template:
-#       metadata:
-#         labels:
-#           app: nexops
-#       spec:
-#         containers:
-#         - name: nexops
-#           image: {{ .Values.defaultBackend.image }}
-#           imagePullPolicy: Always
-#           ports:
-#           - containerPort: 80
-#           env:
-#           - name: CLUSTER_NAME
-#             value: "k8s-sc-local"
-# - |
-#   apiVersion: v1
-#   kind: Service
-#   metadata:
-#     name: be-default-{{ .Release.Name }}
-#     namespace: {{ include "kubernetes-ingress.namespace" . }}
-#   spec:
-#     ports:
-#     - port: 80
-#       targetPort: 80
-#       protocol: TCP
-#       name: http
-#     selector:
-#       app: nexops
+##############################
+## DEFAULT BACKEND CONF
+##############################
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: be-default-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+  spec:
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+    defaultBackend:
+      service:
+        name: be-default-{{ .Release.Name }}
+        port:
+          number: 80
+- |
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: be-default-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: nexops
+    template:
+      metadata:
+        labels:
+          app: nexops
+      spec:
+        containers:
+        - name: nexops
+          image: {{ .Values.defaultBackend.image }}
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+          env:
+          - name: CLUSTER_NAME
+            value: "k8s-sc-local"
+- |
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: be-default-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+  spec:
+    ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    selector:
+      app: nexops
 ## Config Map 503 Page
 - |
   apiVersion: v1
@@ -173,15 +173,6 @@ extraResources:
     name: errorfile
     namespace: haproxy-ingress
   data:
-    404: |-
-      HTTP/1.1 404 Not Found
-      Connection: close
-      Content-Type: text/html
-
-      <h1>404 Not Found hihi</h1>
-      <p>The requested resource could not be found hihi.</p>
-
-
     503: |-
       HTTP/1.1 503 Service Unavailable
       Cache-Control: no-cache
