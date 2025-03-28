@@ -57,7 +57,9 @@ ingress:
     ingressClassName: "haproxy"
     annotations:
       haproxy.org/ssl-redirect: "false"
-    hosts: []
+    hosts:
+    - host: "minio-hrm.starixplay.com"
+      paths: []
     pathType: Prefix
   console:
     enabled: false
