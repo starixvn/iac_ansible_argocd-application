@@ -182,6 +182,7 @@ extraResources:
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Service Unavailable</title>
+          <!-- Cluster: k8s-sc-local -->
           <style>
               body {
                   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -243,7 +244,7 @@ extraResources:
               <p class="sub-message">The server is currently unable to handle the request due to a temporary overload or maintenance. Please try again later.</p>
               
               <div class="help-box">
-                  <p class="help-title">What you can do?? broo:</p>
+                  <p class="help-title">What you can do</p>
                   <ul>
                       <li>Wait a few minutes and refresh the page</li>
                       <li>Check your network connection</li>
