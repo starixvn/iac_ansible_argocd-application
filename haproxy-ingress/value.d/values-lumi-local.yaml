@@ -174,7 +174,7 @@ extraResources:
     namespace: haproxy-ingress
   data:
     404: |-
-      HTTP/2 404 Not found
+      HTTP/1.1 404 Not found
       Cache-Control: no-cache
       Connection: close
       Content-Type: text/html
@@ -185,7 +185,7 @@ extraResources:
 
 
     503: |-
-      HTTP/2 503 Service Unavailable
+      HTTP/1.1 503 Service Unavailable
       Cache-Control: no-cache
       Connection: close
       Content-Type: text/html
