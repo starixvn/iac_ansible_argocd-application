@@ -45,25 +45,54 @@ extraResources:
 #                   {{ .Values.service.name | quote }}
 #               port:
 #                 name: nats
-
-- apiVersion: v1
-  kind: Service
+- apiVersion: "ingress.v1.haproxy.org/v1"
+  kind: TCP
   metadata:
-    name: 
+    name:
       $tplYaml: >
-        {{ include "nats.fullname" $ | printf "%s-lb" | quote }}
-    labels:
+        {{ include "nats.fullname" $ | printf "%s-tcp" | quote }}
+    labels: 
       $tplYaml: |
         {{ include "nats.labels" $ }}
+    annotations:
+      ingress.class: "sc-ops-ingress"
   spec:
-    selector:
-      $tplYaml: |
-        {{- include "nats.selectorLabels" $ }}
-    ports:
-      - appProtocol: tcp
-        name: nats
+    - name:
+        $tplYaml: >
+          {{ include "nats.fullname" $ }}
+      frontend:
+        name: 
+          $tplYaml: >
+            {{ include "nats.fullname" $ | printf "%s-tcp" | quote }}
+        tcplog: true
+        binds:
+        - name:
+            $tplYaml: >
+              {{ include "nats.fullname" $ }}
+          port: 4222
+      service:
+        name:
+          $tplYaml: >
+            {{ include "nats.fullname" $ }}
         port: 4222
-        protocol: TCP
-        targetPort: nats
-        # nodePort: 30222
-    type: LoadBalancer
+# - apiVersion: v1
+#   kind: Service
+#   metadata:
+#     name: 
+#       $tplYaml: >
+#         {{ include "nats.fullname" $ | printf "%s-lb" | quote }}
+#     labels:
+#       $tplYaml: |
+#         {{ include "nats.labels" $ }}
+#   spec:
+#     selector:
+#       $tplYaml: |
+#         {{- include "nats.selectorLabels" $ }}
+#     ports:
+#       - appProtocol: tcp
+#         name: nats
+#         port: 4222
+#         protocol: TCP
+#         targetPort: nats
+#         # nodePort: 30222
+#     type: LoadBalancer
