@@ -14,7 +14,7 @@ spec:
   project: "{{ argo_project | default('default') }}"
   source:
     repoURL: "{{repoURL}}"
-    path: elasticsearch/{{chartVersion}}
+    path: elk/elasticsearch/{{chartVersion}}
     targetRevision: HEAD
     helm:
       valueFiles:
