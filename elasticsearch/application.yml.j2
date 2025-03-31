@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
+        - value.d/values-{{org}}-{{env}}.yml
       releaseName: elasticsearch-{{env}}-{{org}}
 
   syncPolicy:
