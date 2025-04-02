@@ -312,7 +312,7 @@ logstashPipeline:
       if [type] == "vault" {
         if "local" in [tags] and "starix" in [tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -322,7 +322,7 @@ logstashPipeline:
         }
         else if "dev" in [tags] and "starix" in [tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -340,7 +340,7 @@ logstashPipeline:
           if [Properties][Environment] == "LOCAL" {
             if "deposit" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -350,7 +350,7 @@ logstashPipeline:
             }
             else if "deposit-apigateway" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -360,7 +360,7 @@ logstashPipeline:
             }
             else if "deposit-player" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -370,7 +370,7 @@ logstashPipeline:
             }
             else if "deposit-setting-api" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -380,7 +380,7 @@ logstashPipeline:
             }
             else if "deposit-setting-apigateway" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -390,7 +390,7 @@ logstashPipeline:
             }
             else {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -405,7 +405,7 @@ logstashPipeline:
           if [Properties][Environment] == "LOCAL" {
             if "deposit-apigw" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -415,7 +415,7 @@ logstashPipeline:
             }
             else if "licensee-adminsetting" in [tags] {
               opensearch {
-                hosts => ["https://opensearch-cluster-master:9200"]
+                hosts => ["https://opensearch-cluster-master.logging:9200"]
                 user => "logstash"
                 password => "logstash"
                 ssl => true
@@ -428,7 +428,7 @@ logstashPipeline:
 
         else if "LoginTransaction" in [Tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -438,7 +438,7 @@ logstashPipeline:
         }
         else if "Transaction07" in [Tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -450,7 +450,7 @@ logstashPipeline:
         }
         else {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -467,7 +467,7 @@ logstashPipeline:
         if "haproxy_access" in [tags] {
           if "core" in [tags] {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -478,7 +478,7 @@ logstashPipeline:
           }
           else if "nexprod" in [tags] {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -489,7 +489,7 @@ logstashPipeline:
           }
           else if "starix" in [tags] {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -500,7 +500,7 @@ logstashPipeline:
           }
           else {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -512,7 +512,7 @@ logstashPipeline:
         }
         else {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -528,7 +528,7 @@ logstashPipeline:
     output {
       if [type] == "debug" {
         opensearch {
-          hosts => ["https://opensearch-cluster-master:9200"]
+          hosts => ["https://opensearch-cluster-master.logging:9200"]
           user => "logstash"
           password => "logstash"
           ssl => true
@@ -542,7 +542,7 @@ logstashPipeline:
     output {
       if [type] not in ["syslog", "vault", "dev-logs", "debug"] {
         opensearch {
-          hosts => ["https://opensearch-cluster-master:9200"]
+          hosts => ["https://opensearch-cluster-master.logging:9200"]
           user => "logstash"
           password => "logstash"
           ssl => true
