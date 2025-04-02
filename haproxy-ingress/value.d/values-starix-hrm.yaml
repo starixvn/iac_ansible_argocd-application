@@ -16,6 +16,7 @@ controller:
       capture request header X-Forwarded-For len 20
     backend-config-snippet: |
       option forwardfor if-none
+    ssl-redirect-port: "443"
       
   extraArgs:
     - --disable-ipv6
