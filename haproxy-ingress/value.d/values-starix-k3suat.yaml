@@ -34,7 +34,7 @@ controller:
   logging:
     level: info
     traffic:
-      address: "logstash-starix-k3suat-logstash.logging.svc"
+      address: "logstash-starix-k3suat-logstash.logging-starix"
       port: "5045"
       format: "rfc3164"
       facility: "local1"
