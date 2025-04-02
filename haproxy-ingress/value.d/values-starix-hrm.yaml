@@ -2,7 +2,7 @@
 controller:
   kind: DaemonSet
   config:
-    # ssl-certificate: "haproxy-ingress/nebula-prod-cert"
+    ssl-certificate: "haproxy-ingress/hrm-cert"
     stats-config-snippet: |
       stats auth nexcel:NexOps!QAZ
       stats refresh 300s
@@ -56,3 +56,20 @@ controller:
         interval: 30s
 
 extraResources:
+##############################
+## WILDCARD SSL LOADER
+##############################
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: dummy-cert-loader
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+  spec:
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+    tls:
+    - hosts:
+      - "*.sms-vn.com"
+      secretName: hrm-cert
+    rules:
+    - host: "*.sms-vn.com" 
