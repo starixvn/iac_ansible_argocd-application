@@ -1,31 +1,39 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: logstash-{{env}}
+  name: logstash-{{team}}-{{env}}
   namespace: argocd
   labels:
-    name: logstash-{{env}}
+    name: logstash-{{team}}-{{env}}
     env: {{env}}
     org: {{org}}
+    team: {{team}}
 spec:
   destination:
     server: "{{ info[org][env]['cluster'] }}"
+{% if team == 'starix' %}
     namespace: logging
+{% else %}
+    namespace: logging-{{team}}
+{% endif %}
   project: "{{ argo_project | default('default') }}"
-  source:
-    repoURL: "{{repoURL}}"
+  sources:
+  - repoURL: "{{repoURL}}"
     path: logging/logstash/{{helmVersion}}
     targetRevision: HEAD
     helm:
-      releaseName: logstash-{{env}}
+      releaseName: logstash-{{team}}-{{env}}
       valueFiles:
-        - value.d/values-{{org}}-{{env}}.yaml
+        - $values/logging/logstash/value.d/values-{{team}}-{{env}}.yaml
       valuesObject:
         image: "{{ info[org][env]['hub'] }}/base/logstash/logstash"
-        # image: "{{ info[org][env]['hub'] }}/base/opensearchproject/logstash-opensearch"
         logstashPattern:
           pattern.conf: |
             HAPROXYGW %{IP:client_ip}:%{INT:client_port} \[%{HAPROXYDATE:accept_date}\] %{NOTSPACE:frontend_name} %{NOTSPACE:backend_name}/%{NOTSPACE:server_name} %{INT:time_queue}/%{INT:time_backend_connect}/%{NOTSPACE:time_duration} %{NOTSPACE:bytes_read} %{NOTSPACE:termination_state} %{INT:actconn}/%{INT:feconn}/%{INT:beconn}/%{INT:srvconn}/%{NOTSPACE:retries} %{INT:srv_queue}/%{INT:backend_queue}
+
+  - repoURL: "{{values_repoURL}}"
+    targetRevision: HEAD
+    ref: values
 
   syncPolicy:
     automated:
