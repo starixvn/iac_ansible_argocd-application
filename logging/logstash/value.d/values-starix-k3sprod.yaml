@@ -1,0 +1,439 @@
+replicas: 2
+
+logstashConfig:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+
+logstashPipeline:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5000
+        type => "beats"
+      }
+      tcp {
+        port => 5044
+      }
+
+      # udp {
+      #   port => 5099
+      #   type => "dev-s1"
+      #   tags => ["udp-s1", "s1"]
+      # }
+
+      # tcp {
+      #   port => 5099
+      #   type => "dev-s1"
+      #   tags => ["tcp-s1", "s1"]
+      # }
+
+      syslog {
+        port => 5045
+        type => "syslog"
+        tags => ["prod"]
+      }
+
+      tcp {
+        port => 5064
+        type => "vault"
+        tags => ["prod", "starix"]
+      }
+
+      syslog {
+        port => 5077
+        type => "debug"
+        tags => ["prod"]
+      }
+    }
+
+  beats_filter.conf: |
+    filter {
+      if [type] == "beats" {
+        if [@metadata][beat] == "winlogbeat" {
+          if "uat" in [tags] {
+            mutate {
+              add_field => {"env" => "uat"}
+            }
+          }
+          else if "prod" in [tags] {
+            mutate {
+              add_field => {"env" => "prod"}
+            }
+          }
+
+          mutate {
+            add_tag => ["winlogbeat"]
+          }
+        }
+      }
+    }
+
+  vault_filter.conf: |
+    filter {
+      if [type] == "vault" {
+        json {
+          source => "message"
+        }
+        mutate {
+          rename => {
+            "[type]" => "[event_type]"
+            "[response][data][error]" => "[response_error]"
+          }
+          remove_field => ["[event][original]","[response][data]"]
+          add_field => {"type" => "vault"}
+        }
+
+        if [auth][display_name] == "approle" and [request][mount_type] == "kv" and [request][operation] == "read" { drop {} }
+        else if [auth][display_name] == "approle" and [request][operation] == "read" and [request][path] == "auth/token/lookup-self" { drop {} }
+      }
+    }
+
+  syslog_filter.conf: |
+    filter {
+      if [type] == "syslog" {
+        if [program] == "haproxy" {
+          if [facility_label] == "local1" {
+            mutate {
+              add_tag => ["haproxy_access", "hap-ing", "devops"]
+            }
+          } 
+          else if [facility_label] == "local2" {
+            mutate {
+              add_tag => ["haproxy_access", "hap-gw"]
+            }
+          }
+          else if [facility_label] == "local5" {
+            mutate {
+              add_tag => ["haproxy_access", "hap-ing", "sc"]
+            }
+          }
+          else {
+            mutate {
+              add_tag => ["haproxy_access"]
+            }
+          }
+        }
+      }
+
+      if "haproxy_access" in [tags] {
+        grok {
+          match => [
+            "message","%{HAPROXYHTTPBASE}",
+            "message","%{HAPROXYHTTP}",
+            "message","%{HAPROXYTCP}"
+          ]
+        }
+        if ![accept_date] {
+          grok { match => ["message", "%{HAPROXYDATE:accept_date}"] }
+        }
+        if [captured_request_headers] {
+          grok { match => {"captured_request_headers" => "%{DATA:request_host}\|%{DATA:user-agent}\|(%{DATA:request_referer}\|%{IP:TrueClientIP})"} }
+        }
+        mutate {
+          remove_field => ["captured_response_cookie","haproxy_time","haproxy_month","haproxy_hour","srvconn","backend_queue","retries","termination_state"]
+          remove_field => ["haproxy_monthday","time_backend_connect","pid","srv_queue","beat","beconn","client_port","haproxy_milliseconds","@version"]
+          remove_field => ["haproxy_minute","offset","haproxy_second","actconn","source","program","haproxy_year","feconn","http_version"]
+          remove_field => ["prospector","time_duration","time_queue","syslog_timestamp","captured_request_cookie","timestamp8601"]
+          convert => {
+            "http_status_code" => "integer"
+            "time_backend_response" => "integer"
+          }
+        }
+        date {match => ["accept_date", "dd/MMM/yyyy:HH:mm:ss.SSS"]}
+        if [TrueClientIP] {
+          geoip { source => "TrueClientIP" }
+        }
+
+        if "hap-gw" in [tags] {
+        }
+        else if "hap-ing" in [tags] {
+          if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
+          else if [backend_name] == "stats" { drop {} }
+        }
+      }
+    }
+
+  # dev_s1_filter.conf: |
+  #   filter {
+  #     if [type] == "dev-s1" {
+  #       json {
+  #         source => "message"
+  #       }
+  #     }
+  #   }
+
+  debug_filter.conf: |
+    filter {
+      if [type] == "debug" {
+        grok {
+          match => ["message","%{HAPROXYHTTPBASE}","message","%{HAPROXYHTTP}","message","%{HAPROXYTCP}"]
+        }
+        grok {
+          match => ["message", "%{HAPROXYDATE:accept_date}"]
+        }
+        grok {
+          match => {"captured_request_headers" => "%{DATA:request_host}\|%{DATA:user-agent}\|(%{DATA:request_referer}\|%{IP:TrueClientIP})"}
+        }
+        mutate {
+          remove_field => ["captured_response_cookie","haproxy_time","haproxy_month","haproxy_hour","srvconn","backend_queue","retries","termination_state"]
+          remove_field => ["haproxy_monthday","time_backend_connect","pid","srv_queue","beat","beconn","client_port","haproxy_milliseconds","@version"]
+          remove_field => ["haproxy_minute","offset","haproxy_second","actconn","source","program","haproxy_year","feconn","http_version"]
+          remove_field => ["prospector","time_duration","time_queue","syslog_timestamp","captured_request_cookie","timestamp8601"]
+          convert => {
+            "http_status_code" => "integer"
+            "time_backend_response" => "integer"
+          }
+        }
+        date {match => ["accept_date", "dd/MMM/yyyy:HH:mm:ss.SSS"]}
+        geoip {source => "TrueClientIP"}
+      }
+    }
+
+##############################################
+############### OUTPUT SESSION ###############
+
+  beats_output.conf: |
+    output {
+      if [type] == "beats" {
+        opensearch {
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+          user => "logstash"
+          password => "logstash"
+          ssl => true
+          ssl_certificate_verification => false
+          index => "logstash-%{[@metadata][beat]}-%{env}-%{+YYYY.MM.dd}"
+        }
+      }
+    }
+
+  vault_output.conf: |
+    output {
+      if [type] == "vault" {
+        if "prod" in [tags] and "starix" in [tags] {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-vault-starix-prod-%{+YYYY.MM.dd}"
+          }        
+        }
+        else {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-vault-unknown-%{+YYYY.MM.dd}"
+          }       
+        }
+      }
+    }
+
+
+  # dev_s1_output.conf: |
+  #   output {
+  #     if [type] == "dev-s1" {
+  #       if [Properties][Env] == "UAT" {
+  #         opensearch {
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+  #           user => "logstash"
+  #           password => "logstash"
+  #           ssl => true
+  #           ssl_certificate_verification => false
+  #           index => "logstash-s1-ne-uat-%{+YYYY.MM.dd}"
+  #         }
+  #       }
+  #       else if [Properties][Env] == "PROD" {
+  #         opensearch {
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+  #           user => "logstash"
+  #           password => "logstash"
+  #           ssl => true
+  #           ssl_certificate_verification => false
+  #           index => "logstash-s1-ne-prod-%{+YYYY.MM.dd}"
+  #         }          
+  #       }
+  #       else {
+  #         opensearch {
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+  #           user => "logstash"
+  #           password => "logstash"
+  #           ssl => true
+  #           ssl_certificate_verification => false
+  #           index => "logstash-s1-ne-unknown-%{+YYYY.MM.dd}"
+  #         }        
+  #       }
+  #     }
+  #   }
+
+  syslog_output.conf: |
+    output {
+      if [type] == "syslog" {
+        if "hap-gw" in [tags] {
+          opensearch {
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+            user => "logstash"
+            password => "logstash"
+            ssl => true
+            ssl_certificate_verification => false
+            index => "logstash-haproxy-gw-prod-%{+YYYY.MM.dd}"
+          }         
+        }
+        else if "hap-ing" in [tags] {
+          if "devops" in [tags] and "prod" in [tags] {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-devops-prod-%{+YYYY.MM.dd}"
+            }
+          }
+          else if "sc" in [tags] and "prod" in [tags] {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-sc-prod-%{+YYYY.MM.dd}"
+            }
+          }
+          else {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-prod-unknown-%{+YYYY.MM.dd}"
+            }         
+          }
+        }
+      }
+    }
+
+  debug_output.conf: |
+    output {
+      if [type] == "debug" {
+        opensearch {
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+          user => "logstash"
+          password => "logstash"
+          ssl => true
+          ssl_certificate_verification => false
+          index => "logstash-debug-%{+YYYY.MM.dd}"
+        }   
+      }
+    }
+
+
+  main_output.conf: |
+    output {
+      if [type] not in ["http", "tcp", "syslog", "vault", "debug"] {
+        opensearch {
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
+          user => "logstash"
+          password => "logstash"
+          ssl => true
+          ssl_certificate_verification => false
+          index => "logstash-unknown-%{+YYYY.MM.dd}"
+        }   
+      }
+    }
+    
+
+
+logstashJavaOpts: "-Xmx3g -Xms3g"
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "4096Mi"
+  limits:
+    cpu: "1000m"
+    memory: "4096Mi"
+
+
+
+httpPort: 9600
+extraPorts:
+  - name: beats
+    containerPort: 5000
+  - name: tcp
+    containerPort: 5044
+  # - name: tcp-s1
+  #   protocol: TCP
+  #   containerPort: 5099
+  # - name: udp-s1
+  #   protocol: UDP
+  #   containerPort: 5099
+  - name: syslog-tcp
+    containerPort: 5045
+    protocol: TCP
+  - name: syslog-udp
+    containerPort: 5045
+    protocol: UDP
+  - name: vault-st-prod
+    containerPort: 5064
+
+  - name: debug-tcp
+    containerPort: 5077
+    protocol: TCP
+  - name: debug-udp
+    containerPort: 5077
+    protocol: UDP
+
+service:
+  type: NodePort
+  ports:
+  - name: beats
+    nodePort: 30500
+    port: 5000
+    protocol: TCP
+    targetPort: beats
+  # - name: tcp-s1
+  #   port: 5099
+  #   protocol: TCP
+  #   nodePort: 31853
+  #   targetPort: tcp-s1
+  # - name: udp-s1
+  #   port: 5099
+  #   protocol: UDP
+  #   nodePort: 31853
+  #   targetPort: udp-s1
+  - name: tcp
+    nodePort: 30504
+    port: 5044
+    protocol: TCP
+    targetPort: tcp
+  - name: syslog-tcp
+    nodePort: 30045
+    port: 5045
+    protocol: TCP
+    targetPort: syslog-tcp
+  - name: syslog-udp
+    nodePort: 30045
+    port: 5045
+    protocol: UDP
+    targetPort: syslog-udp
+  - name: vault-st-prod
+    nodePort: 30064
+    port: 5064
+    protocol: TCP
+    targetPort: vault-st-prod
+
+  - name: debug-tcp
+    nodePort: 30077
+    port: 5077
+    protocol: TCP
+    targetPort: debug-tcp
+  - name: debug-udp
+    nodePort: 30077
+    port: 5077
+    protocol: UDP
+    targetPort: debug-udp
