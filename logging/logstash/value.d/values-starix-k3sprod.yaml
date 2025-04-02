@@ -196,7 +196,7 @@ logstashPipeline:
     output {
       if [type] == "beats" {
         opensearch {
-          hosts => ["https://opensearch-cluster-master:9200"]
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
           user => "logstash"
           password => "logstash"
           ssl => true
@@ -211,7 +211,7 @@ logstashPipeline:
       if [type] == "vault" {
         if "prod" in [tags] and "starix" in [tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -221,7 +221,7 @@ logstashPipeline:
         }
         else {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -238,7 +238,7 @@ logstashPipeline:
   #     if [type] == "dev-s1" {
   #       if [Properties][Env] == "UAT" {
   #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master:9200"]
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
   #           user => "logstash"
   #           password => "logstash"
   #           ssl => true
@@ -248,7 +248,7 @@ logstashPipeline:
   #       }
   #       else if [Properties][Env] == "PROD" {
   #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master:9200"]
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
   #           user => "logstash"
   #           password => "logstash"
   #           ssl => true
@@ -258,7 +258,7 @@ logstashPipeline:
   #       }
   #       else {
   #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master:9200"]
+  #           hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
   #           user => "logstash"
   #           password => "logstash"
   #           ssl => true
@@ -274,7 +274,7 @@ logstashPipeline:
       if [type] == "syslog" {
         if "hap-gw" in [tags] {
           opensearch {
-            hosts => ["https://opensearch-cluster-master:9200"]
+            hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
             user => "logstash"
             password => "logstash"
             ssl => true
@@ -285,7 +285,7 @@ logstashPipeline:
         else if "hap-ing" in [tags] {
           if "devops" in [tags] and "prod" in [tags] {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -295,7 +295,7 @@ logstashPipeline:
           }
           else if "sc" in [tags] and "prod" in [tags] {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -305,7 +305,7 @@ logstashPipeline:
           }
           else {
             opensearch {
-              hosts => ["https://opensearch-cluster-master:9200"]
+              hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
@@ -321,7 +321,7 @@ logstashPipeline:
     output {
       if [type] == "debug" {
         opensearch {
-          hosts => ["https://opensearch-cluster-master:9200"]
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
           user => "logstash"
           password => "logstash"
           ssl => true
@@ -336,7 +336,7 @@ logstashPipeline:
     output {
       if [type] not in ["http", "tcp", "syslog", "vault", "debug"] {
         opensearch {
-          hosts => ["https://opensearch-cluster-master:9200"]
+          hosts => ["https://opensearch-cluster-master.logging:9200:9200"]
           user => "logstash"
           password => "logstash"
           ssl => true
