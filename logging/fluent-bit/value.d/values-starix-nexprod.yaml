@@ -91,8 +91,7 @@ config:
         Logstash_Format On
         Retry_Limit False
         Suppress_Type_Name On
-        Logstash_Prefix logstash-container-nexops
-        Logstash_DateFormat %Y-%m-%d
+        Index logstash-container-nexops
         Trace_Error On
         Trace_Output On
         Include_Tag_Key On
