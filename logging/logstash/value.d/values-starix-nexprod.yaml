@@ -317,7 +317,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-vault-audit-local-%{+YYYY.MM.dd}"
+            index => "logstash-vault-audit-local"
+            action => "create"
           }
         }
         else if "dev" in [tags] and "starix" in [tags] {
@@ -327,7 +328,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-vault-audit-dev-%{+YYYY.MM.dd}"
+            index => "logstash-vault-audit-dev"
+            action => "create"
           }
         }
       }
