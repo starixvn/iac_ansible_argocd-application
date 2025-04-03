@@ -330,19 +330,9 @@ logstashPipeline:
               add_tag => ["haproxy_access", "hap-ing", "lumprod"]
             }
           }
-          else if [facility_label] == "local3" {
-            mutate {
-              add_tag => ["haproxy_access", "hap-ing", "devops"]
-            }
-          }
           else if [facility_label] == "local4" {
             mutate {
               add_tag => ["haproxy_access", "hap-ing", "sc"]
-            }
-          }
-          else if [facility_label] == "local5" {
-            mutate {
-              add_tag => ["haproxy_access", "hap-ing", "s1"]
             }
           }
           else {
@@ -710,7 +700,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-gw-local-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-gw-local"
+              action => "create"
             }         
           }
           else if "hap-ing" in [tags] {
@@ -721,27 +712,8 @@ logstashPipeline:
                 password => "logstash"
                 ssl => true
                 ssl_certificate_verification => false
-                index => "logstash-haproxy-ing-local-%{+YYYY.MM.dd}"
-              }
-            }
-            else if "s1" in [tags] and "local" in [tags] {
-              opensearch {
-                hosts => ["https://opensearch-cluster-master.logging:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-haproxy-s1-local-%{+YYYY.MM.dd}"
-              }
-            }
-            else if "devops" in [tags] and "local" in [tags] {
-              opensearch {
-                hosts => ["https://opensearch-cluster-master.logging:9200"]
-                user => "logstash"
-                password => "logstash"
-                ssl => true
-                ssl_certificate_verification => false
-                index => "logstash-haproxy-devops-local-%{+YYYY.MM.dd}"
+                index => "logstash-haproxy-ing-lumprod"
+                action => "create"
               }
             }
             else if "sc" in [tags] and "local" in [tags] {
@@ -751,7 +723,8 @@ logstashPipeline:
                 password => "logstash"
                 ssl => true
                 ssl_certificate_verification => false
-                index => "logstash-haproxy-sc-local-%{+YYYY.MM.dd}"
+                index => "logstash-haproxy-sc-local"
+                action => "create"
               }
             }
             else {
@@ -761,7 +734,8 @@ logstashPipeline:
                 password => "logstash"
                 ssl => true
                 ssl_certificate_verification => false
-                index => "logstash-haproxy-local-unknown-%{+YYYY.MM.dd}"
+                index => "logstash-haproxy-ing-unknown-local"
+                action => "create"
               }         
             }
           }
@@ -784,7 +758,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-ing-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-ing-eksprod"
+              action => "create"
             }  
           }
           else if "hap-gw" in [tags] {
@@ -794,7 +769,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-gw-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-gw-eksprod"
+              action => "create"
             }  
           }
 
@@ -817,7 +793,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-ing-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-ing-eksuat"
+              action => "create"
             }  
           }
           else if "hap-gw" in [tags] {
@@ -827,7 +804,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-gw-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-gw-eksuat"
+              action => "create"
             }  
           }
           # else {
@@ -848,7 +826,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-haproxy-unknown-%{+YYYY.MM.dd}"
+            index => "logstash-haproxy-unknown"
+            action => "create"
           }         
         }
       }
@@ -879,7 +858,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-vault-lumi-local-%{+YYYY.MM.dd}"
+            index => "logstash-vault-lumi-local"
+            action => "create"
           }
         }
       }
@@ -896,7 +876,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-unknown-%{+YYYY.MM.dd}"
+              index => "logstash-unknown"
+              action => "create"
             }
           }
         }  
