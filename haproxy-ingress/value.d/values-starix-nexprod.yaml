@@ -39,7 +39,7 @@ controller:
   logging:
     level: info
     traffic:
-      address: "logstash-nexprod-logstash.logging-starix"
+      address: "logstash-starix-nexprod-logstash.logging-starix"
       port: "5045"
       format: "rfc3164"
       facility: "local1"
