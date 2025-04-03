@@ -88,7 +88,6 @@ config:
         Port 9200
         HTTP_User logstash
         HTTP_Passwd logstash
-        Logstash_Format On
         Retry_Limit False
         Suppress_Type_Name On
         Index logstash-container-nexops
