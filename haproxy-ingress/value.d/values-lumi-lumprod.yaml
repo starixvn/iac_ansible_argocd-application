@@ -42,7 +42,7 @@ controller:
   logging:
     level: info
     traffic:
-      address: "logstash-lumprod-logstash.logging.svc"
+      address: "logstash-lumi-lumprod-logstash.logging-lumi"
       port: "5045"
       format: "rfc3164"
       facility: "local1"
