@@ -1,6 +1,5 @@
 ---
 tenant:
-  name: s1
   configuration:
     name: nexops-env-configuration
   configSecret:
