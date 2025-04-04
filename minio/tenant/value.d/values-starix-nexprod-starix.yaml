@@ -60,13 +60,8 @@ ingress:
     annotations:
       haproxy.org/ssl-redirect: "false"
     hosts:
-    - host: "minio-st-api.nexdev.net"
+    - host: "minio-api.nexdev.net"
       paths: []
-    # - host: "minio-st.starixsoft.com"
-    #   paths: []
-    # tls:
-    # - hosts:
-    #   - minio-api.starixsoft.com
     pathType: Prefix
   console:
     enabled: true
@@ -74,6 +69,6 @@ ingress:
     annotations:
       haproxy.org/ssl-redirect: "false"
     hosts:
-    - host: "minio-st.nexdev.net"
+    - host: "minio.nexdev.net"
       paths: []
     pathType: Prefix
