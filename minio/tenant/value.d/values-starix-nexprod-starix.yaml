@@ -1,0 +1,79 @@
+---
+tenant:
+  name: s1
+  configuration:
+    name: nexops-env-configuration
+  configSecret:
+    name: nexops-env-configuration
+    accessKey: nexops
+    secretKey: Ilu@n3xc3l
+
+  buckets: []
+  # buckets:
+  # - name: banner
+  users: [ ]
+
+  features:
+    bucketDNS: false
+    domains: { }
+    enableSFTP: false
+
+  pools:
+  - name: pool-0
+    servers: 2
+    volumesPerServer: 2
+    size: 10Gi
+    storageClassName: longhorn-effort
+    storageAnnotations: { }
+    annotations: { }
+    tolerations: [ ]
+    nodeSelector: { }
+    affinity: { }
+
+  mountPath: /minio
+
+  metrics:
+    enabled: true
+    port: 80
+    protocol: http
+  prometheusOperator: true
+
+  certificate:
+    requestAutoCert: false
+
+  env:
+  - name: MINIO_PROMETHEUS_URL
+    value: "http://prometheus-nexprod-kube-pr-prometheus.monitoring.svc:9090"
+  - name: MINIO_PROMETHEUS_AUTH_TYPE
+    value: "public"
+  
+  ###
+  # PriorityClassName indicates the Pod priority and hence importance of a Pod relative to other Pods.
+  # This is applied to MinIO pods only.
+  # Refer Kubernetes documentation for details https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass/
+  priorityClassName: ""
+
+ingress:
+  api:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/ssl-redirect: "false"
+    hosts:
+    - host: "minio-st-api.nexdev.net"
+      paths: []
+    # - host: "minio-st.starixsoft.com"
+    #   paths: []
+    # tls:
+    # - hosts:
+    #   - minio-api.starixsoft.com
+    pathType: Prefix
+  console:
+    enabled: true
+    ingressClassName: "haproxy"
+    annotations:
+      haproxy.org/ssl-redirect: "false"
+    hosts:
+    - host: "minio-st.nexdev.net"
+      paths: []
+    pathType: Prefix
