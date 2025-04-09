@@ -1,5 +1,6 @@
 tlsSecrets:
 - name: lumigame-com
+- name: vivadzo-com
 # - name: luminetsoft-com
 
 cronjob:
