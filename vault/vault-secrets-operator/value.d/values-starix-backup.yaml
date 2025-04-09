@@ -2,6 +2,12 @@
 controller:
   replicas: 1
 
+  manager:
+    image:
+      pullPolicy: IfNotPresent
+      repository: hub.nexdev.net/base/hashicorp/vault-secrets-operator
+      tag: 0.9.0
+
 manager:
   kubernetesClusterDomain: starix.backup
 

@@ -3,6 +3,10 @@ controller:
   replicas: 1
 
   manager:
+    image:
+      pullPolicy: IfNotPresent
+      repository: hub.lumigame.com/base/hashicorp/vault-secrets-operator
+      tag: 0.9.0
     resources:
       limits:
         cpu: 500m

@@ -4,6 +4,11 @@ controller:
 
 manager:
   kubernetesClusterDomain: starix.nexprod
+  manager:
+    image:
+      pullPolicy: IfNotPresent
+      repository: hub.nexdev.net/base/hashicorp/vault-secrets-operator
+      tag: 0.9.0
 
 metricsService:
   ports:
