@@ -2,6 +2,16 @@
 controller:
   replicas: 1
 
+  manager:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+
+
 manager:
   kubernetesClusterDomain: lumi.local
 
@@ -17,6 +27,9 @@ defaultVaultConnection:
   enabled: true
   address: "https://vault.nexdev.net"
   skipTLSVerify: true
+
+
+  
 
 
 ###################################
