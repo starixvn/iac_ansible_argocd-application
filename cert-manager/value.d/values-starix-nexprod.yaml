@@ -19,10 +19,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     method: kubernetes
     mount: kubernetes
@@ -37,10 +37,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}-aws-creds
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     type: kv-v2
     mount: nexops
@@ -65,10 +65,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     acme:
       server: https://acme-v02.api.letsencrypt.org/directory
@@ -98,10 +98,10 @@ extraObjects:
     # name: wildcard-nex-info-vn
     name: {{ include "cert-manager.name" . }}-lumigame-com
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     # secretName: wildcard-nex-info-vn
     secretName: lumigame-com
@@ -119,10 +119,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}-aws-vivadzo-com
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     acme:
       server: https://acme-v02.api.letsencrypt.org/directory
@@ -152,10 +152,10 @@ extraObjects:
     # name: wildcard-nex-info-vn
     name: {{ include "cert-manager.name" . }}-vivadzo-com
     namespace: {{ include "cert-manager.namespace" . }}
-  labels:
-    app: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    labels:
+      app: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     # secretName: wildcard-nex-info-vn
     secretName: vivadzo-com
