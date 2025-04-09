@@ -82,6 +82,9 @@ extraResources:
     - hosts:
       - "*.lumigame.com"
       secretName: lumigame-cert
+    - hosts:
+      - "*.vivadzo.com"
+      secretName: vivadzo-com
     rules:
     - host: "*.lumi.local" 
 
