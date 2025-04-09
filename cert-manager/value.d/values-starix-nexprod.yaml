@@ -19,6 +19,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}
     namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     method: kubernetes
     mount: kubernetes
@@ -33,6 +37,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}-aws-creds
     namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     type: kv-v2
     mount: nexops
@@ -57,6 +65,10 @@ extraObjects:
   metadata:
     name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
     namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     acme:
       server: https://acme-v02.api.letsencrypt.org/directory
@@ -86,6 +98,10 @@ extraObjects:
     # name: wildcard-nex-info-vn
     name: {{ include "cert-manager.name" . }}-lumigame-com
     namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
   spec:
     # secretName: wildcard-nex-info-vn
     secretName: lumigame-com
@@ -97,48 +113,56 @@ extraObjects:
       name: {{ include "cert-manager.fullname" . }}-aws-lumigame-com
       kind: Issuer
 
-# - | ## Issuer Route53 - luminetsoft.com - Z02126733MHUGLG64UHMO
-#   apiVersion: cert-manager.io/v1
-#   kind: Issuer
-#   metadata:
-#     name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
-#     namespace: {{ include "cert-manager.namespace" . }}
-#   spec:
-#     acme:
-#       server: https://acme-v02.api.letsencrypt.org/directory
-#       email: nexops@starixsoft.com
-#       privateKeySecretRef:
-#         name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
-#       solvers:
-#       - selector: {}
-#           # dnsZones:
-#           #   - "nex.info.vn"
-#         dns01:
-#           route53:
-#             hostedZoneID: Z02126733MHUGLG64UHMO
-#             region: ap-east-1
-#             accessKeyIDSecretRef:
-#               name: {{ include "cert-manager.fullname" . }}-aws-creds
-#               key: access-key-id
-#             secretAccessKeySecretRef:
-#               name: {{ include "cert-manager.fullname" . }}-aws-creds
-#               key: secret-access-key
-#             role: "arn:aws:iam::584102114761:role/lumi-local-cert-challenger"
+- | ## Issuer Route53 - vivadzo.com - Z0507864249KNQ3DTFVL9
+  apiVersion: cert-manager.io/v1
+  kind: Issuer
+  metadata:
+    name: {{ include "cert-manager.fullname" . }}-aws-vivadzo-com
+    namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  spec:
+    acme:
+      server: https://acme-v02.api.letsencrypt.org/directory
+      email: nexops@starixsoft.com
+      privateKeySecretRef:
+        name: {{ include "cert-manager.fullname" . }}-aws-vivadzo-com
+      solvers:
+      - selector: {}
+          # dnsZones:
+          #   - "nex.info.vn"
+        dns01:
+          route53:
+            hostedZoneID: Z0507864249KNQ3DTFVL9
+            region: ap-east-1
+            accessKeyIDSecretRef:
+              name: {{ include "cert-manager.fullname" . }}-aws-creds
+              key: access-key-id
+            secretAccessKeySecretRef:
+              name: {{ include "cert-manager.fullname" . }}-aws-creds
+              key: secret-access-key
+            role: "arn:aws:iam::584102114761:role/lumi-local-cert-challenger"
 
-# - | ## Certificate - *.luminetsoft.com
-#   apiVersion: cert-manager.io/v1
-#   kind: Certificate
-#   metadata:
-#     # name: wildcard-nex-info-vn
-#     name: {{ include "cert-manager.name" . }}-luminetsoft-com
-#     namespace: {{ include "cert-manager.namespace" . }}
-#   spec:
-#     # secretName: wildcard-nex-info-vn
-#     secretName: luminetsoft-com
-#     dnsNames:
-#     - '*.luminetsoft.com'
-#     duration: 2160h
-#     renewBefore: 96h
-#     issuerRef:
-#       name: {{ include "cert-manager.fullname" . }}-aws-luminetsoft-com
-#       kind: Issuer
+- | ## Certificate - *.vivadzo.com
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    # name: wildcard-nex-info-vn
+    name: {{ include "cert-manager.name" . }}-vivadzo-com
+    namespace: {{ include "cert-manager.namespace" . }}
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  spec:
+    # secretName: wildcard-nex-info-vn
+    secretName: vivadzo-com
+    dnsNames:
+    - '*.vivadzo.com'
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      name: {{ include "cert-manager.fullname" . }}-aws-vivadzo-com
+      kind: Issuer
