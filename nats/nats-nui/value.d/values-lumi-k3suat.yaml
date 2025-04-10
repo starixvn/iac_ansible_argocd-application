@@ -7,7 +7,7 @@ ingress:
   className: "haproxy"
   annotations:
     haproxy.org/auth-type: basic-auth
-    haproxy.org/auth-secret: nats-lumi/nuis-haproxy-credentials
+    haproxy.org/auth-secret: nats-lumi/nui-haproxy-credentials
   hosts:
     - host: nui.sgamesuat.com
       paths:
