@@ -72,5 +72,8 @@ extraResources:
     - hosts:
       - "*.sms-vn.com"
       secretName: hrm-cert
+    - hosts:
+      - "*.nexdev.net"
+      secretName: nexdev-cert
     rules:
     - host: "*.sms-vn.com" 
