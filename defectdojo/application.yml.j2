@@ -15,12 +15,12 @@ spec:
   project: "{{ argo_project | default('default') }}"
   sources:
   - repoURL: "{{repoURL}}"
-    path: defect-dojo/{{chartVersion}}
+    path: defectdojo/{{chartVersion}}
     targetRevision: HEAD
     helm:
       releaseName: defect-dojo-{{team}}-{{env}}
       valueFiles:
-        - $values/defect-dojo/value.d/values-{{team}}-{{env}}.yaml
+        - $values/defectdojo/value.d/values-{{team}}-{{env}}.yaml
       parameters:
       - name: "global.image.registry"
         value: "{{ info[org][env]['hub'] }}/base"
