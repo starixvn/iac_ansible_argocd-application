@@ -1,6 +1,6 @@
 defectDojoApiCredentials:
   createSecret: true
-  apiKey: "9b4dc929c2e086d59626f1408951ec4f62b39bb0"
+  apiKey: "abbc7aa9c8db4fcb0c51b077ed8417346b6979a9"
   url: "http://defectdojo.nexdev.net"
 kubernetesClusterDomain: starix.testlab
 
