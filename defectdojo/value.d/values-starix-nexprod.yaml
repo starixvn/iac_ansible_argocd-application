@@ -1,4 +1,5 @@
 ---
+global:
 # Global settings
 # create defectdojo specific secret
 createSecret: true
@@ -35,3 +36,5 @@ redis:
 postgresql:
   global:
     imageRegistry: "hub.nexdev.net/base"
+    security:
+      allowInsecureImages: true
