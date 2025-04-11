@@ -1,6 +1,8 @@
 ---
 excludeNamespaces: ""
 
+targetWorkloads: "replicaset,replicationcontroller,statefulset,daemonset,cronjob"
+
 operator:
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
