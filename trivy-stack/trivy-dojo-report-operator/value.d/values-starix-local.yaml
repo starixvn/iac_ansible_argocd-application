@@ -1,3 +1,8 @@
+global:
+  image:
+    registry: ""
+
+
 defectDojoApiCredentials:
   createSecret: true
   apiKey: "abbc7aa9c8db4fcb0c51b077ed8417346b6979a9"
@@ -7,6 +12,8 @@ kubernetesClusterDomain: starix.local
 
 operator:
   trivyDojoReportOperator:
+    image:
+      repository: hub.nexdev.net/base/telekom-mms/docker-trivy-dojo-operator
     env:
       defectDojoActive: "true"
       defectDojoEnvName: Development
