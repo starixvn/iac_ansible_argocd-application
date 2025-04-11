@@ -1,6 +1,8 @@
 ---
 excludeNamespaces: gitlab-runner
 
+targetWorkloads: "replicaset,replicationcontroller,statefulset,daemonset,cronjob"
+
 operator:
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 2
