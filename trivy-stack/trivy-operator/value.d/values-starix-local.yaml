@@ -4,10 +4,21 @@ excludeNamespaces: ""
 targetWorkloads: "replicaset,replicationcontroller,statefulset,daemonset,cronjob"
 
 operator:
+  vulnerabilityScannerEnabled: true
+  sbomGenerationEnabled: false
+  cacheReportTTL: "72h"
+  configAuditScannerEnabled: true
+  rbacAssessmentScannerEnabled: true
+  infraAssessmentScannerEnabled: true
+  clusterComplianceEnabled: true
+
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
-  sbomGenerationEnabled: false
   controllerCacheSyncTimeout: "60m"
+
+  httpProxy: http://proxysqd.nexdev.net:3128
+  httpsProxy: http://proxysqd.nexdev.net:3128
+  noProxy: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 
 trivyOperator:
   scanJobTolerations:
