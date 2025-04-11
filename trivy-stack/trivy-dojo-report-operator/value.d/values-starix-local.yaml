@@ -1,0 +1,16 @@
+defectDojoApiCredentials:
+  createSecret: true
+  apiKey: "9b4dc929c2e086d59626f1408951ec4f62b39bb0"
+  url: "http://defectdojo.nexdev.net"
+kubernetesClusterDomain: starix.testlab
+
+
+operator:
+  trivyDojoReportOperator:
+    env:
+      defectDojoActive: "true"
+      defectDojoEnvName: Development
+      defectDojoMinimumSeverity: Info
+      defectDojoProductTypeName: Research and Development
+      defectDojoTestTitle: Starix-Nexprod
+      reports: vulnerabilityreports
