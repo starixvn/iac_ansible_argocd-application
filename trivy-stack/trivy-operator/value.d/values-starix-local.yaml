@@ -4,7 +4,6 @@ excludeNamespaces: ""
 operator:
   metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
-
   sbomGenerationEnabled: false
   controllerCacheSyncTimeout: "60m"
 
