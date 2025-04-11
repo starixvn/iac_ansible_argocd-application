@@ -27,3 +27,11 @@ django:
     ingressClassName: "haproxy"
     activateTLS: false
     secretName: defectdojo-tls
+
+redis:
+  global:
+    imageRegistry: "hub.nexdev.net/base"
+
+postgresql:
+  global:
+    imageRegistry: "hub.nexdev.net/base"
