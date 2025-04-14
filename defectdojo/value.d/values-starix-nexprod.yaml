@@ -2,7 +2,7 @@
 global:
 # Global settings
 # create defectdojo specific secret
-createSecret: true
+createSecret: false
 # create redis secret in defectdojo chart, outside of redis chart
 createRedisSecret: false
 # create postgresql secret in defectdojo chart, outside of postgresql chart
@@ -21,10 +21,6 @@ repositoryPrefix: hub.nexdev.net/base/defectdojo
 tag: 2.45.0
 
 imagePullPolicy: IfNotPresent
-
-admin:
-  user: admin
-  password: gAl62a59KQdm4zva
 
 django:
   ingress:
