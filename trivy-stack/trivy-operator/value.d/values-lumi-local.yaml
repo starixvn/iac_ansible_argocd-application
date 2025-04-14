@@ -4,7 +4,7 @@ excludeNamespaces: "l1"
 targetWorkloads: "replicaset,statefulset,daemonset,cronjob"
 
 operator:
-  metricsVulnIdEnabled: false
+  metricsVulnIdEnabled: true
   scanJobsConcurrentLimit: 3
 
   sbomGenerationEnabled: false
