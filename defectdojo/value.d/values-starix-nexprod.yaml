@@ -22,6 +22,10 @@ tag: 2.45.0
 
 imagePullPolicy: IfNotPresent
 
+admin:
+  user: admin
+  password: gAl62a59KQdm4zva
+
 django:
   ingress:
     enabled: true
