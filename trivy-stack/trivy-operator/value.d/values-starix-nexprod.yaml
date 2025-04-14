@@ -41,7 +41,7 @@ trivy:
   # noProxy: "localhost,127.0.0.1,10.0.0.0/8,192.168.0.0/16,.svc,.starix.nexprod"
 
 serviceMonitor:
-  enabled: true
+  enabled: false
   namespace: monitoring
   interval: 5m
 
