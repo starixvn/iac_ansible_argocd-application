@@ -5,7 +5,7 @@ global:
 
 defectDojoApiCredentials:
   createSecret: true
-  apiKey: "ef5f9f413fb4a3ed935ddd1888d24d63e6efc4c7"
+  apiKey: "876fc1116013909691fddf8ee7861a0ecd4c647d"
   url: "http://defectdojo.nexdev.net"
 kubernetesClusterDomain: starix.local
 
