@@ -1,5 +1,5 @@
 ---
-excludeNamespaces: ""
+excludeNamespaces: l1
 
 targetWorkloads: "replicaset,replicationcontroller,statefulset,daemonset,cronjob"
 
