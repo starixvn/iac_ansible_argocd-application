@@ -2,7 +2,7 @@
 global:
 # Global settings
 # create defectdojo specific secret
-createSecret: false
+createSecret: true
 # create redis secret in defectdojo chart, outside of redis chart
 createRedisSecret: false
 # create postgresql secret in defectdojo chart, outside of postgresql chart
