@@ -1,7 +1,7 @@
 ---
 excludeNamespaces: ""
 
-targetWorkloads: "deployment,statefulset,daemonset,cronjob"
+targetWorkloads: "replicaset,statefulset,daemonset,cronjob"
 
 operator:
   vulnerabilityScannerEnabled: true

@@ -1,7 +1,7 @@
 ---
 excludeNamespaces: gitlab-runner,gitlab-runner-debug
 
-targetWorkloads: "deployment,statefulset,daemonset,cronjob"
+targetWorkloads: "replicaset,statefulset,daemonset,cronjob"
 
 operator:
   metricsVulnIdEnabled: true

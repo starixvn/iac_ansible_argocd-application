@@ -1,7 +1,7 @@
 ---
 excludeNamespaces: l1
 
-targetWorkloads: "deployment,statefulset,daemonset,cronjob"
+targetWorkloads: "replicaset,statefulset,daemonset,cronjob"
 
 operator:
   metricsVulnIdEnabled: false
