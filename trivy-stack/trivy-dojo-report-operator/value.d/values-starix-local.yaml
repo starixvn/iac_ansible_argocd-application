@@ -1,8 +1,4 @@
-global:
-  image:
-    registry: ""
-
-
+---
 defectDojoApiCredentials:
   createSecret: true
   apiKey: "876fc1116013909691fddf8ee7861a0ecd4c647d"
@@ -19,5 +15,5 @@ operator:
       defectDojoEnvName: Development
       defectDojoMinimumSeverity: Info
       defectDojoProductTypeName: Research and Development
-      defectDojoTestTitle: Starix-Nexprod
+      defectDojoTestTitle: Starix-LOCAL
       reports: vulnerabilityreports
