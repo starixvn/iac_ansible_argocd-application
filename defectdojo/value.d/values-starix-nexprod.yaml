@@ -42,3 +42,5 @@ postgresql:
     imageRegistry: "hub.nexdev.net/base"
     security:
       allowInsecureImages: true
+  primary:
+    resourcesPreset: "xlarge"
