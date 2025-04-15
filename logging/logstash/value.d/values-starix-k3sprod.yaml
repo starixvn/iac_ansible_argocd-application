@@ -102,6 +102,11 @@ logstashPipeline:
               add_tag => ["haproxy_access", "hap-gw"]
             }
           }
+          else if [facility_label] == "local3" {
+            mutate {
+              add_tag => ["haproxy_access", "hap-swarm", "alphaprod"]
+            }
+          }
           else if [facility_label] == "local5" {
             mutate {
               add_tag => ["haproxy_access", "hap-ing", "sc"]
@@ -146,21 +151,17 @@ logstashPipeline:
 
         if "hap-gw" in [tags] {
         }
+        else if "hap-swarm" in [tags] {
+          if [captured_request_headers] =~ /^(Zabbix|Prometheus|sentry|sonarqube|portainer|axios|grafana|whoami|ansible|deploy|rocketor|kibana|haproxy|logs.lumigame.com|npm.lumigame.com)/ { drop {} }
+          else if [message] =~ /^(Zabbix|Prometheus|sentry|sonarqube|portainer|axios|health|whoami|healthz|grafana|ansible|deploy|rocketor|kibana|haproxy|logs.lumigame.com|npm.lumigame.com)/ { drop {} }
+          else if [http_status_code] == 200 and [time_backend_response] < 5000 { drop {} }
+        }
         else if "hap-ing" in [tags] {
-          if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
+          if [http_status_code] == 200 and [time_backend_response] < 5000 { drop {} }
           else if [backend_name] == "stats" { drop {} }
         }
       }
     }
-
-  # dev_s1_filter.conf: |
-  #   filter {
-  #     if [type] == "dev-s1" {
-  #       json {
-  #         source => "message"
-  #       }
-  #     }
-  #   }
 
   debug_filter.conf: |
     filter {
@@ -232,43 +233,6 @@ logstashPipeline:
       }
     }
 
-
-  # dev_s1_output.conf: |
-  #   output {
-  #     if [type] == "dev-s1" {
-  #       if [Properties][Env] == "UAT" {
-  #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master.logging:9200"]
-  #           user => "logstash"
-  #           password => "logstash"
-  #           ssl => true
-  #           ssl_certificate_verification => false
-  #           index => "logstash-s1-ne-uat-%{+YYYY.MM.dd}"
-  #         }
-  #       }
-  #       else if [Properties][Env] == "PROD" {
-  #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master.logging:9200"]
-  #           user => "logstash"
-  #           password => "logstash"
-  #           ssl => true
-  #           ssl_certificate_verification => false
-  #           index => "logstash-s1-ne-prod-%{+YYYY.MM.dd}"
-  #         }          
-  #       }
-  #       else {
-  #         opensearch {
-  #           hosts => ["https://opensearch-cluster-master.logging:9200"]
-  #           user => "logstash"
-  #           password => "logstash"
-  #           ssl => true
-  #           ssl_certificate_verification => false
-  #           index => "logstash-s1-ne-unknown-%{+YYYY.MM.dd}"
-  #         }        
-  #       }
-  #     }
-  #   }
-
   syslog_output.conf: |
     output {
       if [type] == "syslog" {
@@ -279,28 +243,20 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-haproxy-gw-prod-%{+YYYY.MM.dd}"
+            index => "logstash-haproxy-gw-prod"
+            action => "create"
           }         
         }
-        else if "hap-ing" in [tags] {
-          if "devops" in [tags] and "prod" in [tags] {
+        else if "hap-swarm" in [tags] {
+          if "alphaprod" in [tags] and "prod" in [tags] {
             opensearch {
               hosts => ["https://opensearch-cluster-master.logging:9200"]
               user => "logstash"
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-devops-prod-%{+YYYY.MM.dd}"
-            }
-          }
-          else if "sc" in [tags] and "prod" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-haproxy-sc-prod-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-swarm-alphaprod-prod"
+              action => "create"
             }
           }
           else {
@@ -310,7 +266,43 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-prod-unknown-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-swarm-unknown-prod"
+              action => "create"
+            }         
+          } 
+        }
+        else if "hap-ing" in [tags] {
+          if "devops" in [tags] and "prod" in [tags] {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-ing-devops-prod"
+              action => "create"
+            }
+          }
+          else if "sc" in [tags] and "prod" in [tags] {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-ing-sc-prod"
+              action => "create"
+            }
+          }
+          else {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-ing-unknown-prod"
+              action => "create"
             }         
           }
         }
@@ -326,7 +318,8 @@ logstashPipeline:
           password => "logstash"
           ssl => true
           ssl_certificate_verification => false
-          index => "logstash-debug-%{+YYYY.MM.dd}"
+          index => "logstash-debug"
+          action => "create"
         }   
       }
     }
@@ -341,7 +334,8 @@ logstashPipeline:
           password => "logstash"
           ssl => true
           ssl_certificate_verification => false
-          index => "logstash-unknown-%{+YYYY.MM.dd}"
+          index => "logstash-unknown"
+          action => "create"
         }   
       }
     }
