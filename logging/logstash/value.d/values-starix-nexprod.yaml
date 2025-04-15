@@ -591,7 +591,9 @@ extraPorts:
     protocol: UDP
 
 service:
-  type: NodePort
+  # type: NodePort
+  type: LoadBalancer
+  loadBalancerIP: "10.99.185.215"
   ports:
   - name: httplog
     port: 8080
