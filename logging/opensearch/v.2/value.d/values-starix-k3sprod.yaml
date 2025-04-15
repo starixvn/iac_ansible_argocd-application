@@ -8,7 +8,7 @@ extraEnvs:
 opensearchJavaOpts: "-Xmx8G -Xms6G"
 
 persistence:
-  storageClass: longhorn
+  storageClass: longhorn-effort
   size: 100Gi
 
 service:
