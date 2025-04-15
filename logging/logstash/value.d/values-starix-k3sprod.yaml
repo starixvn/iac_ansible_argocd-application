@@ -15,18 +15,6 @@ logstashPipeline:
         port => 5044
       }
 
-      # udp {
-      #   port => 5099
-      #   type => "dev-s1"
-      #   tags => ["udp-s1", "s1"]
-      # }
-
-      # tcp {
-      #   port => 5099
-      #   type => "dev-s1"
-      #   tags => ["tcp-s1", "s1"]
-      # }
-
       syslog {
         port => 5045
         type => "syslog"
@@ -360,12 +348,6 @@ extraPorts:
     containerPort: 5000
   - name: tcp
     containerPort: 5044
-  # - name: tcp-s1
-  #   protocol: TCP
-  #   containerPort: 5099
-  # - name: udp-s1
-  #   protocol: UDP
-  #   containerPort: 5099
   - name: syslog-tcp
     containerPort: 5045
     protocol: TCP
@@ -390,16 +372,6 @@ service:
     port: 5000
     protocol: TCP
     targetPort: beats
-  # - name: tcp-s1
-  #   port: 5099
-  #   protocol: TCP
-  #   nodePort: 31853
-  #   targetPort: tcp-s1
-  # - name: udp-s1
-  #   port: 5099
-  #   protocol: UDP
-  #   nodePort: 31853
-  #   targetPort: udp-s1
   - name: tcp
     nodePort: 30504
     port: 5044
