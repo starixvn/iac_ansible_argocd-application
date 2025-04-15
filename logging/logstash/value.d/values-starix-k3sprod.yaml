@@ -142,7 +142,7 @@ logstashPipeline:
         else if "hap-swarm" in [tags] {
           if [captured_request_headers] =~ /^(Zabbix|Prometheus|sentry|sonarqube|portainer|axios|grafana|whoami|ansible|deploy|rocketor|kibana|haproxy|logs.lumigame.com|npm.lumigame.com)/ { drop {} }
           else if [message] =~ /^(Zabbix|Prometheus|sentry|sonarqube|portainer|axios|health|whoami|healthz|grafana|ansible|deploy|rocketor|kibana|haproxy|logs.lumigame.com|npm.lumigame.com)/ { drop {} }
-          else if [http_status_code] == 200 and [time_backend_response] < 5000 { drop {} }
+          # else if [http_status_code] == 200 and [time_backend_response] < 5000 { drop {} }
         }
         else if "hap-ing" in [tags] {
           if [http_status_code] == 200 and [time_backend_response] < 5000 { drop {} }
