@@ -5,11 +5,11 @@ extraEnvs:
 - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
   value: Y8cY3sn7hCwSmJLff2U7fkNG
 
-opensearchJavaOpts: "-Xmx6G -Xms4G"
+opensearchJavaOpts: "-Xmx8G -Xms6G"
 
 persistence:
   storageClass: longhorn
-  size: 50Gi
+  size: 100Gi
 
 service:
   type: NodePort
@@ -17,5 +17,5 @@ service:
 
 resources:
   requests:
-    cpu: "2"
-    memory: "6Gi"
+    cpu: "4"
+    memory: "8Gi"
