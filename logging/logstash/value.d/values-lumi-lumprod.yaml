@@ -330,6 +330,11 @@ logstashPipeline:
               add_tag => ["haproxy_access", "hap-ing", "sc"]
             }
           }
+          else if [facility_label] == "kernel" {
+            mutate {
+              add_tag => ["haproxy_access", "sc"]
+            }
+          }
           else {
             mutate {
               add_tag => ["haproxy_access"]
