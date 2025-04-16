@@ -368,9 +368,9 @@ extraPorts:
     protocol: UDP
 
 service:
-  # type: NodePort
-  type: LoadBalancer
-  loadBalancerIP: "10.99.185.215"
+  type: NodePort
+  # type: LoadBalancer
+  # loadBalancerIP: "10.99.185.215"
   ports:
   - name: beats
     nodePort: 30500
