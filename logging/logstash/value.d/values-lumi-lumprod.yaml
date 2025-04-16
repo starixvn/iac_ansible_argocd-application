@@ -739,7 +739,7 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-unknown-local"
+              index => "logstash-haproxy-unknown"
               action => "create"
             }         
           }
