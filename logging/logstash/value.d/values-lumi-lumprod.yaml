@@ -341,10 +341,10 @@ logstashPipeline:
             }
           }
         }
-        else {
-          mutate {
-            add_tag => ["syslog_unknown"]        
-        }
+        # else {
+        #   mutate {
+        #     add_tag => ["syslog_unknown"]        
+        # }
       }
 
       if "haproxy_access" in [tags] {
