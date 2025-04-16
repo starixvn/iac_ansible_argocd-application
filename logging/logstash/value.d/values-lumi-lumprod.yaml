@@ -732,16 +732,17 @@ logstashPipeline:
               }         
             }
           }
-          # else {
-          #   opensearch {
-          #     hosts => ["https://opensearch-cluster-master.logging:9200"]
-          #     user => "logstash"
-          #     password => "logstash"
-          #     ssl => true
-          #     ssl_certificate_verification => false
-          #     index => "%{[@metadata][beat]}-unknown-haproxy-local-%{+YYYY.MM.dd}"
-          #   }         
-          # }
+          else {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-unknown-local"
+              action => "create"
+            }         
+          }
         }
         else if "eksprod" in [tags] {
           if "hap-ing" in [tags] {
