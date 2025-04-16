@@ -110,11 +110,14 @@ logstashPipeline:
 
       if "haproxy_access" in [tags] {
         grok {
-          match => [
-            "message","%{HAPROXYHTTPBASE}",
-            "message","%{HAPROXYHTTP}",
-            "message","%{HAPROXYTCP}"
-          ]
+          match => {
+            "message" => [
+              "%{HAPROXYHTTPBASE}",
+              "%{HAPROXYHTTP}",
+              "%{HAPROXYTCP}",
+              "%{HAPROXYGW}"
+            ]
+          }
         }
         if ![accept_date] {
           grok { match => ["message", "%{HAPROXYDATE:accept_date}"] }
@@ -365,9 +368,9 @@ extraPorts:
     protocol: UDP
 
 service:
-  # type: NodePort
-  type: LoadBalancer
-  loadBalancerIP: "10.99.185.215"
+  type: NodePort
+  # type: LoadBalancer
+  # loadBalancerIP: "10.99.185.215"
   ports:
   - name: beats
     nodePort: 30500
