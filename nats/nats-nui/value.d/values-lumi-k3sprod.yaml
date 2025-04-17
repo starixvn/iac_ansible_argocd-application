@@ -1,0 +1,15 @@
+replicaCount: 1
+
+clusterDomain: starix.k3sprod
+
+ingress:
+  enabled: true
+  className: "haproxy"
+  annotations:
+    haproxy.org/auth-type: basic-auth
+    haproxy.org/auth-secret: nats-lumi/nui-haproxy-credentials
+  hosts:
+    - host: nui-sc.starixplay.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
