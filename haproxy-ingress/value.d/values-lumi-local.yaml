@@ -22,7 +22,7 @@ controller:
     
   service:
     type: LoadBalancer
-    externalTrafficPolicy: "Local"
+    externalTrafficPolicy: "Cluster"
     ipFamilyPolicy: SingleStack
     ipFamilies: [IPv4]
 
