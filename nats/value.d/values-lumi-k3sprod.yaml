@@ -11,12 +11,11 @@ config:
         size: 8Gi
         storageClassName: longhorn
     memoryStore:
-      enabled: false
+      enabled: true
+      maxSize: 2Gi
 
 promExporter:
   enabled: true
-  image: 
-    tag: 0.15.0
   podMonitor:
     enabled: true
 
