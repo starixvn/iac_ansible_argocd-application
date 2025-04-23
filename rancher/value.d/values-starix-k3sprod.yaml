@@ -13,13 +13,13 @@ noProxy: 127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.starix.k3suat
 
 auditLog:
   image:
-    repository: hub.lumigame.com/base/rancher/mirrored-bci-micro
+    repository: nexhub.nebula.prod/kbt/base/rancher/mirrored-bci-micro
 
-rancherImage: hub.lumigame.com/base/rancher/rancher
+rancherImage: nexhub.nebula.prod/kbt/base/rancher/rancher
 
 postDelete:
   image:
-    repository: hub.lumigame.com/base/rancher/shell
+    repository: nexhub.nebula.prod/kbt/base/rancher/shell
 
 
 extraResources:
