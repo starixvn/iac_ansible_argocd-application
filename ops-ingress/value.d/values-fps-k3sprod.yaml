@@ -38,6 +38,7 @@ controller:
     - name: fps-ops-api
       port: 9200
       targetPort: 9200
+      nodePort: 30921
 
   logging:
     level: info
