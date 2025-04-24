@@ -15,12 +15,12 @@ spec:
   project: "{{ argo_project | default('default') }}"
   source:
     repoURL: "{{repoURL}}"
-    path: n8n/n8n-postgresql
+    path: n8n-postgresql/n8n
     targetRevision: HEAD
     helm:
       valueFiles:
-        - value.d/values.yaml
-      releaseName: n8n-test-{{team}}-{{env}}
+        - value.d/values-{{team}}-{{env}}.yaml
+      releaseName: n8n-postgresql-{{team}}-{{env}}
 
   syncPolicy:
     automated:
