@@ -143,3 +143,4 @@ extraResources:
               port:
                 number: 9200
           path: /
+          pathType: Prefix
