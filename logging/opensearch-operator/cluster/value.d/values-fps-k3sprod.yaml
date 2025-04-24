@@ -128,7 +128,6 @@ extraResources:
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    generation: 2
     name: opensearch-fps-nexprod-additional
     namespace: logging-fps
   spec:
