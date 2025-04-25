@@ -14,6 +14,7 @@ operator:
       defectDojoActive: "true"
       defectDojoEnvName: Development
       defectDojoMinimumSeverity: Info
+      defectDojoProductName: "NX-Atomix"
       defectDojoProductTypeName: Research and Development
       defectDojoTestTitle: Starix-LOCAL
       reports: vulnerabilityreports

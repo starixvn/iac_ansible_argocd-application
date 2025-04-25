@@ -22,8 +22,8 @@ spec:
       valueFiles:
         - $values/trivy-stack/trivy-dojo-report-operator/value.d/values-{{team}}-{{env}}.yaml
       parameters:
-      - name: "operator.trivyDojoReportOperator.env.defectDojoProductName"
-        value: "trivy-dojo-report-operator-{{team}}-{{env}}"
+      # - name: "operator.trivyDojoReportOperator.env.defectDojoProductName"
+      #   value: "trivy-dojo-report-operator-{{team}}-{{env}}"
       - name: "operator.trivyDojoReportOperator.env.defectDojoEngagementName"
         value: "trivy-{{team}}-{{env}}"
       # - name: "global.image.registry"
