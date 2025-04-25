@@ -95,6 +95,11 @@ logstashPipeline:
               add_tag => ["haproxy_access", "hap-swarm", "alphaprod"]
             }
           }
+          else if [facility_label] == "local4" {
+            mutate {
+              add_tag => ["haproxy_access", "hap-swarm", "starixprod"]
+            }
+          }
           else if [facility_label] == "local5" {
             mutate {
               add_tag => ["haproxy_access", "hap-ing", "sc"]
@@ -247,6 +252,17 @@ logstashPipeline:
               ssl => true
               ssl_certificate_verification => false
               index => "logstash-haproxy-swarm-alphaprod-prod"
+              action => "create"
+            }
+          }
+          else if "starixprod" in [tags] and "prod" in [tags] {
+            opensearch {
+              hosts => ["https://opensearch-cluster-master.logging:9200"]
+              user => "logstash"
+              password => "logstash"
+              ssl => true
+              ssl_certificate_verification => false
+              index => "logstash-haproxy-swarm-starixprod-prod"
               action => "create"
             }
           }
