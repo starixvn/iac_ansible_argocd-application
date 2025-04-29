@@ -83,7 +83,7 @@ config:
         Name    record_modifier
         Match   kube.container.nexops.*
         Record  cluster_org starix
-        Record  cluster_env k3sprod
+        Record  cluster_env nexprod
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
