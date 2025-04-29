@@ -40,57 +40,61 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/filters
   filters: |
     [FILTER]
-        Name kubernetes
-        Match kube.*
-        Kube_URL https://kubernetes.default.svc:443
-        tls.verify Off
-        Merge_Log On
-        Merge_Log_Key exts
-        Keep_Log On
-        K8S-Logging.Parser On
-        K8S-Logging.Exclude On
-        Labels On
-        Annotations Off
-        Use_Kubelet On
-        Kubelet_Port 10248
-        Use_Tag_For_Meta On
-        Buffer_Size 0
-
-    [FILTER]
-        Name                lua
+        Name                kubernetes
         Match               kube.*
-        code                function strip_ansi_color_code(tag, timestamp, record) if type(record["log"]) == "string" then record["log"] = record["log"]:gsub('[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]', '') return 2, 0, record end return 0, 0, 0 end
-        call                strip_ansi_color_code
+        Kube_URL            https://kubernetes.default.svc:443
+        tls.verify          Off
+        Merge_Log           On
+        Merge_Log_Key       exts
+        Keep_Log            On
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude On
+        Labels              On
+        Annotations         Off
+        Use_Kubelet         On
+        Kubelet_Port        10248
+        Use_Tag_For_Meta    On
+        Buffer_Size         0
 
     [FILTER]
-        Name                grep
-        Match               kube.container.nexops.*
-        Exclude             $log level=info
-        Exclude             $log \"GET (/[a-zA-Z0-9\-]*)+ HTTP/1.[01]\" 200
-        Exclude             $log Found redis master
-        Exclude             $log Identifying redis master 
-        Exclude             $log using sentinel \(argocd\-redis\-ha\) 
+        Name    lua
+        Match   kube.*
+        code    function strip_ansi_color_code(tag, timestamp, record) if type(record["log"]) == "string" then record["log"] = record["log"]:gsub('[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]', '') return 2, 0, record end return 0, 0, 0 end
+        call    strip_ansi_color_code
+
+    [FILTER]
+        Name    record_droper
+        Match   kube.container.nexops.*
+        Exclude $log level=info
+        Exclude $log \"GET (/[a-zA-Z0-9\-]*)+ HTTP/1.[01]\" 200
+        Exclude $log Found redis master
+        Exclude $log Identifying redis master 
+        Exclude $log using sentinel \(argocd\-redis\-ha\) 
+
+    [FILTER]
+        Name    record_modifier
+        Match   kube.container.nexops.*
+        Record  cluster_org starix
+        Record  cluster_env k3sprod
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name opensearch
-        Match kube.container.nexops.*
-        Host opensearch-cluster-master
-        Port 9200
-        HTTP_User logstash
-        HTTP_Passwd logstash
-        Logstash_Format On
-        Retry_Limit False
-        Suppress_Type_Name On
-        Logstash_Prefix logstash-container-nexops
-        Logstash_DateFormat %Y-%m-%d
-        Trace_Error On
-        Trace_Output On
-        Include_Tag_Key On
-        tls On
-        tls.verify Off
-        Tag_Key tagLogKey
+        Name                opensearch
+        Match               kube.container.nexops.*
+        Host                opensearch-cluster-master
+        Port                9200
+        HTTP_User           logstash
+        HTTP_Passwd         logstash
+        Retry_Limit         False
+        Suppress_Type_Name  On
+        Index               logstash-container-nexops
+        Trace_Error         On
+        Trace_Output        On
+        Include_Tag_Key     On
+        tls                 On
+        tls.verify          Off
+        Tag_Key             tagLogKey
 
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
   ## This configuration is deprecated, please use `extraFiles` instead.
