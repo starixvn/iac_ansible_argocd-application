@@ -79,6 +79,9 @@ extraResources:
     - hosts:
       - "*.nexdev.net"
       secretName: nexdev-cert
+    - hosts:
+      - "*.comtechsb.com"
+      secretName: comtechsb-cert
     rules:
     - host: "*.sms-vn.com" 
 
