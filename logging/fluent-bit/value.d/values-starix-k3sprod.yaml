@@ -63,7 +63,7 @@ config:
         call    strip_ansi_color_code
 
     [FILTER]
-        Name    record_droper
+        Name    grep
         Match   kube.container.nexops.*
         Exclude $log level=info
         Exclude $log \"GET (/[a-zA-Z0-9\-]*)+ HTTP/1.[01]\" 200
