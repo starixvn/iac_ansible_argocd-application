@@ -6,37 +6,37 @@ replicaCount: 1
 
 
 
-extraObjects:
-- |
-  apiVersion: cert-manager.io/v1
-  kind: ClusterIssuer
-  metadata:
-    name: letsencrypt-prod
-  spec:
-    acme:
-      email: nexops@starixsoft.com
-      server: https://acme-v02.api.letsencrypt.org/directory
-      privateKeySecretRef:
-        name: letsencrypt-prod-issuer-account-key
-      solvers:
-        - http01:
-            ingress:
-              serviceType: ClusterIP
-              ingressClassName: haproxy
+# extraObjects:
+# - |
+#   apiVersion: cert-manager.io/v1
+#   kind: ClusterIssuer
+#   metadata:
+#     name: letsencrypt-prod
+#   spec:
+#     acme:
+#       email: nexops@starixsoft.com
+#       server: https://acme-v02.api.letsencrypt.org/directory
+#       privateKeySecretRef:
+#         name: letsencrypt-prod-issuer-account-key
+#       solvers:
+#         - http01:
+#             ingress:
+#               serviceType: ClusterIP
+#               ingressClassName: haproxy
 
-- |
-  apiVersion: cert-manager.io/v1
-  kind: Certificate
-  metadata:
-    name:  nexdev-lexfin-cert-le
-    namespace: hrm
-  spec:
-    commonName: hrm-lexfin.nexdev.net
-    secretName:  nexdev-lexfin-cert-le
-    dnsNames:
-      - hrm-lexfin.nexdev.net
-    duration: 2160h
-    renewBefore: 96h
-    issuerRef:
-      kind: ClusterIssuer
-      name: letsencrypt-prod
+# - |
+#   apiVersion: cert-manager.io/v1
+#   kind: Certificate
+#   metadata:
+#     name:  nexdev-lexfin-cert-le
+#     namespace: hrm
+#   spec:
+#     commonName: hrm-lexfin.nexdev.net
+#     secretName:  nexdev-lexfin-cert-le
+#     dnsNames:
+#       - hrm-lexfin.nexdev.net
+#     duration: 2160h
+#     renewBefore: 96h
+#     issuerRef:
+#       kind: ClusterIssuer
+#       name: letsencrypt-prod
