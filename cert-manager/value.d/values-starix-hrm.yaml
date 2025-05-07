@@ -28,13 +28,13 @@ extraObjects:
   apiVersion: cert-manager.io/v1
   kind: Certificate
   metadata:
-    name: nexdev-cert-le
+    name:  nexdev-lexfin-cert-le
     namespace: hrm
   spec:
-    commonName: nexdev.net
-    secretName:  nexdev-cert-le
+    commonName: hrm-lexfin.nexdev.net
+    secretName:  nexdev-lexfin-cert-le
     dnsNames:
-      - nexdev.net
+      - hrm-lexfin.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
