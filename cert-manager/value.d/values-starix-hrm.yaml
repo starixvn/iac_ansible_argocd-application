@@ -36,6 +36,7 @@ extraObjects:
     dnsNames:
       - hrm-lexfin.nexdev.net
       - hrm-slk.nexdev.net
+      - go.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
