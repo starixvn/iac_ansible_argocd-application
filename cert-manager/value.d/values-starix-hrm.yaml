@@ -24,19 +24,19 @@ extraObjects:
               serviceType: ClusterIP
               ingressClassName: haproxy
 
-# - |
-#   apiVersion: cert-manager.io/v1
-#   kind: Certificate
-#   metadata:
-#     name:  nexdev-lexfin-cert-le
-#     namespace: hrm
-#   spec:
-#     commonName: hrm-lexfin.nexdev.net
-#     secretName:  nexdev-lexfin-cert-le
-#     dnsNames:
-#       - hrm-lexfin.nexdev.net
-#     duration: 2160h
-#     renewBefore: 96h
-#     issuerRef:
-#       kind: ClusterIssuer
-#       name: letsencrypt-prod
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name:  nexdev-lexfin-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-lexfin.nexdev.net
+    secretName:  nexdev-lexfin-cert-le
+    dnsNames:
+      - hrm-lexfin.nexdev.net
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
