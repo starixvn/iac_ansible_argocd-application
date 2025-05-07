@@ -6,4 +6,4 @@ replicaCount: 1
 
 
 
-extraObjects: {}
+# extraObjects: {}
