@@ -38,5 +38,5 @@ extraObjects:
     duration: 2160h
     renewBefore: 96h
     issuerRef:
-      kind: Issuer
+      kind: ClusterIssuer
       name: letsencrypt-prod
