@@ -31,12 +31,11 @@ extraObjects:
     name:  nexdev-lexfin-cert-le
     namespace: hrm
   spec:
-    commonName: nexdev.net
+    commonName: hrm-slk.nexdev.net
     secretName:  nexdev-lexfin-cert-le
     dnsNames:
       - hrm-lexfin.nexdev.net
       - hrm-slk.nexdev.net
-      - nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
