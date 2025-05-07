@@ -24,6 +24,7 @@ extraObjects:
               serviceType: ClusterIP
               ingressClassName: haproxy
 
+# For public domain only
 - |
   apiVersion: cert-manager.io/v1
   kind: Certificate
@@ -36,7 +37,6 @@ extraObjects:
     dnsNames:
       - hrm-lexfin.nexdev.net
       - hrm-slk.nexdev.net
-      - go.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
