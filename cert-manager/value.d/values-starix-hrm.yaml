@@ -31,7 +31,7 @@ extraObjects:
     name:  nexdev-lexfin-cert-le
     namespace: hrm
   spec:
-    commonName: *.nexdev.net
+    commonName: hrm-lexfin.nexdev.net
     secretName:  nexdev-lexfin-cert-le
     dnsNames:
       - hrm-lexfin.nexdev.net
