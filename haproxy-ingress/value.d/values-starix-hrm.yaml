@@ -82,6 +82,9 @@ extraResources:
     - hosts:
       - "*.comtechsb.com"
       secretName: comtechsb-cert
+    - hosts:
+      - "hrm-lexfin.nexdev.net"
+      secretName: nexdev-lexfin-cert-le
     rules:
     - host: "*.sms-vn.com" 
 
