@@ -37,6 +37,17 @@ extraObjects:
     dnsNames:
       - hrm-lexfin.nexdev.net
       - hrm-slk.nexdev.net
+      - go.nexdev.net
+      - hrm-nextfortune.nexdev.net
+      - hrm-ascentis.nexdev.net
+      - hrm-onelab.nexdev.net
+      - hrm-oseas.nexdev.net
+      - hrm-fts.nexdev.net
+      - hrm-acora.nexdev.net
+      - hrm-hyjay.nexdev.net
+      - hrm-ssi.nexdev.net
+      - hrm-emc.nexdev.net
+      - hrm-bpo.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
