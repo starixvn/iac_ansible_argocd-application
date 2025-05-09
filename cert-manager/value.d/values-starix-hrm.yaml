@@ -61,7 +61,7 @@ extraObjects:
     issuerRef:
       kind: ClusterIssuer
       name: letsencrypt-prod
-# For public domain only  - hrm.comtechsb.com &&  hrm-new.comtechsb.com
+# For public domain only  - hrm.smstower-vn.com
 - |
   apiVersion: cert-manager.io/v1
   kind: Certificate
@@ -73,6 +73,24 @@ extraObjects:
     secretName:  smstower-vn-cert-le
     dnsNames:
       - hrm.smstower-vn.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+
+# For public domain only  - hrm-new.ghrworld.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: ghrworld-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.ghrworld.com
+    secretName:  ghrworld-cert-le
+    dnsNames:
+      - hrm-new.ghrworld.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
