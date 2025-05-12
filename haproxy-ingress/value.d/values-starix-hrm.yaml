@@ -58,7 +58,7 @@ controller:
         interval: 30s
 
 defaultBackend:
-  image: "harbor.byb6181.com/vn-st/base/nexops-tools/default-backend-ingress"
+  image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
 
 extraResources:
 ##############################
