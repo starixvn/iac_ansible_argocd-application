@@ -28,7 +28,6 @@ spec:
         value: "{{ info[org][env]['hub'] }}/base/minio/minio"
       valueFiles:
         - $values/minio/tenant/value.d/values-{{team}}-{{env}}-{{tenantName}}.yaml
-      parameters: []
       valuesObject:
         tenant:
           name: {{tenantName}}
