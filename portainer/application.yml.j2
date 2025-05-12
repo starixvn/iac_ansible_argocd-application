@@ -23,7 +23,7 @@ spec:
         - $values/portainer/value.d/values-{{team}}-{{env}}.yaml
       parameters:
       - name: "image.repository"
-        value: "harbor.byb6181.com/vn-st/base/portainer/portainer-ce"
+        value: "hub.nexdev.net/base/portainer/portainer-ce"
       valuesObject:
         image:
           repository: "{{ info[org][env]['hub'] }}/base/portainer"
