@@ -33,7 +33,7 @@ info:
       storageClass: ""
     hrm:
       cluster: "https://st-hrm-apiserver.starixplay.com:16445"
-      hub: "harbor.byb6181.com/vn-st"
+      hub: "hub.nexdev.net"
       ingressDomain: ""
       storageClass: "longhorn"
     k3suat:
