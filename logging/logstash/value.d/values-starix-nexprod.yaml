@@ -545,6 +545,7 @@ logstashPipeline:
           ssl => true
           ssl_certificate_verification => false
           index => "logstash-debug-local"
+          action => "create"
         }   
       }
     }
