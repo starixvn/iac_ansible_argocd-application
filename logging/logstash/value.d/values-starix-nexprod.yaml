@@ -643,16 +643,16 @@ service:
     port: 5077
     protocol: UDP
     targetPort: debug-udp
-  - name: debug-gitlab-tcp
+  - name: dbg-gitlab-tcp
     nodePort: 30078
     port: 5078
     protocol: TCP
-    targetPort: debug-gitlab-tcp
-  - name: debug-gitlab-udp
+    targetPort: dbg-gitlab-tcp
+  - name: dbg-gitlab-udp
     nodePort: 30078
     port: 5078
     protocol: UDP
-    targetPort: debug-gitlab-udp
+    targetPort: dbg-gitlab-udp
 
 nodeSelector: 
   nexops-tools: "yes"
