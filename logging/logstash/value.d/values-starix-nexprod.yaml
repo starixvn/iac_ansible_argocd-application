@@ -592,11 +592,18 @@ extraPorts:
   - name: vault-st-dev
     containerPort: 5065
 
+
   - name: debug-tcp
     containerPort: 5077
     protocol: TCP
   - name: debug-udp
     containerPort: 5077
+    protocol: UDP
+  - name: dbg-gitlab-tcp
+    containerPort: 5078
+    protocol: TCP
+  - name: dbg-gitlab-udp
+    containerPort: 5078
     protocol: UDP
 
 service:
