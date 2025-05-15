@@ -103,6 +103,7 @@ extraObjects:
     secretName:  ghrworld-cert-le
     dnsNames:
       - hrm-new.ghrworld.com
+      - hrm.ghrworld.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
