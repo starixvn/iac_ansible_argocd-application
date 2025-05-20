@@ -49,6 +49,8 @@ extraObjects:
       - hrm-emc.nexdev.net
       - hrm-bpo.nexdev.net
       - hrm-letstalk.nexdev.net
+      - hrm-digibytesky.nexdev.net
+      - hrm-evo.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
