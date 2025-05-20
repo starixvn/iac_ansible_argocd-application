@@ -127,3 +127,75 @@ extraObjects:
     issuerRef:
       kind: ClusterIssuer
       name: letsencrypt-prod
+
+# For public domain only  - hrm-new.cymabell.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: cymabell-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.cymabell.com
+    secretName:  cymabell-cert-le
+    dnsNames:
+      - hrm-new.cymabell.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+
+# For public domain only  - hrm-new.elementsc.ph
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: elementsc-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.elementsc.ph
+    secretName:  elementsc-cert-le
+    dnsNames:
+      - hrm-new.elementsc.ph
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+
+# For public domain only  - hrm-new.xpeedcorp.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: xpeedcorp-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.xpeedcorp.com
+    secretName:  xpeedcorp-cert-le
+    dnsNames:
+      - hrm-new.xpeedcorp.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+
+# For public domain only  - hrm-new.sandsdover.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: sandsdover-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.sandsdover.com
+    secretName:  sandsdover-cert-le
+    dnsNames:
+      - hrm-new.sandsdover.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
