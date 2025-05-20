@@ -183,19 +183,19 @@ extraObjects:
       name: letsencrypt-prod
 
 # For public domain only  - hrm-new.sandsdover.com
-- |
-  apiVersion: cert-manager.io/v1
-  kind: Certificate
-  metadata:
-    name: sandsdover-cert-le
-    namespace: hrm
-  spec:
-    commonName: hrm-new.sandsdover.com
-    secretName:  sandsdover-cert-le
-    dnsNames:
-      - hrm-new.sandsdover.com
-    duration: 2160h
-    renewBefore: 96h
-    issuerRef:
-      kind: ClusterIssuer
-      name: letsencrypt-prod
+# - |
+#   apiVersion: cert-manager.io/v1
+#   kind: Certificate
+#   metadata:
+#     name: sandsdover-cert-le
+#     namespace: hrm
+#   spec:
+#     commonName: hrm-new.sandsdover.com
+#     secretName:  sandsdover-cert-le
+#     dnsNames:
+#       - hrm-new.sandsdover.com
+#     duration: 2160h
+#     renewBefore: 96h
+#     issuerRef:
+#       kind: ClusterIssuer
+#       name: letsencrypt-prod
