@@ -109,3 +109,21 @@ extraObjects:
     issuerRef:
       kind: ClusterIssuer
       name: letsencrypt-prod
+
+# For public domain only  - hrm-new.connectshorecorp.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: connectshorecorp-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.connectshorecorp.com
+    secretName:  connectshorecorp-cert-le
+    dnsNames:
+      - hrm-new.connectshorecorp.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
