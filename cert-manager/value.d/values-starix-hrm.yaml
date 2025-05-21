@@ -196,6 +196,7 @@ extraObjects:
     secretName:  sandsdover-cert-le
     dnsNames:
       - hrm-new.sandsdover.com
+      - hrm.sandsdover.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
