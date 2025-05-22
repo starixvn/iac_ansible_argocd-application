@@ -179,6 +179,7 @@ extraObjects:
     secretName:  xpeedcorp-cert-le
     dnsNames:
       - hrm-new.xpeedcorp.com
+      - hrm.xpeedcorp.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
