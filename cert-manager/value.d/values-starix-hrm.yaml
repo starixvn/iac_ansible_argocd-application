@@ -142,6 +142,7 @@ extraObjects:
     secretName:  cymabell-cert-le
     dnsNames:
       - hrm-new.cymabell.com
+      - hrm.cymabell.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
