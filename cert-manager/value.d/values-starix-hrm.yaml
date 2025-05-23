@@ -124,6 +124,7 @@ extraObjects:
     secretName:  connectshorecorp-cert-le
     dnsNames:
       - hrm-new.connectshorecorp.com
+      - hrm.connectshorecorp.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
