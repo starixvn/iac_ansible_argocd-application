@@ -161,6 +161,7 @@ extraObjects:
     secretName:  elementsc-cert-le
     dnsNames:
       - hrm-new.elementsc.ph
+      - hrm.elementsc.ph
     duration: 2160h
     renewBefore: 96h
     issuerRef:
