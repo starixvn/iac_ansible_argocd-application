@@ -541,7 +541,7 @@ logstashPipeline:
         # }
 
         # Output logs for EKSUAT
-        else if "eksuat" in [tags] {
+        if "eksuat" in [tags] {
         
           if "cloud-controller-manager" in [tags] {
             opensearch {
