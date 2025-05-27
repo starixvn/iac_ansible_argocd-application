@@ -472,73 +472,73 @@ logstashPipeline:
       else if [type] == "cloudwatch" {
 
         # Output logs for EKSLOCAL
-        if "ekslocal" in [tags] {
+        # if "ekslocal" in [tags] {
 
-          # EKS Control Plane logging
-          if "cloud-controller-manager" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-eks-cloud-controller-manager-ekslocal-%{+YYYY.MM.dd}"
-            }
-          }
-          else if "kube-controller-manager" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-eks-kube-controller-manager-ekslocal-%{+YYYY.MM.dd}"
-            }
-          }
-          else if "kube-scheduler" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-eks-kube-scheduler-ekslocal-%{+YYYY.MM.dd}"
-            }
-          }
+        #   # EKS Control Plane logging
+        #   if "cloud-controller-manager" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-eks-cloud-controller-manager-ekslocal-%{+YYYY.MM.dd}"
+        #     }
+        #   }
+        #   else if "kube-controller-manager" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-eks-kube-controller-manager-ekslocal-%{+YYYY.MM.dd}"
+        #     }
+        #   }
+        #   else if "kube-scheduler" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-eks-kube-scheduler-ekslocal-%{+YYYY.MM.dd}"
+        #     }
+        #   }
 
-          # EKS Data Plane logging
-          else if "eks-dataplane" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-dataplane-ekslocal-%{+YYYY.MM.dd}"
-            } 
-          }
+        #   # EKS Data Plane logging
+        #   else if "eks-dataplane" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-dataplane-ekslocal-%{+YYYY.MM.dd}"
+        #     } 
+        #   }
 
-          else if "eks-containers" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-container-logs-ekslocal-%{+YYYY.MM.dd}"
-            }             
-          }
-          else if "eks-workernode" in [tags] {
-            opensearch {
-              hosts => ["https://opensearch-cluster-master.logging:9200"]
-              user => "logstash"
-              password => "logstash"
-              ssl => true
-              ssl_certificate_verification => false
-              index => "logstash-worker-node-logs-ekslocal-%{+YYYY.MM.dd}"
-            }             
-          }
-        }
+        #   else if "eks-containers" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-container-logs-ekslocal-%{+YYYY.MM.dd}"
+        #     }             
+        #   }
+        #   else if "eks-workernode" in [tags] {
+        #     opensearch {
+        #       hosts => ["https://opensearch-cluster-master.logging:9200"]
+        #       user => "logstash"
+        #       password => "logstash"
+        #       ssl => true
+        #       ssl_certificate_verification => false
+        #       index => "logstash-worker-node-logs-ekslocal-%{+YYYY.MM.dd}"
+        #     }             
+        #   }
+        # }
 
         # Output logs for EKSUAT
         else if "eksuat" in [tags] {
@@ -550,7 +550,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-cloud-controller-manager-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-eks-cloud-controller-manager-eksuat"
+              action => "create"
             }
           }
           else if "kube-controller-manager" in [tags] {
@@ -560,7 +561,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-kube-controller-manager-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-eks-kube-controller-manager-eksuat"
+              action => "create"
             }
           }
           else if "kube-scheduler" in [tags] {
@@ -570,7 +572,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-kube-scheduler-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-eks-kube-scheduler-eksuat"
+              action => "create"
             }
           }
 
@@ -582,7 +585,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-dataplane-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-dataplane-eksuat"
+              action => "create"
             } 
           }
 
@@ -593,7 +597,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-container-logs-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-container-logs-eksuat"
+              action => "create"
             }             
           }
           else if "eks-workernode" in [tags] {
@@ -603,7 +608,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-worker-node-logs-eksuat-%{+YYYY.MM.dd}"
+              index => "logstash-worker-node-logs-eksuat"
+              action => "create"
             }             
           }
           # else {
@@ -627,7 +633,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-cloud-controller-manager-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-eks-cloud-controller-manager-eksprod"
+              action => "create"
             }
           }
           else if "kube-controller-manager" in [tags] {
@@ -637,7 +644,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-kube-controller-manager-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-eks-kube-controller-manager-eksprod"
+              action => "create"
             }
           }
           else if "kube-scheduler" in [tags] {
@@ -647,7 +655,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-eks-kube-scheduler-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-eks-kube-scheduler-eksprod"
+              action => "create"
             }
           }
 
@@ -659,7 +668,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-dataplane-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-dataplane-eksprod"
+              action => "create"
             } 
           }
 
@@ -670,7 +680,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-container-logs-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-container-logs-eksprod"
+              action => "create"
             }             
           }
           else if "eks-workernode" in [tags] {
@@ -680,7 +691,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-worker-node-logs-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-worker-node-logs-eksprod"
+              action => "create"
             }             
           }
           else {
@@ -690,7 +702,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-unknown-eksprod-%{+YYYY.MM.dd}"
+              index => "logstash-unknown-eksprod"
+              action => "create"
             }             
           }          
         }
