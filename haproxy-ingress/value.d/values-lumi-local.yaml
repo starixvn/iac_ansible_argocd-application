@@ -290,7 +290,8 @@ extraResources:
           - name: http-echo
             image: {{ .Values.defaultBackend.health }}
             args:
-              - "-text=Service Ready!"
+              - -text="Service Ready!"
+              - -listen=:8080
             ports:
               - containerPort: 8080
             readinessProbe:
