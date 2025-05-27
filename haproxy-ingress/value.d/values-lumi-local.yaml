@@ -64,7 +64,8 @@ controller:
     
 
 defaultBackend:
-  image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
+  image: "hub.lumigame.com/base/nexops-tools/default-backend-ingress"
+  health: "hub.lumigame.com/base/hashicorp/http-echo:1.0.0"
 
 extraResources:
 ##############################
@@ -262,3 +263,77 @@ extraResources:
       </html>
 
 
+
+
+##############################
+## Healthcheck Page
+##############################
+- |
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: be-health-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+    labels:
+      app: health-backend
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: health-backend
+    template:
+      metadata:
+        labels:
+          app: health-backend
+      spec:
+        containers:
+          - name: http-echo
+            image: {{ .Values.defaultBackend.health }}
+            args:
+              - "-text=Service Ready!"
+            ports:
+              - containerPort: 8080
+            readinessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 2
+              periodSeconds: 5
+              failureThreshold: 3
+- |
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: be-health-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+    labels:
+      app: health-backend
+  spec:
+    selector:
+      app: health-backend
+    ports:
+      - port: 80
+        targetPort: 8080
+        protocol: TCP
+
+- |
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: ingress-checkstatus-{{ .Release.Name }}
+    namespace: {{ include "kubernetes-ingress.namespace" . }}
+    annotations:
+      haproxy.ingress.kubernetes.io/timeout-client: "5s"
+      haproxy.ingress.kubernetes.io/rewrite-target: /
+  spec:
+    ingressClassName: {{ .Values.controller.ingressClassResource.name }}
+    rules:
+      - http:
+          paths:
+            - path: /checkstatus
+              pathType: Prefix
+              backend:
+                service:
+                  name: be-health-{{ .Release.Name }}
+                  port:
+                    number: 80
