@@ -39,13 +39,13 @@ controller:
       https: 31443
       stat: 31024
 
-  # logging:
-  #   level: info
-  #   traffic:
-  #     address: "logstash-lumi-lumprod-logstash.logging-lumi"
-  #     port: "5045"
-  #     format: "rfc3164"
-  #     facility: "local1"
+  logging:
+    level: info
+    traffic:
+      address: "logstash-lumi-lumprod-logstash.logging-lumi"
+      port: "5045"
+      format: "rfc3164"
+      facility: "local1"
 
   nodeSelector:
     node-role.kubernetes.io/master: "true"
