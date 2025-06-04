@@ -1,6 +1,12 @@
 ---
 controller:
   kind: DaemonSet
+  ingressClass: haproxy
+
+  kubernetesGateway:
+    enabled: true
+    gatewayControllerName: haproxy.org/gateway-controller
+
   config:
     stats-config-snippet: |
       stats auth nexcel:NexOps!QAZ
