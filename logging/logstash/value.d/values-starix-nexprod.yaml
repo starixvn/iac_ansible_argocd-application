@@ -566,15 +566,15 @@ logstashPipeline:
     
 
 
-logstashJavaOpts: "-Xmx3g -Xms3g"
+logstashJavaOpts: "-Xmx2g -Xms2g"
 
 resources:
   requests:
     cpu: "100m"
-    memory: "4096Mi"
+    memory: "2560Mi"
   limits:
     cpu: "1000m"
-    memory: "4096Mi"
+    memory: "2560Mi"
 
 httpPort: 9600
 extraPorts:
