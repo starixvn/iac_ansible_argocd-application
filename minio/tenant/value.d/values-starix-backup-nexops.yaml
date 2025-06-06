@@ -51,6 +51,8 @@ tenant:
   env:
   - name: MINIO_PROMETHEUS_URL
     value: "http://prometheus-atx-backup-kube-prometheus.monitoring.svc:9090"
+  - name: MINIO_STORAGE_CLASS_STANDARD
+    value: "EC:2"
 
 
 ingress:
