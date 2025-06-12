@@ -65,13 +65,13 @@ ingress:
     hosts:
     - host: "s3-api.nexdev.net"       # API-access from LOCAL
       paths: []
-    - host: "s3-api.starixsoft.com"   # API-access from KBT
-      paths: []
+    # - host: "s3-api.starixsoft.com"   # API-access from KBT
+    #   paths: []
     - host: "s3-api.lumigame.com"     # API-access for git3
       paths: []
     tls:
     - hosts:
-      - s3-api.starixsoft.com
+      # - s3-api.starixsoft.com
       - s3-api.nexdev.net
       - s3-api.lumigame.com
     pathType: Prefix
