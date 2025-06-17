@@ -51,6 +51,8 @@ extraObjects:
       - hrm-letstalk.nexdev.net
       - hrm-digibytesky.nexdev.net
       - hrm-evo.nexdev.net
+      - hrm-new.nexdev.net
+      - hrm-new-nexvision.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
@@ -201,6 +203,24 @@ extraObjects:
     dnsNames:
       - hrm-new.sandsdover.com
       - hrm.sandsdover.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+
+# For public domain only  - hrm-new.lumiplus.vn
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: lumiplus-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.lumiplus.vn
+    secretName:  lumiplus-cert-le
+    dnsNames:
+      - hrm-new.lumiplus.vn
     duration: 2160h
     renewBefore: 96h
     issuerRef:
