@@ -53,7 +53,6 @@ extraObjects:
       - hrm-evo.nexdev.net
       - hrm-new.nexdev.net
       - hrm-new-nexvision.nexdev.net
-      - hrm-webservice.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
@@ -222,7 +221,6 @@ extraObjects:
     secretName:  lumiplus-cert-le
     dnsNames:
       - hrm-new.lumiplus.vn
-      - hrm-webservice.lumiplus.vn
     duration: 2160h
     renewBefore: 96h
     issuerRef:
