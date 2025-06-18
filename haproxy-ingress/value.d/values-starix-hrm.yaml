@@ -77,9 +77,6 @@ extraResources:
       - "*.sms-vn.com"
       secretName: hrm-cert
     - hosts:
-      - "*.nexdev.net"
-      secretName: nexdev-cert
-    - hosts:
       - "*.comtechsb.com"
       secretName: comtechsb-cert
     - hosts:
