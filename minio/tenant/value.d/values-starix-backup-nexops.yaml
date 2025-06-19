@@ -82,6 +82,6 @@ ingress:
       haproxy.org/ssl-redirect: "false"
     tls: [ ]
     hosts:
-    - host: "s3.nexdev.net"
+    - host: "s3c.nexdev.net"
       paths: []
     pathType: Prefix
