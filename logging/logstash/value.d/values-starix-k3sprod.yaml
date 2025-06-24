@@ -361,7 +361,8 @@ resources:
     cpu: "1"
     memory: "4096Mi"
 
-
+nodeSelector:
+  logstash: "yes"
 
 httpPort: 9600
 extraPorts:
