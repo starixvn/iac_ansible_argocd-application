@@ -58,7 +58,7 @@ logstashPipeline:
           }
           else if [facility_label] == "local5" {
             mutate {
-              add_tag => ["haproxy_access", "hap-ing", "s1"]
+              add_tag => ["haproxy_access", "hap-ing", "sc"]
             }
           }
           else {
@@ -157,7 +157,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-devops-uat-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-ing-devops-uat"
+              action => "create"
             }
           }
           else if "s1" in [tags] and "uat" in [tags] {
@@ -167,7 +168,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-s1-uat-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-ing-sc-uat"
+              action => "create"
             }
           }
           else {
@@ -177,7 +179,8 @@ logstashPipeline:
               password => "logstash"
               ssl => true
               ssl_certificate_verification => false
-              index => "logstash-haproxy-uat-unknown-%{+YYYY.MM.dd}"
+              index => "logstash-haproxy-uat-unknown"
+              action => "create"
             }         
           }
         }
@@ -193,7 +196,8 @@ logstashPipeline:
           password => "logstash"
           ssl => true
           ssl_certificate_verification => false
-          index => "logstash-uat-unknown-%{+YYYY.MM.dd}"
+          index => "logstash-unknown"
+          action => "create"
         }   
       }
     }
