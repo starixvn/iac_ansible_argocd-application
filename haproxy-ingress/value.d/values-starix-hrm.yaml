@@ -74,9 +74,6 @@ extraResources:
     ingressClassName: {{ .Values.controller.ingressClassResource.name }}
     tls:
     - hosts:
-      - "*.sms-vn.com"
-      secretName: hrm-cert
-    - hosts:
       - "*.comtechsb.com"
       secretName: comtechsb-cert
     - hosts:
