@@ -161,7 +161,7 @@ logstashPipeline:
               action => "create"
             }
           }
-          else if "s1" in [tags] and "uat" in [tags] {
+          else if "sc" in [tags] and "uat" in [tags] {
             opensearch {
               hosts => ["https://vn-st-ing-prod.nebula.prod:31920"]
               user => "logstash"
