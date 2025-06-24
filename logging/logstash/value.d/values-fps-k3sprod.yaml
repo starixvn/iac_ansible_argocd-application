@@ -102,8 +102,7 @@ resources:
     cpu: "4"
     memory: "6Gi"
 
-nodeSelector:
-  logstash: "yes"
+
 
 httpPort: 9600
 extraPorts:
