@@ -5,7 +5,7 @@ extraEnvs:
 - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
   value: Y8cY3sn7hCwSmJLff2U7fkNG
 
-opensearchJavaOpts: "-Xmx8G -Xms6G"
+opensearchJavaOpts: "-Xmx8G -Xms6G -Dhttp.proxyHost=lisasqd.nebula.prod -Dhttp.proxyPort=8801 -Dhttps.proxyHost=lisasqd.nebula.prod -Dhttps.proxyPort=8801"
 
 persistence:
   storageClass: longhorn
