@@ -664,3 +664,8 @@ service:
 
 nodeSelector: 
   nexops-tools: "yes"
+tolerations:
+- key: cattle.io/os
+  value: zabbix-server
+  operator: Equal
+  effect: NoSchedule
