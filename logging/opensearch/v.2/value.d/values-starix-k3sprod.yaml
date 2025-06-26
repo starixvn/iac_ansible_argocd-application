@@ -21,6 +21,6 @@ resources:
     memory: "8Gi"
 
 plugins:
-  enabled: false
+  enabled: true
   installList:
   - https://github.com/Aiven-Open/prometheus-exporter-plugin-for-opensearch/releases/download/2.13.0.0/prometheus-exporter-2.13.0.0.zip
