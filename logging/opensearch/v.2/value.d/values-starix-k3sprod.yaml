@@ -23,4 +23,4 @@ resources:
 plugins:
   enabled: true
   installList:
-  - https://s3-api.starixsoft.com:9000/awx-install/prometheus-exporter-2.17.1.0.zip
+  - https://github.com/Aiven-Open/prometheus-exporter-plugin-for-opensearch/releases/download/2.13.0.0/prometheus-exporter-2.13.0.0.zip
