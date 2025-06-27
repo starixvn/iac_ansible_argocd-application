@@ -20,9 +20,10 @@ ingress:
   hosts:
     - chart-example.local
 
-# service:
-#   type: NodePort
-#   nodePort: "31920"
+plugins:
+  enabled: true
+  installList:
+  - https://s3-api.starixsoft.com/awx-install/prometheus-exporter-2.19.2.zip
 
 resources:
   requests:
