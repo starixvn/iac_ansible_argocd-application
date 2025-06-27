@@ -1,6 +1,7 @@
 ---
 image:
   repository: "nexhub.nebula.prod/kbt/base/opensearchproject/opensearch"
+  tag: "2.19.2"
 
 singleNode: true
 

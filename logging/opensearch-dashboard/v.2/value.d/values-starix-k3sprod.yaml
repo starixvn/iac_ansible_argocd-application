@@ -1,7 +1,8 @@
 ---
 image:
   repository: "nexhub.nebula.prod/kbt/base/opensearchproject/opensearch-dashboards"
-
+  tag: "2.19.2"
+  
 resources:
   requests:
     cpu: "100m"
