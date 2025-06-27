@@ -23,7 +23,7 @@ ingress:
 plugins:
   enabled: true
   installList:
-  - https://s3-api.starixsoft.com/awx-install/prometheus-exporter-2.19.2.zip
+  - https://s3-api.starixsoft.com:9000/awx-install/prometheus-exporter-2.19.2.zip
 
 resources:
   requests:
