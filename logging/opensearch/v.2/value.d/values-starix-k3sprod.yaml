@@ -1,4 +1,7 @@
 ---
+image:
+  repository: "nexhub.nebula.prod/kbt/base/opensearchproject/opensearch"
+
 singleNode: true
 
 extraEnvs:
@@ -11,9 +14,14 @@ persistence:
   storageClass: longhorn
   size: 180Gi
 
-service:
-  type: NodePort
-  nodePort: "31920"
+ingress:
+  enabled: false
+  hosts:
+    - chart-example.local
+
+# service:
+#   type: NodePort
+#   nodePort: "31920"
 
 resources:
   requests:
@@ -22,4 +30,10 @@ resources:
 
 serviceMonitor:
   enabled: true
-  interval: 30s
+  scheme: https
+  internal: 30s
+  tlsConfig:
+    insecureSkipVerify: true
+  basicAuth:
+    enabled: true
+    existingSecret: opensearch-cluster-master-service-monitor-credentials

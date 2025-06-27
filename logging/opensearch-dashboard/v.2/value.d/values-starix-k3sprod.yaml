@@ -1,5 +1,7 @@
 ---
-# opensearchHosts: "https://opensearch-cluster-lumi:9200"
+image:
+  repository: "nexhub.nebula.prod/kbt/base/opensearchproject/opensearch-dashboards"
+
 resources:
   requests:
     cpu: "100m"
