@@ -128,12 +128,6 @@ logstashPipeline:
           grok { match => ["message", "%{HAPROXYDATE:accept_date}"] }
         }
         if [captured_request_headers] {
-          grok { match => {
-            "captured_request_headers" => [
-              "%{DATA:request_host}\|%{DATA:user-agent}\|%{DATA:request_referer}\|(%{IP:TrueClientIP})?" 
-            ]
-          }}
-          
           # Define expected headers
           mutate {
             add_field => {
@@ -177,6 +171,16 @@ logstashPipeline:
             remove_field => ["_tmp"]
           }
         }
+
+        if [captured_request_headers] and "header_parse_mismatch" not in [tag] {
+          grok { match => {
+            "captured_request_headers" => [
+              "%{DATA:request_host}\|%{DATA:user-agent}\|%{DATA:request_referer}\|(%{IP:TrueClientIP})?" 
+            ]
+          }}
+        }
+                  
+          
         mutate {
           remove_field => ["captured_response_cookie","haproxy_time","haproxy_month","haproxy_hour","srvconn","backend_queue","retries","termination_state"]
           remove_field => ["haproxy_monthday","time_backend_connect","pid","srv_queue","beat","beconn","client_port","haproxy_milliseconds","@version"]
