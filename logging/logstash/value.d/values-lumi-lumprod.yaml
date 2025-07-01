@@ -376,7 +376,6 @@ logstashPipeline:
           }
           mutate {
             split => {
-              "captured_request_headers" => "|"
               "[_tmp][header_names]" => "|"
             }
           }
@@ -384,6 +383,11 @@ logstashPipeline:
           # Standarized headers field
           ruby {
             code => '
+              raw_header = event.get("captured_request_headers")
+              if raw.is_a?(String)
+                split_headers = raw_header.split("|", -1)
+                event.set("captured_request_headers", split_headers)
+              end
               header_keys = event.get("[_tmp][header_names]")
               header_vals = event.get("captured_request_headers")
 
