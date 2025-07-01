@@ -363,7 +363,7 @@ logstashPipeline:
         if [captured_request_headers] {
           grok { match => {
               "captured_request_headers" => [
-                "%{DATA:request_host}\|%{DATA:user-agent}\|%{DATA:request_referer}\|(%{IP:TrueClientIP})?" 
+                "%{DATA:request_host}\|(%{DATA:user-agent})?\|(%{DATA:request_referer})?\|(%{IP:TrueClientIP})?" 
               ]
             }
           }
