@@ -500,7 +500,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-cloudtrail-awslocal-%{+YYYY.MM.dd}"
+            index => "logstash-cloudtrail-awslocal"
+            action => "create"
           }
         }
 
@@ -512,7 +513,8 @@ logstashPipeline:
             password => "logstash"
             ssl => true
             ssl_certificate_verification => false
-            index => "logstash-cloudtrail-awskbt-%{+YYYY.MM.dd}"
+            index => "logstash-cloudtrail-awskbt"
+            action => "create"
           }          
         }
       }
