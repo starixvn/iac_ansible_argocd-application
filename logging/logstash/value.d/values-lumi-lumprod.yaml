@@ -361,7 +361,55 @@ logstashPipeline:
           grok { match => { "message" => ["%{HAPROXYDATE:accept_date}"] } }
         }
         if [captured_request_headers] {
-          grok { match => { "captured_request_headers" => ["%{DATA:request_host}\|%{DATA:user-agent}\|(%{DATA:request_referer}\|%{IP:TrueClientIP})"] } }
+          grok { match => {
+              "captured_request_headers" => [
+                "%{DATA:request_host}\|%{DATA:user-agent}\|%{DATA:request_referer}\|(%{IP:TrueClientIP})?" 
+              ]
+            }
+          }
+
+          # Define expected headers
+          mutate {
+            add_field => {
+              "[_tmp][header_names]" => "Host|User-Agent|Referer|X-Forwarded-For"
+            }
+          }
+          mutate {
+            split => {
+              "captured_request_headers" => "|"
+              "[_tmp][header_names]" => "|"
+            }
+          }
+
+          # Standarized headers field
+          ruby {
+            code => '
+              header_keys = event.get("[_tmp][header_names]")
+              header_vals = event.get("captured_request_headers")
+
+              if header_keys.is_a?(Array) && header_vals.is_a?(Array)
+                if header_keys.length == header_vals.length
+                  headers = header_keys.zip(header_vals).map do |k, v|
+                    { "name" => k, "value" => v }
+                  end
+                  event.set("[httpRequest][headers]", headers)
+                else
+                  event.tag("header_parse_mismatch")
+                  event.set("[httpRequest][headers_parse_error]", {
+                    "expected_keys" => header_keys.length,
+                    "actual_values" => header_vals.length
+                  })
+                end
+              else
+                event.tag("header_parse_error")
+              end
+            '
+          }
+
+          # Cleanup temporary fields
+          mutate {
+            remove_field => ["_tmp"]
+          }
         }
         mutate {
           remove_field => ["captured_response_cookie","haproxy_time","haproxy_month","haproxy_hour","srvconn","backend_queue","retries","termination_state"]
@@ -407,7 +455,7 @@ logstashPipeline:
           }
         }
         else if "hap-ing" in [tags] {
-          if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
+          # if [http_status_code] == 200 and  [time_backend_response] < 5000 { drop {} }
           else if [backend_name] == "stats" { drop {} }
         }
         if [type] == "cloudwatch" {
