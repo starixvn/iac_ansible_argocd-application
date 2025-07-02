@@ -94,13 +94,7 @@ logstashPipeline:
               "[_tmp][header_names]" => "Host|User-Agent|Referer|X-Forwarded-For"
             }
           }
-          mutate {
-            split => {
-              "[_tmp][header_names]" => "|"
-            }
-          }
 
-          # Standarized headers field
           # Standarized headers field
           ruby {
             code => '
