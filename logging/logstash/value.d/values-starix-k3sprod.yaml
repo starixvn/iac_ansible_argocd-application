@@ -129,20 +129,18 @@ logstashPipeline:
         }
         if [captured_request_headers] {
           grok { match => {
-            "captured_request_headers" => [
-              "%{DATA:request_host}\|%{DATA:user-agent}\|%{DATA:request_referer}\|(%{IP:TrueClientIP})?" 
-            ]
-          }}
+              "captured_request_headers" => [
+                "%{DATA:request_host}\|(%{DATA:user-agent})?\|(%{DATA:request_referer})?\|(%{IP:TrueClientIP})?" 
+              ]
+            }
+          }
 
           # Define expected headers
           mutate {
             add_field => {
               "[_tmp][header_names]" => "Host|User-Agent|Referer|X-Forwarded-For"
             }
-          }
-          mutate {
             split => {
-              "captured_request_headers" => "|"
               "[_tmp][header_names]" => "|"
             }
           }
@@ -150,6 +148,16 @@ logstashPipeline:
           # Standarized headers field
           ruby {
             code => '
+              raw_header = event.get("captured_request_headers")
+              if raw_header.is_a?(String)
+                split_headers = raw_header.split("|", -1)
+                event.set("captured_request_headers", split_headers)
+              end
+              raw_header_name = event.get("[_tmp][header_names]")
+              if raw_header_name.is_a?(String)
+                split_headers = raw_header_name.split("|", -1)
+                event.set("[_tmp][header_names]", split_headers)
+              end
               header_keys = event.get("[_tmp][header_names]")
               header_vals = event.get("captured_request_headers")
 

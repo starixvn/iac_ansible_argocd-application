@@ -140,6 +140,11 @@ logstashPipeline:
                 split_headers = raw_header.split("|", -1)
                 event.set("captured_request_headers", split_headers)
               end
+              raw_header_name = event.get("[_tmp][header_names]")
+              if raw_header_name.is_a?(String)
+                split_headers = raw_header_name.split("|", -1)
+                event.set("[_tmp][header_names]", split_headers)
+              end
               header_keys = event.get("[_tmp][header_names]")
               header_vals = event.get("captured_request_headers")
 
