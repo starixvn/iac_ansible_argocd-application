@@ -373,9 +373,9 @@ logstashPipeline:
             add_field => {
               "[_tmp][header_names]" => "Host|User-Agent|Referer|X-Forwarded-For"
             }
-            split => {
-              "[_tmp][header_names]" => "|"
-            }
+          }
+          split => {
+            "[_tmp][header_names]" => "|"
           }
 
           # Standarized headers field
