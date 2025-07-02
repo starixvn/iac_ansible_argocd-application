@@ -375,7 +375,8 @@ logstashPipeline:
             }
           }
           split => {
-            "[_tmp][header_names]" => "|"
+            field => "[_tmp][header_names]"
+            terminator => "|"
           }
 
           # Standarized headers field
