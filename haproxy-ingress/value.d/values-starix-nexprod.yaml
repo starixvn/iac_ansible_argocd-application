@@ -44,6 +44,15 @@ controller:
       format: "rfc3164"
       facility: "local1"
 
+  resources:
+    requests:
+      memory: 4Gi
+    limits:
+      memory: 6Gi
+
+  priorityClassName: "critical-ingress"
+
+
   nodeSelector:
     node-role.kubernetes.io/master: "true"
     node-role.kubernetes.io/control-plane: "true"
