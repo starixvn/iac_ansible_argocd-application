@@ -3,6 +3,8 @@ controller:
   kind: DaemonSet
   config:
     ssl-certificate: "haproxy-ingress/nexdev-cert"
+    global-config-snippet: |
+      http-request return status 200 content-type "text/plain" string "Healthy!" if { path /checkstatus }
     stats-config-snippet: |
       stats auth nexops:NexOps!QAZ
       stats refresh 300s
