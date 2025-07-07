@@ -36,13 +36,13 @@ controller:
       https: 31443
       stat: 31024
 
-  # logging:
-  #   level: info
-  #   traffic:
-  #     address: "logstash-starix-nexprod-logstash.logging-starix"
-  #     port: "5045"
-  #     format: "rfc3164"
-  #     facility: "local1"
+  logging:
+    level: info
+    traffic:
+      address: "logstash-starix-nexprod-logstash.logging"
+      port: "5045"
+      format: "rfc3164"
+      facility: "local1"
 
   resources:
     requests:
