@@ -55,6 +55,7 @@ extraObjects:
       - hrm-new-nexvision.nexdev.net
       - hrm.nexdev.net
       - hrm-nexvision.nexdev.net
+      - hrm-letstalk-api.nexdev.net
     duration: 2160h
     renewBefore: 96h
     issuerRef:
