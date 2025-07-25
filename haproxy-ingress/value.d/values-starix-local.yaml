@@ -2,7 +2,7 @@
 controller:
   kind: DaemonSet
   config:
-    ssl-certificate: "haproxy-ingress/klc-nexdev-net"
+    ssl-certificate: ""
     stats-config-snippet: |
       stats auth nexops:NexOps!QAZ
       stats refresh 300s
@@ -10,6 +10,7 @@ controller:
       stats show-node
       stats show-modules
     frontend-config-snippet: |
+      http-request return status 200 content-type "text/plain" string "Starix LOCAL" if { path -i /cluster-name }
       capture request header Host len 30
       capture request header User-Agent len 200
       capture request header Referer len 800
