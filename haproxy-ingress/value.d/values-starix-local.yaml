@@ -60,6 +60,8 @@ controller:
 defaultBackend:
   image: "hub.nexdev.net/base/nexops-tools/default-backend-ingress"
 
+clusterInfo: "k8s-st-local"
+
 extraResources:
 ##############################
 ## WILDCARD SSL LOADER
@@ -141,7 +143,10 @@ extraResources:
           image: {{ .Values.defaultBackend.image }}
           imagePullPolicy: Always
           ports:
-          - containerPort: 8080
+          - containerPort: 80
+          env:
+          - name: CLUSTER_NAME
+            value: {{ .Values.clusterInfo }}
 - |
   apiVersion: v1
   kind: Service
@@ -151,7 +156,7 @@ extraResources:
   spec:
     ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
       protocol: TCP
       name: http
     selector:
