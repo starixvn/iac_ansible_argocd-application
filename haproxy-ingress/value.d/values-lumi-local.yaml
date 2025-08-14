@@ -51,7 +51,10 @@ controller:
         path: /metrics
         scheme: http
         interval: 30s
-
+        metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: "haproxy_server_.*"
+          action: drop
   nodeSelector:
     node-role.kubernetes.io/master: ""
     node-role.kubernetes.io/control-plane: ""
