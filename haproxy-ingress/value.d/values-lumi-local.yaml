@@ -55,6 +55,10 @@ controller:
         - sourceLabels: [__name__]
           regex: "haproxy_server_.*"
           action: drop
+        - sourceLabels: [__name__]
+          regex: "haproxy_backend_agg_check_status"
+          action: drop
+
   nodeSelector:
     node-role.kubernetes.io/master: ""
     node-role.kubernetes.io/control-plane: ""
