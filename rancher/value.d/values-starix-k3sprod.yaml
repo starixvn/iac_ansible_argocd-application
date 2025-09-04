@@ -2,11 +2,11 @@
 replicas: 1
 
 debug: true
-extraTolerations:
-  - effect: NoSchedule
-    key: cicd-tools
-    value: "yes"
-    operator: Equal
+# extraTolerations:
+#   - effect: NoSchedule
+#     key: cicd-tools
+#     value: "yes"
+#     operator: Equal
 
 hostname: vn-st-rancher-prod.nebula.prod
 
