@@ -92,17 +92,8 @@ extraResources:
       - "*.nexdev.net"
       secretName: nexdev-cert
     - hosts:
-      - "*.starixwork.net"
-      secretName: starixwork-cert
-    - hosts:
-      - "*.starixnet.com"
-      secretName: starixnet-cert
-    - hosts:
       - "*.lumigame.com"
       secretName: lumigame-cert
-    - hosts:
-      - "*.nexentgame.com"
-      secretName: nexentgame-cert
     rules:
     - host: "*.starix.k3slocal"
 
