@@ -39,10 +39,15 @@ controller:
   logging:
     level: info
     traffic:
-      address: "logstash-atx-nexprod-logstash.logging"
-      port: "5045"
-      format: "rfc3164"
+      # address: "logstash-atx-nexprod-logstash.logging"
+      # port: "5045"
+      # format: "rfc3164"
+      # facility: "local1"
+      address: "logstash-atx-nexprod-logstash.logging.svc"
+      port: "5170"
+      format: "rfc5424"
       facility: "local1"
+
 
   resources:
     requests:
