@@ -14,7 +14,8 @@ createPostgresqlHaPgpoolSecret: false
 
 host: defectdojo.nexdev.net
 
-# alternativeHosts:
+alternativeHosts:
+- defectdojo.lumigame.com
 
 # Where to pull the defectDojo images from. Defaults to "defectdojo/*" repositories on hub.docker.com
 repositoryPrefix: hub.nexdev.net/base/defectdojo
