@@ -232,3 +232,21 @@ extraObjects:
     issuerRef:
       kind: ClusterIssuer
       name: letsencrypt-prod
+
+# For public domain only  - onefortuneproperty.com
+- |
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: onefortuneproperty-cert-le
+    namespace: hrm
+  spec:
+    commonName: hrm-new.onefortuneproperty.com
+    secretName:  onefortuneproperty-cert-le
+    dnsNames:
+      - hrm-new.onefortuneproperty.com
+    duration: 2160h
+    renewBefore: 96h
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
