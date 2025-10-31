@@ -245,6 +245,7 @@ extraObjects:
     secretName:  onefortuneproperty-cert-le
     dnsNames:
       - hrm-new.onefortuneproperty.com
+      - hrm.onefortuneproperty.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
