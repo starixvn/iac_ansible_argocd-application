@@ -113,6 +113,7 @@ extraObjects:
       - hrm-new.ghrworld.com
       - hrm.ghrworld.com
       - one-epa.ghrworld.com
+      - hrm-ailab.ghrworld.com
     duration: 2160h
     renewBefore: 96h
     issuerRef:
