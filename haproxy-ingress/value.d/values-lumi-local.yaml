@@ -93,6 +93,9 @@ extraResources:
     - hosts:
       - "*.vivadzo.com"
       secretName: vivadzo-com
+    - hosts:
+      - "*.nexdev.net"
+      secretName: nexdev-net
     rules:
     - host: "*.lumi.local" 
 
