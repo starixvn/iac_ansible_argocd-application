@@ -95,7 +95,7 @@ extraResources:
       secretName: vivadzo-com
     - hosts:
       - "*.nexdev.net"
-      secretName: nexdev-net
+      secretName: nexdev-cert
     rules:
     - host: "*.lumi.local" 
 
